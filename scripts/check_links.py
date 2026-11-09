@@ -38,7 +38,7 @@ USER_AGENT = (
     "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
 )
 HTTP_BLOCKED_STATUS_CODES = frozenset({401, 403, 405, 429, 999})
-URL_PATTERN = re.compile(r"https?://[^\s<>\"'`()\[\]，。、]+")
+URL_PATTERN = re.compile(r"https?://[^\s<>\"'`()\[\]「」，。、；：！？]+")
 # 站点 200 但已重定向至「关停公告」这类路径时，按 dead 处理
 CLOSURE_REDIRECT_HINTS = ("-to-close", "wonderopolis-to-close", "site-closed")
 # 人工判定的状态，脚本不覆盖（链接可达但页面内容与描述不符）
