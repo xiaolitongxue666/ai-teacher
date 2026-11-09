@@ -1,0 +1,1273 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-09T11:22:00+08:00",
+  "probe_note": "verified 字段由 scripts/check_links.py 生成。ok=HTTP 2xx；blocked=站点反爬（浏览器可正常打开）；dead=域名不存在或站点已关闭；unreachable=DNS 正常但本机网络连接失败（常见于境外站点直连）；mismatch=链接可达但页面内容与描述不符（需人工处理，脚本不会自动写入）；pending=未探测。",
+  "status_values": [
+    "ok",
+    "blocked",
+    "dead",
+    "unreachable",
+    "mismatch",
+    "pending"
+  ],
+  "websites": [
+    {
+      "id": "scratch",
+      "name": "Scratch",
+      "category": "编程与逻辑",
+      "age": "7+",
+      "url": "https://scratch.mit.edu",
+      "verified": "ok",
+      "note": "MIT 出品，儿童图形化编程标杆",
+      "lang": "多语言"
+    },
+    {
+      "id": "code_org",
+      "name": "Code.org",
+      "category": "编程与逻辑",
+      "age": "5+",
+      "url": "https://code.org/en-US",
+      "verified": "ok",
+      "note": "零基础编程课程体系",
+      "lang": "多语言"
+    },
+    {
+      "id": "codecombat",
+      "name": "CodeCombat",
+      "category": "编程与逻辑",
+      "age": "9+",
+      "url": "https://codecombat.com",
+      "verified": "ok",
+      "note": "游戏化写代码，Python/JS",
+      "lang": "en"
+    },
+    {
+      "id": "blockly_games",
+      "name": "Blockly Games",
+      "category": "编程与逻辑",
+      "age": "6+",
+      "url": "https://blockly.games",
+      "verified": "ok",
+      "note": "Google Blockly 积木编程游戏",
+      "lang": "多语言"
+    },
+    {
+      "id": "makecode",
+      "name": "Microsoft MakeCode",
+      "category": "编程与逻辑",
+      "age": "8+",
+      "url": "https://makecode.com",
+      "verified": "ok",
+      "note": "原 makecode.microsoft.com 已失效，现统一走 makecode.com 并跳转至 microsoft.com/makecode",
+      "lang": "多语言"
+    },
+    {
+      "id": "csforall",
+      "name": "CS for All",
+      "category": "编程与逻辑",
+      "age": "6+",
+      "url": "https://csforall.org/en-US",
+      "verified": "ok",
+      "note": "原 /en-US/hour-of-ai 路径返回 308 跳转异常，改用站点根",
+      "lang": "en"
+    },
+    {
+      "id": "abcya",
+      "name": "ABCya",
+      "category": "启蒙与低幼",
+      "age": "3-12",
+      "url": "https://www.abcya.com/",
+      "verified": "ok",
+      "note": "分年级教育类小游戏",
+      "lang": "en"
+    },
+    {
+      "id": "starfall",
+      "name": "Starfall",
+      "category": "启蒙与低幼",
+      "age": "2-8",
+      "url": "https://www.starfall.com",
+      "verified": "ok",
+      "note": "字母与阅读启蒙，部分内容免费",
+      "lang": "en"
+    },
+    {
+      "id": "pbskids",
+      "name": "PBS Kids",
+      "category": "启蒙与低幼",
+      "age": "2-8",
+      "url": "https://pbskids.org",
+      "verified": "ok",
+      "note": "教育动画与游戏",
+      "lang": "en"
+    },
+    {
+      "id": "sesamestreet",
+      "name": "Sesame Street",
+      "category": "启蒙与低幼",
+      "age": "2-6",
+      "url": "https://www.sesamestreet.org/",
+      "verified": "ok",
+      "note": "芝麻街官方资源库",
+      "lang": "en"
+    },
+    {
+      "id": "trtcocuk",
+      "name": "TRT Çocuk",
+      "category": "启蒙与低幼",
+      "age": "3-10",
+      "url": "https://trtcocuk.net.tr",
+      "verified": "unreachable",
+      "note": "土耳其国家广播儿童频道，DNS 正常（85.111.24.151）但本机连接失败",
+      "lang": "tr"
+    },
+    {
+      "id": "bilimgenc",
+      "name": "Bilim Genç (TÜBİTAK)",
+      "category": "启蒙与低幼",
+      "age": "10+",
+      "url": "https://bilimgenc.tubitak.gov.tr",
+      "verified": "unreachable",
+      "note": "土耳其科学技术委员会青少年科普，SSL 证书校验失败（可能已过期）",
+      "lang": "tr"
+    },
+    {
+      "id": "ngkids",
+      "name": "National Geographic Kids",
+      "category": "通识百科",
+      "age": "6+",
+      "url": "https://kids.nationalgeographic.com",
+      "verified": "ok",
+      "note": "自然与动物内容",
+      "lang": "en"
+    },
+    {
+      "id": "si_kids",
+      "name": "Smithsonian Kids",
+      "category": "通识百科",
+      "age": "6+",
+      "url": "https://www.si.edu/kids",
+      "verified": "blocked",
+      "note": "返回 403，属站点反爬；浏览器可正常打开",
+      "lang": "en"
+    },
+    {
+      "id": "britannica_kids",
+      "name": "Britannica Kids",
+      "category": "通识百科",
+      "age": "6+",
+      "url": "https://kids.britannica.com",
+      "verified": "blocked",
+      "note": "返回 403，属站点反爬；浏览器可正常打开",
+      "lang": "en"
+    },
+    {
+      "id": "dk_learning",
+      "name": "DK Learning",
+      "category": "通识百科",
+      "age": "5+",
+      "url": "https://dk.com/pages/dk-learning",
+      "verified": "ok",
+      "note": "视觉百科，图文密度高",
+      "lang": "en"
+    },
+    {
+      "id": "ducksters",
+      "name": "Ducksters",
+      "category": "通识百科",
+      "age": "8+",
+      "url": "https://www.ducksters.com/",
+      "verified": "ok",
+      "note": "作业辅导与主题讲解",
+      "lang": "en"
+    },
+    {
+      "id": "wonderopolis",
+      "name": "Wonderopolis（已关闭）",
+      "category": "通识百科",
+      "age": "6+",
+      "url": "https://www.wonderopolis.org",
+      "verified": "dead",
+      "note": "站点已由 NCFL 关停，域名重定向至关闭公告页。原清单中的「每日一问」入口失效",
+      "lang": "en"
+    },
+    {
+      "id": "simple_wiki",
+      "name": "Simple English Wikipedia",
+      "category": "通识百科",
+      "age": "10+",
+      "url": "https://simple.wikipedia.org/wiki/Main_Page",
+      "verified": "ok",
+      "note": "简化英语维基，i+1 阅读的理想语料",
+      "lang": "en"
+    },
+    {
+      "id": "sciencebuddies",
+      "name": "Science Buddies",
+      "category": "科学实验",
+      "age": "8+",
+      "url": "https://sciencebuddies.org",
+      "verified": "blocked",
+      "note": "返回 403，属站点反爬；浏览器可正常打开",
+      "lang": "en"
+    },
+    {
+      "id": "phet",
+      "name": "PhET Simulations",
+      "category": "科学实验",
+      "age": "10+",
+      "url": "https://phet.colorado.edu",
+      "verified": "ok",
+      "note": "科罗拉多大学物理/化学仿真，可离线下载",
+      "lang": "多语言"
+    },
+    {
+      "id": "spaceplace",
+      "name": "NASA Space Place",
+      "category": "科学实验",
+      "age": "6+",
+      "url": "https://spaceplace.nasa.gov",
+      "verified": "ok",
+      "note": "NASA 儿童页面",
+      "lang": "en"
+    },
+    {
+      "id": "nasa_earth_kids",
+      "name": "NASA Science Kids: Earth",
+      "category": "科学实验",
+      "age": "8+",
+      "url": "https://science.nasa.gov/kids/earth/",
+      "verified": "ok",
+      "note": "气候与地球科学",
+      "lang": "en"
+    },
+    {
+      "id": "esa_kids",
+      "name": "ESA Kids",
+      "category": "科学实验",
+      "age": "6+",
+      "url": "https://kids.esa.int/",
+      "verified": "ok",
+      "note": "欧空局儿童版块，原 esa.int/kids 已跳转至此",
+      "lang": "en"
+    },
+    {
+      "id": "exploratorium",
+      "name": "Exploratorium",
+      "category": "科学实验",
+      "age": "6+",
+      "url": "https://www.exploratorium.edu/",
+      "verified": "ok",
+      "note": "旧金山探索馆实验与活动",
+      "lang": "en"
+    },
+    {
+      "id": "mysteryscience",
+      "name": "Mystery Science",
+      "category": "科学实验",
+      "age": "6-12",
+      "url": "https://mysteryscience.com",
+      "verified": "ok",
+      "note": "现成科学教案与短视频，部分免费",
+      "lang": "en"
+    },
+    {
+      "id": "generationgenius",
+      "name": "Generation Genius",
+      "category": "科学实验",
+      "age": "8+",
+      "url": "https://generationgenius.com",
+      "verified": "blocked",
+      "note": "返回 403，属站点反爬；主体为付费订阅",
+      "lang": "en"
+    },
+    {
+      "id": "nrich",
+      "name": "NRICH",
+      "category": "数学",
+      "age": "5+",
+      "url": "https://nrich.maths.org",
+      "verified": "ok",
+      "note": "剑桥数学问题库，按学段分级",
+      "lang": "en"
+    },
+    {
+      "id": "mathplayground",
+      "name": "Math Playground",
+      "category": "数学",
+      "age": "6-12",
+      "url": "https://www.mathplayground.com",
+      "verified": "ok",
+      "note": "数学游戏与可视化",
+      "lang": "en"
+    },
+    {
+      "id": "bedtimemath",
+      "name": "Bedtime Math",
+      "category": "数学",
+      "age": "4-10",
+      "url": "https://bedtimemath.org",
+      "verified": "ok",
+      "note": "每日一题，家长共读式",
+      "lang": "en"
+    },
+    {
+      "id": "splashlearn",
+      "name": "SplashLearn",
+      "category": "数学",
+      "age": "4-11",
+      "url": "https://www.splashlearn.com/",
+      "verified": "ok",
+      "note": "分年级练习，免费额度有限",
+      "lang": "en"
+    },
+    {
+      "id": "storylineonline",
+      "name": "Storyline Online",
+      "category": "英语阅读",
+      "age": "4-10",
+      "url": "https://www.storylineonline.net",
+      "verified": "ok",
+      "note": "演员真人朗读绘本，配字幕，超音段特征真实",
+      "lang": "en"
+    },
+    {
+      "id": "storyweaver",
+      "name": "StoryWeaver",
+      "category": "英语阅读",
+      "age": "3-10",
+      "url": "https://storyweaver.org.in",
+      "verified": "ok",
+      "note": "多语言儿童图书库，可下载 PDF",
+      "lang": "多语言"
+    },
+    {
+      "id": "childrenslibrary",
+      "name": "International Children's Digital Library",
+      "category": "英语阅读",
+      "age": "3-13",
+      "url": "https://childrenslibrary.org",
+      "verified": "ok",
+      "note": "世界儿童数字图书馆",
+      "lang": "多语言"
+    },
+    {
+      "id": "freekidsbooks",
+      "name": "Free Kids Books",
+      "category": "英语阅读",
+      "age": "3-12",
+      "url": "https://freekidsbooks.org",
+      "verified": "ok",
+      "note": "免费儿童图书，可下载",
+      "lang": "en"
+    },
+    {
+      "id": "oxfordowl",
+      "name": "Oxford Owl",
+      "category": "英语阅读",
+      "age": "3-11",
+      "url": "https://www.oxfordowl.co.uk",
+      "verified": "ok",
+      "note": "牛津分级阅读，需注册免费账号",
+      "lang": "en"
+    },
+    {
+      "id": "readingbear",
+      "name": "Reading Bear",
+      "category": "自然拼读",
+      "age": "3-7",
+      "url": "https://www.readingbear.org",
+      "verified": "ok",
+      "note": "系统自然拼读教学，免费",
+      "lang": "en"
+    },
+    {
+      "id": "unite4literacy",
+      "name": "unite4literacy（已失效）",
+      "category": "英语阅读",
+      "age": "-",
+      "url": "https://unite4literacy.com",
+      "verified": "dead",
+      "note": "域名 DNS 不存在（NXDOMAIN），原清单中的有声绘本入口已失效",
+      "lang": "en"
+    },
+    {
+      "id": "freechildrenstories",
+      "name": "Free Children Stories",
+      "category": "英语阅读",
+      "age": "3-10",
+      "url": "https://www.freechildrenstories.com",
+      "verified": "ok",
+      "note": "免费儿童故事，补充入口",
+      "lang": "en"
+    },
+    {
+      "id": "getepic",
+      "name": "Epic",
+      "category": "英语阅读",
+      "age": "3-12",
+      "url": "https://www.getepic.com",
+      "verified": "ok",
+      "note": "电子书库，教育账号免费但需教师身份",
+      "lang": "en"
+    },
+    {
+      "id": "razkids",
+      "name": "Raz-Kids",
+      "category": "英语阅读",
+      "age": "4-11",
+      "url": "https://www.raz-kids.com",
+      "verified": "blocked",
+      "note": "返回 403，属站点反爬；主体为付费订阅",
+      "lang": "en"
+    },
+    {
+      "id": "bbc_bitesize",
+      "name": "BBC Bitesize",
+      "category": "通识百科",
+      "age": "5-16",
+      "url": "https://www.bbc.co.uk/bitesize",
+      "verified": "ok",
+      "note": "英式课标全科复习，配短视频",
+      "lang": "en"
+    },
+    {
+      "id": "newsinlevels",
+      "name": "News in Levels",
+      "category": "英语阅读",
+      "age": "10+",
+      "url": "https://www.newsinlevels.com",
+      "verified": "ok",
+      "note": "同一新闻三档难度，i+1 输入的现成素材",
+      "lang": "en"
+    },
+    {
+      "id": "breakingnewsenglish",
+      "name": "Breaking News English",
+      "category": "英语阅读",
+      "age": "12+",
+      "url": "https://breakingnewsenglish.com",
+      "verified": "ok",
+      "note": "新闻分级 + 配套练习与音频",
+      "lang": "en"
+    },
+    {
+      "id": "voa_learningenglish",
+      "name": "VOA Learning English",
+      "category": "英语听力",
+      "age": "10+",
+      "url": "https://learningenglish.voanews.com",
+      "verified": "unreachable",
+      "note": "DNS 正常但本机连接被阻断；需要代理才能访问",
+      "lang": "en"
+    },
+    {
+      "id": "youglish",
+      "name": "YouGlish",
+      "category": "英语听力",
+      "age": "12+",
+      "url": "https://youglish.com",
+      "verified": "ok",
+      "note": "按词检索真人视频语境，替代 TTS 查发音的正确做法",
+      "lang": "en"
+    },
+    {
+      "id": "tatoeba",
+      "name": "Tatoeba",
+      "category": "语境例句",
+      "age": "10+",
+      "url": "https://tatoeba.org",
+      "verified": "ok",
+      "note": "多语言对照例句库，查词的真实语境",
+      "lang": "多语言"
+    },
+    {
+      "id": "cambridge_english",
+      "name": "Cambridge English",
+      "category": "英语测评",
+      "age": "8+",
+      "url": "https://www.cambridgeenglish.org",
+      "verified": "ok",
+      "note": "免费在线水平测试与备考资料",
+      "lang": "en"
+    },
+    {
+      "id": "test_english",
+      "name": "Test-English",
+      "category": "英语测评",
+      "age": "12+",
+      "url": "https://test-english.com",
+      "verified": "ok",
+      "note": "A1-C1 分级测验，第一次探测返回 403、复测 200，属间歇性反爬",
+      "lang": "en"
+    },
+    {
+      "id": "ldoce",
+      "name": "Longman Dictionary",
+      "category": "词典",
+      "age": "-",
+      "url": "https://www.ldoceonline.com",
+      "verified": "ok",
+      "note": "朗文当代，释义用 2000 基础词写成",
+      "lang": "en"
+    },
+    {
+      "id": "oxford_learners",
+      "name": "Oxford Learner's Dictionaries",
+      "category": "词典",
+      "age": "-",
+      "url": "https://www.oxfordlearnersdictionaries.com",
+      "verified": "ok",
+      "note": "牛津学习词典，含真人发音与例句",
+      "lang": "en"
+    },
+    {
+      "id": "dapeng_zidian",
+      "name": "大鹏书法字典",
+      "category": "中文",
+      "age": "-",
+      "url": "https://zidian.dapengshufa.com/",
+      "verified": "ok",
+      "note": "汉字字形/笔顺查询，硬笔练习辅助",
+      "lang": "zh"
+    },
+    {
+      "id": "duolingo",
+      "name": "Duolingo",
+      "category": "语言",
+      "age": "6+",
+      "url": "https://www.duolingo.com",
+      "verified": "ok",
+      "note": "游戏化语言学习，适合维持动机而非主输入",
+      "lang": "多语言"
+    },
+    {
+      "id": "gusonthego",
+      "name": "Gus on the Go（已失效）",
+      "category": "语言",
+      "age": "-",
+      "url": "https://gus-on-the-go.com",
+      "verified": "dead",
+      "note": "域名 DNS 不存在（NXDOMAIN）",
+      "lang": "en"
+    },
+    {
+      "id": "musictheory",
+      "name": "musictheory.net",
+      "category": "艺术音乐",
+      "age": "8+",
+      "url": "https://www.musictheory.net/",
+      "verified": "ok",
+      "note": "乐理基础，含交互练习",
+      "lang": "en"
+    },
+    {
+      "id": "sketchrx",
+      "name": "SketchRX",
+      "category": "艺术音乐",
+      "age": "10+",
+      "url": "https://sketchrx.com",
+      "verified": "ok",
+      "note": "绘画临摹练习",
+      "lang": "en"
+    },
+    {
+      "id": "artforkidshub",
+      "name": "Art for Kids Hub",
+      "category": "艺术音乐",
+      "age": "4-12",
+      "url": "https://www.artforkidshub.com",
+      "verified": "ok",
+      "note": "零基础绘画视频教程",
+      "lang": "en"
+    },
+    {
+      "id": "metkids",
+      "name": "The Met Kids（域名已失效）",
+      "category": "艺术音乐",
+      "age": "-",
+      "url": "https://www.metkids.org",
+      "verified": "dead",
+      "note": "metkids.org 已不解析；大都会博物馆儿童页现位于 metmuseum.org 下，但该站对脚本探测返回 429，未做判定",
+      "lang": "en"
+    },
+    {
+      "id": "tate_kids",
+      "name": "Tate Kids",
+      "category": "艺术音乐",
+      "age": "5-12",
+      "url": "https://www.tate.org.uk/kids",
+      "verified": "ok",
+      "note": "泰特美术馆儿童艺术页",
+      "lang": "en"
+    },
+    {
+      "id": "chesskid",
+      "name": "ChessKid",
+      "category": "棋类",
+      "age": "5+",
+      "url": "https://www.chesskid.com",
+      "verified": "ok",
+      "note": "儿童国际象棋，免费额度有限",
+      "lang": "en"
+    },
+    {
+      "id": "lichess",
+      "name": "Lichess",
+      "category": "棋类",
+      "age": "6+",
+      "url": "https://lichess.org",
+      "verified": "ok",
+      "note": "完全免费开源的国际象棋平台，含战术练习",
+      "lang": "多语言"
+    },
+    {
+      "id": "typingclub",
+      "name": "TypingClub",
+      "category": "工具技能",
+      "age": "7+",
+      "url": "https://www.typingclub.com",
+      "verified": "ok",
+      "note": "十指盲打教学",
+      "lang": "en"
+    },
+    {
+      "id": "lego_edu",
+      "name": "LEGO Education",
+      "category": "工具技能",
+      "age": "4+",
+      "url": "https://education.lego.com/ja-jp/",
+      "verified": "ok",
+      "note": "免费教案（清单给的是日文站）",
+      "lang": "多语言"
+    },
+    {
+      "id": "commonsense",
+      "name": "Common Sense Media",
+      "category": "家长工具",
+      "age": "-",
+      "url": "https://www.commonsensemedia.org/",
+      "verified": "ok",
+      "note": "按年龄把关内容适龄度",
+      "lang": "en"
+    },
+    {
+      "id": "parroto",
+      "name": "Parrot 播客",
+      "category": "英语听力",
+      "age": "10+",
+      "url": "https://parroto.app/zh-CN",
+      "verified": "ok",
+      "note": "Minecraft 长视频/播客，语速真实、单集时长极高，天然高输入量",
+      "lang": "en"
+    },
+    {
+      "id": "words0xlei",
+      "name": "words (0xlei)",
+      "category": "英语词汇",
+      "age": "12+",
+      "url": "https://0xlei.tech/words/",
+      "verified": "ok",
+      "note": "词汇练习小站",
+      "lang": "zh/en"
+    },
+    {
+      "id": "every_joule",
+      "name": "Every Joule",
+      "category": "物理",
+      "age": "14+",
+      "url": "https://iamtechartist.com/every-joule/",
+      "verified": "ok",
+      "note": "交互式能量/物理可视化",
+      "lang": "en"
+    },
+    {
+      "id": "openhouse",
+      "name": "Open House 3D 书",
+      "category": "艺术音乐",
+      "age": "10+",
+      "url": "https://april-zhu.com/openhouse",
+      "verified": "ok",
+      "note": "3D 立体书案例，制作方法见 colorfigures",
+      "lang": "en"
+    },
+    {
+      "id": "colorfigures",
+      "name": "Color Figures 制作方法",
+      "category": "艺术音乐",
+      "age": "12+",
+      "url": "https://april-zhu.com/colorfigures",
+      "verified": "ok",
+      "note": "立体书/信息图制作技法",
+      "lang": "en"
+    },
+    {
+      "id": "khanacademy",
+      "name": "Khan Academy",
+      "category": "通识百科",
+      "age": "5+",
+      "url": "https://www.khanacademy.org",
+      "verified": "ok",
+      "note": "全科免费课程，数学与科学最完整",
+      "lang": "多语言"
+    }
+  ],
+  "repos": [
+    {
+      "id": "ielts_practice",
+      "name": "gtiipoi/ielts-practice",
+      "stars": 609,
+      "url": "https://github.com/gtiipoi/ielts-practice",
+      "desc": "IELTS Atlas 雅思练习系统",
+      "subject": "英语"
+    },
+    {
+      "id": "bodyvista",
+      "name": "FreedomIntelligence/BodyVista",
+      "stars": 151,
+      "url": "https://github.com/FreedomIntelligence/BodyVista",
+      "desc": "沉浸式人体解剖探索",
+      "subject": "科学"
+    },
+    {
+      "id": "deeptutor",
+      "name": "HKUDS/DeepTutor",
+      "stars": 57092,
+      "url": "https://github.com/HKUDS/DeepTutor",
+      "desc": "终身个性化 AI 辅导框架（港大数据智能实验室）",
+      "subject": "AI 辅导"
+    },
+    {
+      "id": "speaking_island",
+      "name": "modengsir/speaking-island",
+      "stars": 29,
+      "url": "https://github.com/modengsir/speaking-island",
+      "desc": "开口小岛，基于 Ming 语音模型的儿童英语启蒙应用",
+      "subject": "英语"
+    },
+    {
+      "id": "awesome_english_ebooks",
+      "name": "hehonghui/awesome-english-ebooks",
+      "stars": 39311,
+      "url": "https://github.com/hehonghui/awesome-english-ebooks",
+      "desc": "经济学人/纽约客/卫报等英语杂志（含音频）",
+      "subject": "英语"
+    },
+    {
+      "id": "nce_notes",
+      "name": "andylee1890/NewConceptEnglish",
+      "stars": 2051,
+      "url": "https://github.com/andylee1890/NewConceptEnglish",
+      "desc": "新概念学习笔记与工具",
+      "subject": "英语"
+    },
+    {
+      "id": "atlas_of_physics",
+      "name": "nathanliow/atlas-of-physics",
+      "stars": 397,
+      "url": "https://github.com/nathanliow/atlas-of-physics",
+      "desc": "AP Physics 1/C 交互式 3D 教材",
+      "subject": "科学"
+    },
+    {
+      "id": "algorithm_visualizer",
+      "name": "algorithm-visualizer/algorithm-visualizer",
+      "stars": 49395,
+      "url": "https://github.com/algorithm-visualizer/algorithm-visualizer",
+      "desc": "算法可视化在线平台",
+      "subject": "编程与逻辑"
+    },
+    {
+      "id": "learning_english",
+      "name": "knowledgefxg/learning-english",
+      "stars": 4955,
+      "url": "https://github.com/knowledgefxg/learning-english",
+      "desc": "听说读写英语学习资源合集",
+      "subject": "英语"
+    },
+    {
+      "id": "awesome_english",
+      "name": "yvoronoy/awesome-english",
+      "stars": 4478,
+      "url": "https://github.com/yvoronoy/awesome-english",
+      "desc": "英语学习资源 awesome 清单",
+      "subject": "英语"
+    },
+    {
+      "id": "word_atlas",
+      "name": "designfuchen/word-atlas",
+      "stars": 4483,
+      "url": "https://github.com/designfuchen/word-atlas",
+      "desc": "词光 · 图解雅思词汇 7298 词，含英美音与 FSRS 复习",
+      "subject": "英语"
+    },
+    {
+      "id": "keyboard_island",
+      "name": "shaom/keyboard-island",
+      "stars": 101,
+      "url": "https://github.com/shaom/keyboard-island",
+      "desc": "儿童打字冒险，Keyboard Island 96 章 + Sentence Post Office",
+      "subject": "工具技能"
+    },
+    {
+      "id": "nce_online",
+      "name": "iChochy/NCE",
+      "stars": 4371,
+      "url": "https://github.com/iChochy/NCE",
+      "desc": "新概念英语全四册在线朗读、单句点读、中英对照",
+      "subject": "英语"
+    },
+    {
+      "id": "cn_math_taxonomy",
+      "name": "xiaoyang111222/cn-math-taxonomy",
+      "stars": 7127,
+      "url": "https://github.com/xiaoyang111222/cn-math-taxonomy",
+      "desc": "小学数学到高中、英语三年级到高中、初中物理的知识图谱",
+      "subject": "数学"
+    },
+    {
+      "id": "freepep",
+      "name": "siknet/FreePEP",
+      "stars": 1476,
+      "url": "https://github.com/siknet/FreePEP",
+      "desc": "人教社电子教材下载器",
+      "subject": "教材"
+    },
+    {
+      "id": "cet_practice",
+      "name": "o-Sakurajimamai-o/cet-practice",
+      "stars": 161,
+      "url": "https://github.com/o-Sakurajimamai-o/cet-practice",
+      "desc": "英语研习室，本地四六级/考研真题练习",
+      "subject": "英语"
+    },
+    {
+      "id": "anatomy_3d",
+      "name": "thebuggeddev/anatomy",
+      "stars": 3888,
+      "url": "https://github.com/thebuggeddev/anatomy",
+      "desc": "Three.js 交互式 3D 人体解剖浏览器",
+      "subject": "科学"
+    },
+    {
+      "id": "lilinji_english",
+      "name": "lilinji/English",
+      "stars": 1260,
+      "url": "https://github.com/lilinji/English",
+      "desc": "英语学习小站",
+      "subject": "英语"
+    },
+    {
+      "id": "mineru",
+      "name": "opendatalab/MinerU",
+      "stars": 83327,
+      "url": "https://github.com/opendatalab/MinerU",
+      "desc": "PDF 结构化解析引擎，扫描件自动 OCR，输出 Markdown/JSON",
+      "subject": "OCR"
+    },
+    {
+      "id": "dify",
+      "name": "langgenius/dify",
+      "stars": 160699,
+      "url": "https://github.com/langgenius/dify",
+      "desc": "LLM 应用开发平台，官方插件仓库见 dify-official-plugins",
+      "subject": "平台"
+    },
+    {
+      "id": "dify_official_plugins",
+      "name": "langgenius/dify-official-plugins",
+      "stars": 641,
+      "url": "https://github.com/langgenius/dify-official-plugins",
+      "desc": "Dify 官方插件库（datasources / tools / models 等）",
+      "subject": "平台"
+    }
+  ],
+  "mcp_tools": [
+    {
+      "id": "webdav_mcp_server",
+      "name": "webdav-mcp-server",
+      "pkg": "webdav-mcp-server",
+      "registry": "npm",
+      "version": "1.0.4",
+      "repo": "LaubPlusCo/mcp-webdav-server",
+      "stars": 19,
+      "run": "npx -y webdav-mcp-server",
+      "needs_key": false,
+      "platform": "全平台",
+      "verified": "ok",
+      "note": "通用 WebDAV，坚果云/Nextcloud/ownCloud 首选；本地与网盘直传，不经第三方",
+      "pushed": "2025-03-19"
+    },
+    {
+      "id": "sync_vault_agent",
+      "name": "sync-vault-agent",
+      "pkg": "sync-vault-agent",
+      "registry": "npm",
+      "version": "0.2.1",
+      "repo": "abcamus/sync-vault-agent",
+      "stars": 0,
+      "run": "npm i -g sync-vault-agent && mcp-agent init",
+      "needs_key": true,
+      "platform": "全平台",
+      "verified": "ok",
+      "note": "声称聚合百度/阿里云盘/115/夸克/OneDrive，走 OAuth。包发布于 2026-07，仓库零 star，属新项目，建议先隔离试跑再连主账号",
+      "pushed": "2026-07-20"
+    },
+    {
+      "id": "nutstore_mcp",
+      "name": "nutstore-mcp",
+      "pkg": "nutstore-mcp",
+      "registry": "pypi",
+      "version": "1.1.0",
+      "repo": "silverze/nutstore-mcp",
+      "stars": 1,
+      "run": "uvx nutstore-mcp",
+      "needs_key": true,
+      "platform": "全平台",
+      "verified": "ok",
+      "note": "坚果云专用（走 WebDAV 协议，因此也能连任何兼容 WebDAV 的网盘）",
+      "pushed": "2026-04-24"
+    },
+    {
+      "id": "netdisk_mcp_server",
+      "name": "@ptbsare/netdisk-mcp-server",
+      "pkg": "@ptbsare/netdisk-mcp-server",
+      "registry": "npm",
+      "version": "1.1.1",
+      "repo": "ptbsare/netdisk-mcp-server",
+      "stars": 1,
+      "run": "npx -y @ptbsare/netdisk-mcp-server",
+      "needs_key": true,
+      "platform": "全平台",
+      "verified": "ok",
+      "note": "夸克 + 115：列表/查看/转存/离线下载/多平台搜索。原需求中的「360 云盘 MCP」「百度网盘 MCP」未找到通用实现，这是最接近的可用替代",
+      "pushed": "2026-09-11"
+    },
+    {
+      "id": "pdffr_mcp",
+      "name": "pdffr-mcp",
+      "pkg": "pdffr-mcp",
+      "registry": "npm",
+      "version": "0.1.1",
+      "repo": "AmerSarhan/PDFFR",
+      "stars": 0,
+      "run": "npx -y pdffr-mcp",
+      "needs_key": false,
+      "platform": "全平台",
+      "verified": "ok",
+      "note": "本地 PDF→Markdown，工具 pdf_to_markdown / pdf_outline / pdf_tables。注意 PyPI 无此包，只能走 npm",
+      "pushed": "2026-09-03"
+    },
+    {
+      "id": "pymupdf4llm_mcp",
+      "name": "pymupdf4llm-mcp",
+      "pkg": "pymupdf4llm-mcp",
+      "registry": "pypi",
+      "version": "1.28.0",
+      "repo": "pymupdf/pymupdf4llm-mcp",
+      "stars": 73,
+      "run": "uvx pymupdf4llm-mcp",
+      "needs_key": false,
+      "platform": "全平台",
+      "verified": "ok",
+      "note": "PyMuPDF 官方 MCP，纯本地、无 Key，是把教材 PDF 转 Markdown 最稳的一条路",
+      "pushed": "2026-07-02"
+    },
+    {
+      "id": "mcp_pdf",
+      "name": "mcp-pdf",
+      "pkg": "mcp-pdf",
+      "registry": "pypi",
+      "version": "2026.9.22",
+      "repo": "rsp2k/mcp-pdf",
+      "stars": 11,
+      "run": "uvx mcp-pdf",
+      "needs_key": false,
+      "platform": "全平台",
+      "verified": "ok",
+      "note": "文本提取 + OCR + 表格提取，功能面比 pdffr 广。原清单说的「pdf-mcp 57 种工具」在 npm 上对应的是 alanhe421/pdf-mcp@0.0.3，实际功能只有「删除 PDF 页面」，不可互换",
+      "pushed": "2026-09-22"
+    },
+    {
+      "id": "macos_vision_mcp",
+      "name": "macos-vision-mcp",
+      "pkg": "macos-vision-mcp",
+      "registry": "npm",
+      "version": "0.7.0",
+      "repo": "未核实",
+      "stars": 0,
+      "run": "npx -y macos-vision-mcp",
+      "needs_key": false,
+      "platform": "仅 macOS",
+      "verified": "ok",
+      "note": "调用苹果 Vision 框架离线 OCR。当前机器是 Windows，不可用",
+      "pushed": ""
+    },
+    {
+      "id": "fastocr_mcp",
+      "name": "fastocr-mcp",
+      "pkg": "fastocr-mcp",
+      "registry": "pypi",
+      "version": "0.3.0",
+      "repo": "fastocr-org/fastocr-mcp",
+      "stars": 0,
+      "run": "uvx fastocr-mcp",
+      "needs_key": true,
+      "platform": "全平台",
+      "verified": "ok",
+      "note": "依赖 fastocr.org 云端 API，需 Key 且需联网，不是本地 OCR。原清单说它在 npm，实际在 PyPI",
+      "pushed": "2026-11-06"
+    },
+    {
+      "id": "ocr_mcp",
+      "name": "ocr-mcp",
+      "pkg": "ocr-mcp",
+      "registry": "pypi",
+      "version": "0.1.0",
+      "repo": "未核实",
+      "stars": 0,
+      "run": "uvx ocr-mcp",
+      "needs_key": true,
+      "platform": "全平台",
+      "verified": "ok",
+      "note": "多后端（Marker / DeepSeek / Mistral），本地 Marker 可完全离线，但版本很早期",
+      "pushed": ""
+    },
+    {
+      "id": "onedrive_mcp",
+      "name": "mcp-onedrive",
+      "pkg": "mcp-onedrive",
+      "registry": "npm",
+      "version": "0.10.2",
+      "repo": "未核实",
+      "stars": 0,
+      "run": "npx -y mcp-onedrive",
+      "needs_key": true,
+      "platform": "全平台",
+      "verified": "ok",
+      "note": "OneDrive 专用 MCP",
+      "pushed": "2026-11-04"
+    }
+  ],
+  "dify": [
+    {
+      "id": "dify_ds_onedrive",
+      "name": "OneDrive 数据源",
+      "kind": "官方 datasource",
+      "verified": "ok",
+      "note": "dify-official-plugins/datasources/onedrive"
+    },
+    {
+      "id": "dify_ds_gdrive",
+      "name": "Google Drive 数据源",
+      "kind": "官方 datasource",
+      "verified": "ok",
+      "note": "dify-official-plugins/datasources/google_drive"
+    },
+    {
+      "id": "dify_ds_box",
+      "name": "Box 数据源",
+      "kind": "官方 datasource",
+      "verified": "ok",
+      "note": "dify-official-plugins/datasources/box_datasource"
+    },
+    {
+      "id": "dify_ds_s3",
+      "name": "AWS S3 数据源",
+      "kind": "官方 datasource",
+      "verified": "ok",
+      "note": "dify-official-plugins/datasources/aws_s3_storage"
+    },
+    {
+      "id": "dify_ds_cos",
+      "name": "腾讯 COS 数据源",
+      "kind": "官方 datasource",
+      "verified": "ok",
+      "note": "dify-official-plugins/datasources/tencent_cos_storage"
+    },
+    {
+      "id": "dify_ds_dropbox",
+      "name": "Dropbox 数据源",
+      "kind": "官方 datasource",
+      "verified": "ok",
+      "note": "dify-official-plugins/datasources/dropbox_datasource"
+    },
+    {
+      "id": "dify_ds_webdav",
+      "name": "WebDAV 数据源",
+      "kind": "社区插件",
+      "verified": "unverified",
+      "note": "shaba/dify-datasource-webdav，仅 1 star。官方目录内没有任何 webdav 数据源，说明「事实标准」这个说法不成立，需自行评估维护状态"
+    },
+    {
+      "id": "dify_tool_mineru",
+      "name": "MinerU",
+      "kind": "官方 tool 插件",
+      "verified": "ok",
+      "note": "dify-official-plugins/tools/mineru，扫描版 PDF 自动 OCR，输出结构化 Markdown"
+    },
+    {
+      "id": "dify_tool_paddleocr",
+      "name": "PaddleOCR",
+      "kind": "官方 tool 插件",
+      "verified": "ok",
+      "note": "dify-official-plugins/tools/paddleocr，可自托管，中文识别优势"
+    },
+    {
+      "id": "dify_tool_upstage",
+      "name": "Upstage Document Parse",
+      "kind": "第三方/未核实",
+      "verified": "unverified",
+      "note": "官方插件目录中未找到，需自行确认来源"
+    }
+  ],
+  "collections": [
+    {
+      "id": "fan_geometry_900",
+      "name": "范老师·小学数学几何思维课",
+      "subject": "数学",
+      "grade": "1-6 年级",
+      "media": "视频（动画教程）",
+      "claimed": "900 节，1-6 年级全覆盖",
+      "url_official": "https://pan.quark.cn/s/668920790b03",
+      "url_alias": "https://pan.quarkn.xyz/s/668920790b03",
+      "entry_type": "第三方中转域名 → 夸克官方分享页",
+      "verified": "ok",
+      "note": "链接层已验证：quarkn.xyz 返回 200 并以 meta refresh + location.replace 跳转到 pan.quark.cn/s/668920790b03（同样 200）。课时数与年级覆盖为原始文案，未逐一核对",
+      "url_official_verified": "ok",
+      "url_alias_verified": "ok",
+      "checked_at": "2026-11-09T11:18:09+08:00"
+    },
+    {
+      "id": "primary_1000_words",
+      "name": "小学核心词汇 1000 词 + 40 篇短文",
+      "subject": "英语",
+      "grade": "小学",
+      "media": "短文 + 中英文默写本 + 童话故事默写材料",
+      "url_official": "https://pan.quark.cn/s/cbd38d7f7061",
+      "password": "YhRG",
+      "entry_type": "第三方中转页，页内直接给出夸克官方链接（同一 share id）",
+      "verified": "ok",
+      "note": "中转页打开后直接展示「夸克链接：https://pan.quark.cn/s/cbd38d7f7061」，未要求提取码。原始文案的提取码 YhRG 在该页上未被使用。夸克分享页返回 200（SPA 壳，文件清单需登录后查看）",
+      "url_official_verified": "ok",
+      "checked_at": "2026-11-09T11:18:09+08:00",
+      "url_alias": "https://pan.powersharex.com/s/cbd38d7f7061"
+    },
+    {
+      "id": "phonics_270",
+      "name": "儿童自然拼读练习手册（Z 自然拼读作业纸 270+ 页）",
+      "subject": "英语",
+      "grade": "学前-小学低年级",
+      "media": "可打印作业纸 + 幼小衔接数学资料",
+      "url_official": "https://pan.quark.cn/s/f78b4890729e",
+      "password": "ab8M",
+      "entry_type": "第三方中转页，页内直接给出夸克官方链接（同一 share id）",
+      "verified": "ok",
+      "note": "中转页展示夸克链接 https://pan.quark.cn/s/f78b4890729e，未要求提取码。原始文案的提取码 ab8M 未在该页使用",
+      "url_official_verified": "ok",
+      "checked_at": "2026-11-09T11:18:09+08:00",
+      "url_alias": "https://pan.powersharex.com/s/f78b4890729e"
+    },
+    {
+      "id": "scratch_174",
+      "name": "Scratch 3.0 初/中/高全套 174 节",
+      "subject": "编程与逻辑",
+      "grade": "7-12 岁",
+      "media": "视频课 + .sprite3 素材包",
+      "url_official": "https://wpss.best/res/EOSiKyB1BL7wrxtD",
+      "url_alt": "https://wpss.best/res/Qk15E1dIjxu11Gwl",
+      "entry_type": "第三方跳转（夸克 / 百度两个源）",
+      "verified": "ok",
+      "note": "wpss.best 实际是「松果盘搜」，页面内提供夸克与百度两个源。⚠️ 内容不一致：聚合页标题写「Scratch 3.0 全套 214 节课程」，而资源描述写「174 节」（65+59+50）。百度源页面标注「更新 2020-08-12」。节数需自行核对",
+      "url_official_verified": "ok",
+      "url_alt_verified": "ok",
+      "checked_at": "2026-11-09T11:18:09+08:00"
+    },
+    {
+      "id": "learn_english_movies",
+      "name": "看电影学英语·100 部纯英文电影",
+      "subject": "英语",
+      "grade": "初中以上",
+      "media": "影片 + 音频 + 台词剧本",
+      "url_official": "https://pan.nameishare.com/70c6c512117b",
+      "entry_type": "第三方短链",
+      "verified": "ok",
+      "note": "分享页 200",
+      "url_official_verified": "ok",
+      "url_official_redirected_to": "https://pan.quark.cn/s/7572c1cb1016",
+      "checked_at": "2026-11-09T11:18:09+08:00"
+    },
+    {
+      "id": "ielts_100_sentences",
+      "name": "100 个句子吃透 7000 雅思词汇",
+      "subject": "英语",
+      "grade": "雅思备考",
+      "media": "视频课程 + 电子书",
+      "url_official": "https://pan.quark.cn/s/ae36118717fd",
+      "entry_type": "第三方中转页，自动 location.replace 跳转至夸克官方（同一 share id）",
+      "verified": "ok",
+      "note": "中转页以 location.replace 跳转至 https://pan.quark.cn/s/ae36118717fd，夸克页返回 200",
+      "url_official_verified": "ok",
+      "checked_at": "2026-11-09T11:18:09+08:00",
+      "url_alias": "https://pan.quarket.xyz/s/ae36118717fd"
+    },
+    {
+      "id": "wordly_wise_3000",
+      "name": "Wordly Wise 3000（K-12 全套）",
+      "subject": "英语",
+      "grade": "K-12",
+      "media": "教材 + 练习",
+      "url_official": "https://pan.nameishare.com/b03137408b44",
+      "entry_type": "第三方短链",
+      "verified": "ok",
+      "note": "分享页 200",
+      "url_official_verified": "ok",
+      "url_official_redirected_to": "https://pan.quark.cn/s/47b03b344081",
+      "checked_at": "2026-11-09T11:18:09+08:00"
+    },
+    {
+      "id": "word_posters",
+      "name": "过目不忘·小学英语单词海报",
+      "subject": "英语",
+      "grade": "3-6 年级",
+      "media": "彩色海报 + 视频讲解 + 音频跟读",
+      "url_official": "https://pan.nameishare.com/75b897a058c1",
+      "entry_type": "第三方短链",
+      "verified": "ok",
+      "note": "分享页 200",
+      "url_official_verified": "ok",
+      "url_official_redirected_to": "https://pan.quark.cn/s/c770b891a558",
+      "checked_at": "2026-11-09T11:18:09+08:00"
+    },
+    {
+      "id": "quark_misc",
+      "name": "夸克分享集合（原清单未标注内容）",
+      "subject": "综合",
+      "grade": "-",
+      "media": "网盘目录",
+      "url_official": "https://pan.quark.cn/s/3d2dd7b91043",
+      "entry_type": "夸克官方",
+      "verified": "ok",
+      "note": "原始资料未说明具体内容，未登录无法列出目录；收录待你补充说明",
+      "url_official_verified": "ok",
+      "checked_at": "2026-11-09T11:18:09+08:00"
+    },
+    {
+      "id": "smartedu_downloader",
+      "name": "智慧教育平台电子教材下载器",
+      "subject": "教材",
+      "grade": "中小学",
+      "media": "工具（Windows + macOS）",
+      "url_official": "https://v.v8l.cn/s/rRxsZcP",
+      "url_alt": "https://pan.baidu.com/s/1ff0dvoCbM_jXwAKayymf3w",
+      "password": "8vnn",
+      "entry_type": "第三方跳转 + 百度网盘",
+      "verified": "mismatch",
+      "note": "⚠️ 内容不符：v.v8l.cn/s/rRxsZcP 打开后是「夸克网盘 扫码访问」页，资源名为「网盘热门资源2000T」，且仅允许手机端扫码访问，并非电子教材下载器。百度网盘入口 https://pan.baidu.com/s/1ff0dvoCbM_jXwAKayymf3w 已确认为有效的加密分享（页面显示「请输入提取码」，分享者「笑**人生」），但提取码 8vnn 未提交验证，无法确认内容",
+      "url_official_verified": "ok",
+      "url_alt_verified": "ok",
+      "url_alt_redirected_to": "https://pan.baidu.com/share/init?surl=ff0dvoCbM_jXwAKayymf3w",
+      "checked_at": "2026-11-09T11:18:09+08:00"
+    }
+  ]
+}
