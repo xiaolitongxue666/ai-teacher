@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# 本地 MCP 配置（可能含凭据，不要提交）
+.cursor/mcp.json
+mcp/mcp.local.json
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+
+# 临时产物
+_probe_tmp.json
+*.tmp
