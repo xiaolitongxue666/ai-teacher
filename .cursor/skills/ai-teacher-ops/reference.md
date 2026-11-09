@@ -11,11 +11,11 @@
   "schema_version": 1,
   "checked_at": "2026-11-09T13:21:31+08:00",
   "status_values": [...],
-  "websites": [], "repos": [], "mcp_tools": [], "dify": [], "collections": []
+  "websites": [], "tutoring": [], "repos": [], "mcp_tools": [], "dify": [], "collections": []
 }
 ```
 
-当前条目数：websites 70 / repos 22 / mcp_tools 12 / dify 11 / collections 11。
+当前条目数：websites 74 / tutoring 15 / repos 22 / mcp_tools 12 / dify 11 / collections 59。
 
 ### websites
 
@@ -28,6 +28,23 @@
 | `checked_at` | 最后一次探测时间，脚本写 |
 | `note` | 人工描述，脚本不改 |
 | `final_url` / `redirected_to` | 发生过跳转时由脚本记录 |
+
+### tutoring
+
+| 字段 | 来源 | 说明 |
+| --- | --- | --- |
+| `id` / `name` / `url` | 人工 | 展示用 |
+| `operator` | 人工 | 服务条款或联系页写明的主体；中文站不等于主体所在地 |
+| `operator_evidence_url` | 人工 | 支撑主体判断的官方页面 |
+| `teacher_origin` | 人工 | 师资国籍构成，写清是否含菲律宾 |
+| `fixed_teacher` | 人工 | `支持` / `可预约` / `待确认`；`可预约` 指每次自己抢时段，无自动固定排课 |
+| `fixed_teacher_note` | 人工 | 固定机制的具体限制（有效期、改期时限、每日上限） |
+| `alipay` | 人工 | `official` 官网结账原生 / `official_manual` 官方渠道收款 / `none` 官方列全且不含 / `unverified` 只有间接证据 |
+| `alipay_note` | 人工 | 结论与边界，写明「为什么不算」 |
+| `alipay_evidence_url` | 人工 | 支撑支付结论的官方页面 |
+| `verified` / `checked_at` / `redirected_to` | 脚本 | 只表示入口可达，与支付无关 |
+
+**`alipay` 与 `fixed_teacher` 是人工结论，探针不覆盖。** 官网支付说明页返回 200 不等于支持支付宝；App 里打包支付宝 SDK 也不等于网页结账能选支付宝。拿脚本结果改写这两列，等于用「页面能打开」冒充「支持支付宝」。
 
 ### repos
 
@@ -66,6 +83,25 @@
 | `share_tree_requests` | 脚本 | 实际请求次数 |
 | `share_request_budget` | 人工 | 单条覆盖默认预算 |
 | `tree_checked_at` | 脚本 | 本次统计时间 |
+
+### videos
+
+按国家审定教材矩阵登记的在线视频课程。
+
+| 字段 | 来源 | 说明 |
+| --- | --- | --- |
+| `id` | 脚本 | `{出版社}_{学科}_g{年级}_{册别}`，如 `beishida_math_g2_up` |
+| `platform` | 脚本 | 目前只有 `bilibili` |
+| `bvid` | 脚本 | B站 视频号 |
+| `publisher` / `subject` / `grade` / `volume` | 脚本 | 匹配键，与 `docs/11` 的矩阵一一对应 |
+| `editor` | 脚本 | 平台登记的主编。英语按主编分版本，是区分键 |
+| `pages` | 脚本 | **`view` 接口返回的真实分P数**，不是标题声称的集数 |
+| `duration_seconds` / `play` / `publish` | 脚本 | `view` 接口实测值 |
+| `uploader` / `uploader_mid` | 脚本 | UP 主名与 mid |
+| `url` | 脚本 | 播放页 |
+| `verified` | 探针 | 只表示播放页 HTTP 可达 |
+| `checked_at` | 探针 | 最近一次可达性探测时间 |
+| `note` | 脚本 | 标题集数与实际分P不符、上下册合并、分P过少、地方教材等需披露项 |
 
 ## 二、`verified` 六种取值
 
@@ -111,6 +147,23 @@
 18. **星数会漂移**。一次比对 22 个项目有 14 个已偏。发布前用 API 复核，同步 `data` 与 `docs/07` 两处。
 19. **两份工作副本会导致工作区分叉**。只保留 `E:\Code\my_code\Agents\ai-teacher`。
 
+### B站检索类
+
+20. **wbi 搜索接口 5/8 不稳定，不可依赖**。失败时 `data` 里只有 `v_voucher`，没有 `result`。必须做「有 result 就用，空就回退 SSR」。
+21. **SSR 才是可靠召回**（8/8），但只给 bvid + 标题，元数据必须再调 `view`。
+22. **`view` 几乎必成**（31/32）。失败的那条是从 HTML 正则里误抓的无效串，返回 `-400`，不是限流。
+23. **wbi 的 `title` 带 `<em class="keyword">` 高亮标签**，SSR 的 `title="..."` 是纯文本。两条通道都要先剥标签再打分，否则关键词匹配失效。
+24. **标题匹配必须有三道硬门槛**：出版社必须出现、册别必须对、其它学科名不能出现。只靠扣分压不住，实测三条都出现过误命中。
+25. **标题集数普遍虚标**。30 条带集数的标题只有 3 条对得上（`BV1NMaP6KEcQ` 称 152 实际 100、`BV1VoXEBrEYb` 称 180 实际 54）。
+26. **`space/wbi/arc/search` 与 `yt-dlp bilisearch` 都是 412**，UP 主投稿列表枚举不了，别浪费时间。
+27. **`data/resources.json` 可能被并行会话覆盖**。写入前重新读盘；用 `--json-out` 留备份，冲突时 `--from-json` 恢复，不必重新检索。
+
+### 教材目录类
+
+28. **小学语文只有统编版**。「人教版语文」「部编版语文」指的是同一套，2017 年起全国统一。
+29. **小学英语从三年级起**，23 个国家审定版本没有任何一个覆盖二年级。二年级英语教材都是地方/校本教材。
+30. **外研社版按主编分三个**（孙有中 / 刘兆义 / 张祖春），覆盖年级不同。刘兆义版缺四年级上册，所以外研社只有 7 格。
+
 ## 四、常用命令
 
 ```bash
@@ -122,6 +175,12 @@ python scripts/check_links.py --only quark_tree --write
 # 视频
 python scripts/download_video.py --check
 python scripts/download_video.py "https://www.bilibili.com/video/BVxxxx" --audio-only
+
+# 按教材版本检索课程
+python scripts/search_bilibili_courses.py --grid
+python scripts/search_bilibili_courses.py --only 数学
+python scripts/search_bilibili_courses.py --write --json-out data/videos_bilibili.json
+python scripts/search_bilibili_courses.py --from-json data/videos_bilibili.json
 
 # Cookie 可读性
 python scripts/check_chrome_cookies.py
@@ -140,4 +199,4 @@ git-smart-commit --yes
 
 - 五列表：`| 名称 | 年龄 | \`status\` | 说明 | 链接 |`
 - 四列表：首列链接、末列状态
-- 计数类（70 / 22 / 12 / 11 / 11）散落在 `README.md`、`docs/00`、`docs/03`，改数据后必须逐处核对。
+- 计数类（74 / 22 / 12 / 11 / 11）散落在 `README.md`、`docs/00`、`docs/03`，改数据后必须逐处核对。

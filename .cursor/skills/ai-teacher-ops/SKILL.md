@@ -24,14 +24,16 @@ python scripts/check_links.py --write            # 回写 verified / checked_at 
 
 ## 三个工作流
 
-### 工作流 A：新增一条网站 / 仓库链接
+### 工作流 A：新增一条网站 / 仓库 / 平台链接
 
 1. 追加到 `data/resources.json` 对应分区，`verified` 写 `pending`，`checked_at` 留空。
 2. 跑 `check_links.py --only <分区> --write`，让脚本填值。
-3. 把结果同步进 `docs/03-参考网站.md`（网站）或 `docs/07-开源项目清单.md`（仓库）的表格。
+3. 把结果同步进 `docs/03-参考网站.md`（网站）、`docs/07-开源项目清单.md`（仓库）或 `docs/12-线上口语一对一.md`（平台）的表格。
 4. 如果分区总数变了，同步 `docs/00-使用说明.md` 的分区计数表与 `README.md` 的索引表。
 
 **不要**手写 `verified: ok`。仓库已有 14 条星数漂移是历史遗留，别再制造第二种漂移。
+
+平台条目（`tutoring`）多一道工序：`alipay` / `operator` / `fixed_teacher` 三个字段脚本永远不填，必须打开官方支付说明页与条款页逐条核对，并把证据链接写进 `*_evidence_url`。**官网能打开 ≠ 支持支付宝**，别拿探针结果当支付结论。
 
 ### 工作流 B：登记一条网盘分享
 
@@ -63,6 +65,37 @@ python scripts/download_video.py <URL> [--audio-only] [--output DIR]
 
 网盘分享链接会被脚本直接拒绝——`yt-dlp` 1755 个提取器里国内网盘命中 0。网盘里的 mp4 必须先用网盘客户端或 `BaiduPCS-Go` 落盘。
 
+### 工作流 D：按教材版本找视频课
+
+分类基准是**国家审定教材目录**，不是 B站 的标签。
+
+```bash
+python scripts/search_bilibili_courses.py --grid        # 看矩阵，不检索
+python scripts/search_bilibili_courses.py --only 数学    # 只跑一科
+python scripts/search_bilibili_courses.py --write       # 全量检索并回写 videos 分区
+python scripts/search_bilibili_courses.py --write --json-out data/videos_bilibili.json  # 同时留备份
+```
+
+**三条通道的成功率决定了必须做双路**：
+
+| 通道 | 实测成功率 | 拿到什么 |
+| --- | --- | --- |
+| `search.bilibili.com/all` SSR | 8/8 | bvid + 标题 |
+| `x/web-interface/view?bvid=` | 31/32 | 分P数、时长、UP 主、播放量 |
+| `x/web-interface/wbi/search/type` | 5/8 | 20 条完整元数据 |
+
+`space/wbi/arc/search`（UP 主投稿列表）与 `yt-dlp bilisearch` 都是 `412`，别试。
+
+**标题匹配必须有三道硬门槛**，缺一条就会错：
+
+| 门槛 | 反例 |
+| --- | --- |
+| 出版社必须出现 | 「北师大版六年级英语」命中「湘少版六年级英语」`BV1uNgK68EBd` |
+| 册别必须对 | 「四年级英语下册」命中「四年级英语上册」`BV1GmgQ6bEbz` |
+| 其它学科名不能出现 | 「北师大版四年级英语下册」命中「北师大版四年级数学下册」`BV13p8S6iEx2` |
+
+再加两条软约束：分P数 < 5 视为不是成套课程（单词朗读、单节精讲），带「单词朗读 / 课文朗读 / 听力磨耳朵」的降权。
+
 ## 不要做什么
 
 | 禁止 | 原因 |
@@ -74,6 +107,9 @@ python scripts/download_video.py <URL> [--audio-only] [--output DIR]
 | 转述原始文案里的数量（「900 节」「57 种工具」） | 要么实测过，要么在 `note` 里写明「原文案，未核对」 |
 | 提交 Cookie / token / 可执行文件 | 凭据进 `.credentials/`（已忽略），二进制进 `.tools/`（已忽略） |
 | 把 5 分钟没跑完的遍历结果当完整值 | 置 `share_tree_truncated`，文档写「≥N」 |
+| 相信视频标题里的集数 | 实测 30 条带集数的标题只有 3 条对得上；判断覆盖度看 `view` 返回的分P数 |
+| 假设语文有多个版本 | 小学语文在国家审定目录里只有统编版，「人教版语文」= 「部编版」= 统编版 |
+| 假设小学英语有一二年级 | 国家审定的小学英语从三年级起，一二年级的英语教材都是地方/校本教材 |
 
 ## 环境约定
 
