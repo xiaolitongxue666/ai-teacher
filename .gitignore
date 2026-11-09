@@ -35,3 +35,6 @@ graphify-out/
 # Windows 上 cmd 展开残留的目录名
 /%SystemDrive%/
 /%USERPROFILE%/
+
+# CLI 把状态写进项目内时的残留（gh 等；HOME 未正确解析时出现）
+/.local/
