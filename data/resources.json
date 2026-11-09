@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-11-09T11:48:44+08:00",
+  "checked_at": "2026-11-09T13:21:31+08:00",
   "probe_note": "verified 字段由 scripts/check_links.py 生成。ok=HTTP 2xx；blocked=站点反爬（浏览器可正常打开）；dead=域名不存在或站点已关闭；unreachable=DNS 正常但本机网络连接失败（常见于境外站点直连）；mismatch=链接可达但页面内容与描述不符（需人工处理，脚本不会自动写入）；pending=未探测。",
   "status_values": [
     "ok",
@@ -1315,7 +1315,19 @@
       "url_alias_verified": "ok",
       "checked_at": "2026-11-09T11:48:44+08:00",
       "actual": "910 个条目 = 909 个 mp4 + 1 个 电子档资料.zip",
-      "grade_actual": "910 个文件中 232 个带年级标记、678 个无标记。标记按「L1、2、3、4、5、6」这类范围语法解析：仅 L6 的 111 条，L5+L6 的 62 条，L4-6 的 24 条，L3-6 的 31 条，L2-6 的 1 条，L1-6 全适用 3 条。真正覆盖低年级的只有 4 条，且都是「全年级适用」的趣味题与速算技巧，不是低年级课标内容"
+      "grade_actual": "910 个文件中 232 个带年级标记、678 个无标记。标记按「L1、2、3、4、5、6」这类范围语法解析：仅 L6 的 111 条，L5+L6 的 62 条，L4-6 的 24 条，L3-6 的 31 条，L2-6 的 1 条，L1-6 全适用 3 条。真正覆盖低年级的只有 4 条，且都是「全年级适用」的趣味题与速算技巧，不是低年级课标内容",
+      "needs_passcode": false,
+      "share_total_files": 910,
+      "share_total_size_bytes": 20451853956,
+      "share_suffix_counts": {
+        ".mp4": 909,
+        ".zip": 1
+      },
+      "share_tree_truncated": false,
+      "share_tree_requests": 11,
+      "tree_checked_at": "2026-11-09T13:21:31+08:00",
+      "share_tree_failed_pages": 0,
+      "share_tree_incomplete": false
     },
     {
       "id": "primary_1000_words",
@@ -1331,7 +1343,20 @@
       "url_official_verified": "ok",
       "checked_at": "2026-11-09T11:48:44+08:00",
       "url_alias": "https://pan.powersharex.com/s/cbd38d7f7061",
-      "url_alias_verified": "ok"
+      "url_alias_verified": "ok",
+      "needs_passcode": true,
+      "passcode_valid": true,
+      "share_total_files": 4,
+      "share_total_size_bytes": 177349934,
+      "share_suffix_counts": {
+        ".pdf": 3,
+        ".docx": 1
+      },
+      "share_tree_truncated": false,
+      "share_tree_requests": 2,
+      "tree_checked_at": "2026-11-09T13:21:31+08:00",
+      "share_tree_failed_pages": 0,
+      "share_tree_incomplete": false
     },
     {
       "id": "phonics_270",
@@ -1347,7 +1372,28 @@
       "url_official_verified": "ok",
       "checked_at": "2026-11-09T11:48:44+08:00",
       "url_alias": "https://pan.powersharex.com/s/f78b4890729e",
-      "url_alias_verified": "ok"
+      "url_alias_verified": "ok",
+      "needs_passcode": true,
+      "passcode_valid": true,
+      "share_total_files": 462,
+      "share_total_size_bytes": 2773884795,
+      "share_suffix_counts": {
+        ".pdf": 323,
+        ".png": 46,
+        ".jpg": 40,
+        ".ppt": 32,
+        ".pptx": 8,
+        ".gif": 6,
+        ".doc": 3,
+        ".xls": 2,
+        ".docx": 1,
+        ".xlsx": 1
+      },
+      "share_tree_truncated": false,
+      "share_tree_requests": 52,
+      "tree_checked_at": "2026-11-09T13:21:31+08:00",
+      "share_tree_failed_pages": 0,
+      "share_tree_incomplete": false
     },
     {
       "id": "scratch_174",
@@ -1376,7 +1422,24 @@
       "note": "分享页 200",
       "url_official_verified": "ok",
       "url_official_redirected_to": "https://pan.quark.cn/s/7572c1cb1016",
-      "checked_at": "2026-11-09T11:48:44+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00",
+      "needs_passcode": false,
+      "share_total_files": 818,
+      "share_total_size_bytes": 407157061596,
+      "share_suffix_counts": {
+        ".mp4": 303,
+        ".txt": 220,
+        ".pdf": 183,
+        ".mp3": 93,
+        ".wma": 15,
+        ".png": 3,
+        ".7z": 1
+      },
+      "share_tree_truncated": false,
+      "share_tree_requests": 114,
+      "tree_checked_at": "2026-11-09T13:21:31+08:00",
+      "share_tree_failed_pages": 0,
+      "share_tree_incomplete": false
     },
     {
       "id": "ielts_100_sentences",
@@ -1391,7 +1454,19 @@
       "url_official_verified": "ok",
       "checked_at": "2026-11-09T11:48:44+08:00",
       "url_alias": "https://pan.quarket.xyz/s/ae36118717fd",
-      "url_alias_verified": "ok"
+      "url_alias_verified": "ok",
+      "needs_passcode": false,
+      "share_total_files": 101,
+      "share_total_size_bytes": 10009366613,
+      "share_suffix_counts": {
+        ".mp4": 100,
+        ".pdf": 1
+      },
+      "share_tree_truncated": false,
+      "share_tree_requests": 3,
+      "tree_checked_at": "2026-11-09T13:21:31+08:00",
+      "share_tree_failed_pages": 0,
+      "share_tree_incomplete": false
     },
     {
       "id": "wordly_wise_3000",
@@ -1405,7 +1480,19 @@
       "note": "分享页 200",
       "url_official_verified": "ok",
       "url_official_redirected_to": "https://pan.quark.cn/s/47b03b344081",
-      "checked_at": "2026-11-09T11:48:44+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00",
+      "needs_passcode": false,
+      "share_total_files": 1118,
+      "share_total_size_bytes": 64294408364,
+      "share_suffix_counts": {
+        ".mp4": 698,
+        ".mp3": 420
+      },
+      "share_tree_truncated": false,
+      "share_tree_requests": 23,
+      "tree_checked_at": "2026-11-09T13:21:31+08:00",
+      "share_tree_failed_pages": 0,
+      "share_tree_incomplete": false
     },
     {
       "id": "word_posters",
@@ -1419,7 +1506,21 @@
       "note": "分享页 200",
       "url_official_verified": "ok",
       "url_official_redirected_to": "https://pan.quark.cn/s/c770b891a558",
-      "checked_at": "2026-11-09T11:48:44+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00",
+      "needs_passcode": false,
+      "share_total_files": 327,
+      "share_total_size_bytes": 1168149973,
+      "share_suffix_counts": {
+        ".png": 101,
+        ".mp3": 101,
+        ".mp4": 100,
+        ".jpg": 25
+      },
+      "share_tree_truncated": false,
+      "share_tree_requests": 9,
+      "tree_checked_at": "2026-11-09T13:21:31+08:00",
+      "share_tree_failed_pages": 0,
+      "share_tree_incomplete": false
     },
     {
       "id": "quark_misc",
@@ -1432,7 +1533,21 @@
       "verified": "ok",
       "note": "标题「爆笑初中9科全套」。12 个顶层项：2 个推广文件（合众盘 .docx 0.34MB + .pdf 1.43MB）+ 10 个内容目录。含物理 3 版（142/400/3200+ 节）、化学 3 版（349/167/1500+ 节）、数学 33 项（26 目录 + 7 文件）、地理 19 项、历史 8 模块、生物 6 模块、语文 4 模块、英语 5 册、政治 6 册、乐乐课堂 18 项。⚠️ 存在 (1) 重复副本：数学 13 组目录全部成对、乐乐课堂 9 组全部成对、地理仅 8 章成对（01/02/04 单份）",
       "url_official_verified": "ok",
-      "checked_at": "2026-11-09T11:48:44+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00",
+      "needs_passcode": false,
+      "share_total_files": 6899,
+      "share_total_size_bytes": 126094080952,
+      "share_suffix_counts": {
+        ".mp4": 6876,
+        ".pdf": 20,
+        ".xlsx": 2,
+        ".docx": 1
+      },
+      "share_tree_truncated": true,
+      "share_tree_requests": 400,
+      "tree_checked_at": "2026-11-09T13:21:31+08:00",
+      "share_tree_failed_pages": 0,
+      "share_tree_incomplete": true
     },
     {
       "id": "smartedu_downloader",
