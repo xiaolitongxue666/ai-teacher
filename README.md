@@ -20,10 +20,13 @@
 | 我家孩子 X 岁，该从哪下手 | [docs/01-适合人群.md](docs/01-适合人群.md) |
 | 我要补某个科目 | [docs/02-科目类别.md](docs/02-科目类别.md) |
 | 找免费学习网站 | [docs/03-参考网站.md](docs/03-参考网站.md) |
-| 找成套的网盘资料 | [docs/03b-网盘资料清单.md](docs/03b-网盘资料清单.md) |
+| 找成套的网盘资料 | [docs/03b-网盘资料清单.md](docs/03b-网盘资料清单.md)、[docs/03c-教辅成套清单.md](docs/03c-教辅成套清单.md) |
+| 按教材版本找配套视频课 | [docs/11-在线视频课程.md](docs/11-在线视频课程.md) |
 | 配置网盘 / OCR 工具 | [docs/04-工具推荐.md](docs/04-工具推荐.md)、[mcp/README.md](mcp/README.md)、[dify/README.md](dify/README.md) |
 | 方法比资源更重要 | [docs/05-学习方法论.md](docs/05-学习方法论.md) |
 | 按年龄排一个学习计划 | [docs/06-学习路线图.md](docs/06-学习路线图.md) |
+| 想知道 KET / 剑桥五级是什么、要不要考 | [docs/10-剑桥英语KET.md](docs/10-剑桥英语KET.md) |
+| 想找口语一对一的真人老师 | [docs/12-线上口语一对一.md](docs/12-线上口语一对一.md) |
 | 想直接读代码 / 自建 | [docs/07-开源项目清单.md](docs/07-开源项目清单.md)、[docs/08-DeepTutor-拆解.md](docs/08-DeepTutor-拆解.md) |
 | 想知道这仓库踩过哪些坑、为什么这么设计 | [docs/09-开发复盘.md](docs/09-开发复盘.md) |
 | 用 agent 维护这个仓库 | [.cursor/skills/ai-teacher-ops/SKILL.md](.cursor/skills/ai-teacher-ops/SKILL.md) |
@@ -69,11 +72,11 @@
 
 ## 索引三：参考网站（节选）
 
-完整清单 70 条见 [docs/03-参考网站.md](docs/03-参考网站.md)，每条带核验状态。
+完整清单 74 条见 [docs/03-参考网站.md](docs/03-参考网站.md)，每条带核验状态。
 
 | 状态 | 数量 | 含义 |
 | --- | --- | --- |
-| ok | 57 | 可直接访问 |
+| ok | 61 | 可直接访问 |
 | blocked | 6 | 站点反爬，浏览器能打开，脚本探测被拦 |
 | dead | 4 | 域名不存在或站点已关停 |
 | unreachable | 3 | DNS 正常但本机连不上（境外站点直连） |
