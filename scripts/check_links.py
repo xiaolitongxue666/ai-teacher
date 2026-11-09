@@ -56,9 +56,11 @@ QUARK_DETAIL_PATH = "/1/clouddrive/share/sharepage/detail"
 QUARK_PAGE_SIZE = 100
 # 单个分享最多翻多少页，防止异常数据导致无限循环
 QUARK_MAX_PAGES = 200
-# 单个分享最多发多少次请求。大分享（如初中全科，单是物理就有 3200+ 节）
-# 完整遍历要上千次请求，必须设上限，超限时标记 truncated 而不是假装完整
-QUARK_REQUEST_BUDGET = 400
+# 单个分享最多发多少次请求。大分享（如初中全科）实测要 1534 次、约 11 分钟，
+# 400 次会截断成 6899（真实 21943），所以默认放到 2000 并允许按分享覆盖。
+QUARK_REQUEST_BUDGET = 2000
+# 单次运行的总时间预算（秒）。超过就停，避免整轮探针跑上一小时。
+QUARK_TOTAL_TIME_BUDGET_SECONDS = 1800
 # 目录树最大递归深度
 QUARK_MAX_DEPTH = 8
 # 单页请求失败时的重试次数（网络抖动很常见，一次失败就放弃会漏数）
@@ -257,7 +259,7 @@ def quark_share_walk(
     return collected
 
 
-def probe_quark_share(share_id: str, passcode: str = "") -> dict:
+def probe_quark_share(share_id: str, passcode: str = "", request_budget: int | None = None) -> dict:
     """探测单个夸克分享：是否需要提取码、总文件数、按扩展名统计。
 
     是否「需要提取码」必须先用空码试一次才能判定：带码成功不等于不需要码。
@@ -276,7 +278,8 @@ def probe_quark_share(share_id: str, passcode: str = "") -> dict:
             "error": token_error,
         }
 
-    budget = {"remaining": QUARK_REQUEST_BUDGET, "truncated": False, "failed_pages": 0}
+    budget_limit = request_budget if request_budget is not None else QUARK_REQUEST_BUDGET
+    budget = {"remaining": budget_limit, "truncated": False, "failed_pages": 0}
     entries = quark_share_walk(share_id, stoken, budget)
     files = [entry for entry in entries if not entry["is_dir"]]
     suffix_counts: dict[str, int] = {}
@@ -297,7 +300,7 @@ def probe_quark_share(share_id: str, passcode: str = "") -> dict:
         "truncated": budget["truncated"],
         "failed_pages": budget["failed_pages"],
         "incomplete": incomplete,
-        "requests_used": QUARK_REQUEST_BUDGET - budget["remaining"],
+        "requests_used": budget_limit - budget["remaining"],
         "error": "",
     }
 
@@ -307,6 +310,9 @@ def collect_quark_targets(resources: dict) -> list[dict]:
 
     有些条目原始入口是第三方短链，真实的夸克分享记在 *_redirected_to 里，
     也要一并纳入，否则会漏掉 learn_english_movies / word_posters / wordly_wise_3000。
+
+    预算按条目可覆盖：数据里写 share_request_budget 就用它，
+    用于「这个分享特别大，值得多花时间」的情况。
     """
     targets: list[dict] = []
     seen_share_ids: set[str] = set()
@@ -330,6 +336,7 @@ def collect_quark_targets(resources: dict) -> list[dict]:
                 "id": item["id"],
                 "share_id": share_id,
                 "passcode": item.get("password") or "",
+                "request_budget": item.get("share_request_budget"),
             })
     return targets
 
@@ -403,7 +410,9 @@ def run_quark_probes(targets: list[dict]) -> list[dict]:
     """夸克分享目录探测。逐条串行跑，避免对同一站点并发过高被限流。"""
     results: list[dict] = []
     for target in targets:
-        probe_result = probe_quark_share(target["share_id"], target["passcode"])
+        probe_result = probe_quark_share(
+            target["share_id"], target["passcode"], target.get("request_budget")
+        )
         results.append({**target, **probe_result})
     results.sort(key=lambda row: row["id"])
     return results
