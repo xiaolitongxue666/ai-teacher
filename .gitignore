@@ -19,3 +19,19 @@ desktop.ini
 # 临时产物
 _probe_tmp.json
 *.tmp
+temp_args.json
+ERROR.md
+logs/
+*.log
+*.jsonl
+
+# 生成目录
+graphify-out/
+
+# 全局/工具记忆残留（记忆 SSOT 是根目录 PROJECT_MEMORY.md）
+.claude-mem/
+.project-memory-backups/
+
+# Windows 上 cmd 展开残留的目录名
+/%SystemDrive%/
+/%USERPROFILE%/
