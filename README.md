@@ -24,7 +24,9 @@
 | 配置网盘 / OCR 工具 | [docs/04-工具推荐.md](docs/04-工具推荐.md)、[mcp/README.md](mcp/README.md)、[dify/README.md](dify/README.md) |
 | 方法比资源更重要 | [docs/05-学习方法论.md](docs/05-学习方法论.md) |
 | 按年龄排一个学习计划 | [docs/06-学习路线图.md](docs/06-学习路线图.md) |
-| 想直接读代码 / 自建 | [docs/07-开源项目清单.md](docs/07-开源项目清单.md) |
+| 想直接读代码 / 自建 | [docs/07-开源项目清单.md](docs/07-开源项目清单.md)、[docs/08-DeepTutor-拆解.md](docs/08-DeepTutor-拆解.md) |
+| 想知道这仓库踩过哪些坑、为什么这么设计 | [docs/09-开发复盘.md](docs/09-开发复盘.md) |
+| 用 agent 维护这个仓库 | [.cursor/skills/ai-teacher-ops/SKILL.md](.cursor/skills/ai-teacher-ops/SKILL.md) |
 
 ---
 
@@ -80,7 +82,7 @@
 
 ## 索引四：网盘成套资料
 
-10 份资料，见 [docs/03b-网盘资料清单.md](docs/03b-网盘资料清单.md)。
+11 份资料，见 [docs/03b-网盘资料清单.md](docs/03b-网盘资料清单.md)。
 
 其中数学方向的 **范老师·小学数学几何思维课**，我拉了完整目录核对：夸克分享里实际是 **910 个条目**（909 个 mp4 + 1 个 `电子档资料.zip`），「900 节」这个数量属实。但**「1-6 年级全覆盖」不成立**——910 个文件里 678 个没有年级标记，带标记的 232 个中只标 L6 的就有 111 条，真正覆盖到 1-2 年级的只有 4 条且都是全年级通用的速算技巧题；按主题看是奥数专题（巧求面积 150 条、鸡兔同笼 10、容斥 9、行程 8）。
 
@@ -121,7 +123,8 @@ ai-teacher/
 ├── mcp/                       # Cursor MCP 配置模板
 ├── dify/                      # Dify 插件方案
 ├── collections/               # 网盘链接原始清单（含提取码）
-└── scripts/check_links.py     # 链接核验
+├── scripts/check_links.py     # 链接核验
+└── .cursor/skills/            # 维护本仓库的 agent skill
 ```
 
 ## 核验链接
