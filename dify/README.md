@@ -7,7 +7,7 @@ Dify 里做教育知识库，目标是**给 RAG 准备高质量数据**，不是
 | 你的云存储 | 用什么 |
 | --- | --- |
 | OneDrive / Google Drive / Box / AWS S3 / 腾讯 COS / Dropbox / Azure Blob / SharePoint | **官方 datasource 插件**，插件市场直接装 |
-| 坚果云 / Nextcloud / ownCloud 等 WebDAV | 社区插件 `shaba/dify-datasource-webdav`，或本地同步后手动上传 |
+| 坚果云 / Nextcloud / ownCloud 等 WebDAV | 知识库数据源：社区插件 `shaba/dify-datasource-webdav`，或本地同步后手动上传；工作流内取文件：官方 `nextcloud` tool 插件 |
 | 扫描版 PDF 解析 | **MinerU 官方插件**（首选） |
 | 中文 OCR / 需自托管 | **PaddleOCR 官方插件** |
 
@@ -40,7 +40,11 @@ dropbox_datasource      firecrawl_datasource
 
 **实际情况：官方 `datasources` 目录里没有任何 webdav 条目。**
 
-能用的只有社区插件：
+但要区分清楚：官方 `tools` 目录里有一个 `nextcloud` 插件（`langgenius` 作者，v0.1.7），描述写明「manage files, folders and access shared content via **WebDAV**」，提供 `list_files` / `download_file` / `upload_file` / `create_folder` / `delete_file` / `search_files` 六个工具。
+
+它是 **tool 插件，不是 datasource**。区别在于：tool 插件只能在工作流/Agent 节点里被调用，不能出现在「知识库 → 数据源」的摄取列表里。所以它解决不了「把网盘文件直接灌进知识库」，但能解决「工作流里按路径取文件」。
+
+真正要接知识库数据源，能用的只有社区插件：
 
 | 项 | 值 |
 | --- | --- |
@@ -90,6 +94,7 @@ password:  应用密码（不是登录密码）
 tools/
 ├── mineru          ✅
 ├── paddleocr       ✅
+├── nextcloud       ✅（WebDAV，但只能在工作流里调用）
 ├── feishu_document
 └── lark_document
 ```
