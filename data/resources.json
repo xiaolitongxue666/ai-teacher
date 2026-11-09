@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-11-09T11:22:00+08:00",
+  "checked_at": "2026-11-09T11:35:00+08:00",
   "probe_note": "verified 字段由 scripts/check_links.py 生成。ok=HTTP 2xx；blocked=站点反爬（浏览器可正常打开）；dead=域名不存在或站点已关闭；unreachable=DNS 正常但本机网络连接失败（常见于境外站点直连）；mismatch=链接可达但页面内容与描述不符（需人工处理，脚本不会自动写入）；pending=未探测。",
   "status_values": [
     "ok",
@@ -880,6 +880,14 @@
       "url": "https://github.com/langgenius/dify-official-plugins",
       "desc": "Dify 官方插件库（datasources / tools / models 等）",
       "subject": "平台"
+    },
+    {
+      "id": "tchmaterial_parser",
+      "name": "happycola233/tchMaterial-parser",
+      "stars": 7744,
+      "url": "https://github.com/happycola233/tchMaterial-parser",
+      "desc": "国家中小学智慧教育平台电子课本下载工具，MIT，Python，支持批量下载与自动加书签",
+      "subject": "教材"
     }
   ],
   "mcp_tools": [
@@ -1133,10 +1141,12 @@
       "url_alias": "https://pan.quarkn.xyz/s/668920790b03",
       "entry_type": "第三方中转域名 → 夸克官方分享页",
       "verified": "ok",
-      "note": "链接层已验证：quarkn.xyz 返回 200 并以 meta refresh + location.replace 跳转到 pan.quark.cn/s/668920790b03（同样 200）。课时数与年级覆盖为原始文案，未逐一核对",
+      "note": "数量属实：夸克分享目录实为 910 个条目（909 个 mp4，1 个 zip），「900 节」成立。但「1-6 年级全覆盖」与目录不符：内容以小学奥数/思维训练为主（巧求面积 150 条、鸡兔同笼 10、容斥 9、行程 8、盈亏 8、抽屉 6、牛吃草 4），低年级内容极少。目录通过夸克分享公开接口读取，无需登录",
       "url_official_verified": "ok",
       "url_alias_verified": "ok",
-      "checked_at": "2026-11-09T11:18:09+08:00"
+      "checked_at": "2026-11-09T11:18:09+08:00",
+      "actual": "910 个条目 = 909 个 mp4 + 1 个 电子档资料.zip",
+      "grade_actual": "难度重心在 4-6 年级；显式 L1/L2 标记仅 4 条，L3 40 / L4 35 / L5 76 / L6 128（其余 627 条无年级标记）"
     },
     {
       "id": "primary_1000_words",
@@ -1241,20 +1251,20 @@
     },
     {
       "id": "quark_misc",
-      "name": "夸克分享集合（原清单未标注内容）",
-      "subject": "综合",
-      "grade": "-",
-      "media": "网盘目录",
+      "name": "爆笑初中9科全套（含乐乐课堂）",
+      "subject": "初中全科",
+      "grade": "初中（部分为小学/高中）",
+      "media": "视频课 + PDF 练习 + Excel 目录",
       "url_official": "https://pan.quark.cn/s/3d2dd7b91043",
       "entry_type": "夸克官方",
       "verified": "ok",
-      "note": "原始资料未说明具体内容，未登录无法列出目录；收录待你补充说明",
+      "note": "标题「爆笑初中9科全套」。12 个顶层项：2 个推广文件（合众盘 .docx/.pdf）+ 10 个内容目录。含物理 3 版（142/400/3200+ 节）、化学 3 版（349/167/1500+ 节）、数学 12 个教材版本 + 中考 + 每日一练 PDF、地理 19 章、历史 8 模块、生物 6 模块、语文 4 模块、英语 5 册、政治 6 册、乐乐课堂 18 项。⚠️ 数学 12 个版本与乐乐课堂 18 项均带 (1) 重复副本，实际有效内容约为列出项的一半",
       "url_official_verified": "ok",
       "checked_at": "2026-11-09T11:18:09+08:00"
     },
     {
       "id": "smartedu_downloader",
-      "name": "智慧教育平台电子教材下载器",
+      "name": "智慧教育平台电子教材下载器（原链接已移除）",
       "subject": "教材",
       "grade": "中小学",
       "media": "工具（Windows + macOS）",
@@ -1263,11 +1273,12 @@
       "password": "8vnn",
       "entry_type": "第三方跳转 + 百度网盘",
       "verified": "mismatch",
-      "note": "⚠️ 内容不符：v.v8l.cn/s/rRxsZcP 打开后是「夸克网盘 扫码访问」页，资源名为「网盘热门资源2000T」，且仅允许手机端扫码访问，并非电子教材下载器。百度网盘入口 https://pan.baidu.com/s/1ff0dvoCbM_jXwAKayymf3w 已确认为有效的加密分享（页面显示「请输入提取码」，分享者「笑**人生」），但提取码 8vnn 未提交验证，无法确认内容",
+      "note": "原 v.v8l.cn/s/rRxsZcP 实测为「夸克网盘 扫码访问」页，资源名「网盘热门资源2000T」，与教材下载器无关，已移除该入口。替代方案见 tchMaterial-parser（happycola233，7744 star，MIT，winget 可装），或直接用官方网页端 basic.smartedu.cn/tchMaterial/",
       "url_official_verified": "ok",
       "url_alt_verified": "ok",
       "url_alt_redirected_to": "https://pan.baidu.com/share/init?surl=ff0dvoCbM_jXwAKayymf3w",
-      "checked_at": "2026-11-09T11:18:09+08:00"
+      "checked_at": "2026-11-09T11:18:09+08:00",
+      "removed": true
     }
   ]
 }
