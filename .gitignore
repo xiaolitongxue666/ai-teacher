@@ -28,6 +28,9 @@ logs/
 # 生成目录
 graphify-out/
 
+# 视频下载产物（可用 scripts/download_video.py --output 改到别处）
+downloads/
+
 # 全局/工具记忆残留（记忆 SSOT 是根目录 PROJECT_MEMORY.md）
 .claude-mem/
 .project-memory-backups/

@@ -100,9 +100,12 @@
 | --- | --- | --- |
 | 接坚果云 / Nextcloud | `webdav-mcp-server` | `npx -y webdav-mcp-server` |
 | 接百度 / 阿里 / 115 / 夸克 | `sync-vault-agent` | `npm i -g sync-vault-agent && mcp-agent init` |
+| 下载视频（B站 / YouTube） | `yt-dlp` | `uvx yt-dlp <URL>` |
 | 本地 PDF → Markdown | `pymupdf4llm-mcp` | `uvx pymupdf4llm-mcp` |
 | 本地 PDF OCR（轻量） | `pdffr-mcp` | `npx -y pdffr-mcp` |
 | Dify 知识库解析 | MinerU（官方插件） | Dify 插件市场直接装 |
+
+视频下载有边界：`yt-dlp` **下不了任何国内网盘**（夸克、百度、阿里、115 全无提取器）。网盘里的 mp4 先用网盘客户端或 `BaiduPCS-Go` 落盘。
 
 选型理由、被证伪的说法、Windows 上的坑，见 [docs/04-工具推荐.md](docs/04-工具推荐.md)。
 

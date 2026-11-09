@@ -292,6 +292,55 @@ BaiduPCS-Go ls /       -> not absolute path
 | `ocr-mcp` | PyPI | 0.1.0 | 视后端 | 全平台 | 中（版本很早期） |
 | `mcp-onedrive` | npm | 0.10.2 | 是 | 全平台 | 中 |
 | `BaiduPCS-Go` | GitHub Release | v4.0.2 | 是（Cookie） | Win/macOS/Linux | 中（**非 MCP**，CLI） |
+| `yt-dlp` | PyPI | 2026.10.26 | 否 | 全平台 | 低（**非 MCP**，CLI） |
+
+---
+
+## 视频下载：yt-dlp 是唯一解，但它进不了网盘
+
+| 项 | 值 |
+| --- | --- |
+| 包名 | `yt-dlp` |
+| 仓库 | `yt-dlp/yt-dlp`（206,288 star，Unlicense） |
+| 版本 | `2026.10.26` |
+| 运行 | `uvx yt-dlp <URL>` |
+
+实测 **1755 个提取器**，B站与 YouTube 都能下。项目内封装见 `scripts/download_video.py`。
+
+### 它下不了国内网盘
+
+实测在提取器列表里搜夸克、百度、阿里、115、迅雷、天翼、彩云，**全部命中 0**：
+
+```
+quark 0   baidu 1(BaiduVideo，是视频站不是网盘)   aliyun 0
+115   0   xunlei 0   tianyi 0   caiyun 0
+```
+
+所以「网盘里的 mp4 怎么下」这个问题，yt-dlp 回答不了。实际分工：
+
+| 场景 | 用什么 |
+| --- | --- |
+| B站 / YouTube / 公开视频站 | `yt-dlp` |
+| 夸克网盘 | 网盘客户端（无可用 CLI） |
+| 百度网盘 | `BaiduPCS-Go download` |
+| 转存到自己的账号 | `netdisk` MCP 的 `transfer` |
+
+### Windows 上 Cookie 这条路走不通
+
+`--cookies-from-browser chrome` 在本机直接报错：
+
+```
+ERROR: Could not copy Chrome cookie database.
+```
+
+两个独立原因叠加：
+
+1. Chrome 运行**独占锁** `Network/Cookies`，实测 `PermissionError: [Errno 13]`；
+2. Chrome 127+ 用 App-Bound Encryption，密钥绑定 Chrome 进程，复制出来也解不开。
+
+yt-dlp 维护者在 [issue #15401](https://github.com/yt-dlp/yt-dlp/issues/15401) 明确表示**没有修复计划**，并已正式移除 Windows 上 Chrome 的 `--cookies-from-browser` 支持。
+
+替代：浏览器扩展导出 `cookies.txt` 后用 `--cookies`，或改用 Firefox。`cookies.txt` 是登录态明文，别放进项目目录。
 
 ---
 

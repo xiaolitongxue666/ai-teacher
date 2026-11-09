@@ -1197,6 +1197,23 @@
       "pushed": "2026-11-04",
       "checked_at": "2026-11-09T11:47:07+08:00",
       "latest_version_checked": "0.10.2"
+    },
+    {
+      "id": "yt_dlp",
+      "name": "yt-dlp",
+      "pkg": "yt-dlp",
+      "registry": "pypi",
+      "version": "2026.10.26",
+      "repo": "yt-dlp/yt-dlp",
+      "stars": 206288,
+      "run": "uvx yt-dlp <URL>",
+      "needs_key": false,
+      "platform": "全平台",
+      "verified": "ok",
+      "note": "视频下载事实标准，1755 个提取器。实测不支持任何国内网盘：夸克/百度/阿里/115/迅雷/天翼/彩云命中 0。Windows 上 --cookies-from-browser chrome 不可用（Chrome 运行时独占锁 Cookie 库 + 127+ App-Bound Encryption，yt-dlp 官方 issue #15401 明确无修复计划），需用扩展导出 cookies.txt 或改用 Firefox。B站字幕需登录态。项目内封装见 scripts/download_video.py",
+      "pushed": "2026-11-04",
+      "checked_at": "2026-11-09T13:27:36+08:00",
+      "latest_version_checked": "2026.10.26"
     }
   ],
   "dify": [
