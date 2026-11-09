@@ -137,6 +137,10 @@ def collect_targets(resources: dict, only_sections: set[str] | None) -> list[dic
                 continue
             targets.append({"section": "websites", "group": "websites", "id": item["id"], "url": item["url"]})
 
+    if should_run("repos"):
+        for item in resources.get("repos", []):
+            targets.append({"section": "repos", "group": "repos", "id": item["id"], "url": item["url"]})
+
     if should_run("collections"):
         for item in resources.get("collections", []):
             for url_field in ("url_official", "url_alias", "url_alt"):
@@ -189,12 +193,24 @@ def write_results_back(resources: dict, results: list[dict], checked_at_iso: str
     """把探测结果回写到 JSON。返回更新条目数。"""
     by_key: dict[tuple[str, str, str], dict] = {}
     for row in results:
-        field = row.get("field") or ("url" if row["section"] == "websites" else "url_official")
+        field = row.get("field") or ("url_official" if row["section"] == "collections" else "url")
         by_key[(row["section"], row["id"], field)] = row
 
     updated_count = 0
     for item in resources.get("websites", []):
         row = by_key.get(("websites", item["id"], "url"))
+        if row is None:
+            continue
+        item["verified"] = row["status"]
+        item["checked_at"] = checked_at_iso
+        if row["final_url"] and row["final_url"] != item["url"]:
+            item["redirected_to"] = row["final_url"]
+        else:
+            item.pop("redirected_to", None)
+        updated_count += 1
+
+    for item in resources.get("repos", []):
+        row = by_key.get(("repos", item["id"], "url"))
         if row is None:
             continue
         item["verified"] = row["status"]
@@ -269,8 +285,8 @@ def main() -> int:
     parser.add_argument("--write", action="store_true", help="把结果回写到 data/resources.json")
     parser.add_argument(
         "--only",
-        default="websites,collections,markdown",
-        help="只跑指定分区，逗号分隔：websites,collections,markdown",
+        default="websites,repos,collections,markdown",
+        help="只跑指定分区，逗号分隔：websites,repos,collections,markdown",
     )
     arguments = parser.parse_args()
 
