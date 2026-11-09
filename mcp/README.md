@@ -333,12 +333,22 @@ quark 0   baidu 1(BaiduVideo，是视频站不是网盘)   aliyun 0
 ERROR: Could not copy Chrome cookie database.
 ```
 
-两个独立原因叠加：
+两层限制叠加，都已实测确认：
 
-1. Chrome 运行**独占锁** `Network/Cookies`，实测 `PermissionError: [Errno 13]`；
-2. Chrome 127+ 用 App-Bound Encryption，密钥绑定 Chrome 进程，复制出来也解不开。
+1. Chrome 运行**独占锁** `Network/Cookies`，直接读报 `PermissionError: [Errno 13]`；
+2. 用 VSS 卷影复制能绕过第一层（需管理员权限，实测拿到 2MB 快照），但本机 **3446 条 Cookie 全是 v20**（App-Bound Encryption）。v20 主密钥要先用 SYSTEM 权限 DPAPI 解一层，用户态进程无解。
 
-yt-dlp 维护者在 [issue #15401](https://github.com/yt-dlp/yt-dlp/issues/15401) 明确表示**没有修复计划**，并已正式移除 Windows 上 Chrome 的 `--cookies-from-browser` 支持。
+对照实验：`v10` 的 `encrypted_key` 能用用户级 DPAPI 解出 32 字节 AES key，`v20` 的 `app_bound_encrypted_key` 则解不开。这是 Chrome 防 infostealer 的核心设计，不是配置问题。
+
+yt-dlp 维护者在 [issue #15401](https://github.com/yt-dlp/yt-dlp/issues/15401) 明确表示没有修复计划，已移除 Windows 上 Chrome 的该支持。
+
+自检命令：
+
+```bash
+python scripts/check_chrome_cookies.py
+```
+
+**别套 `timeout`**：MSYS 的 `timeout` 会丢 `LOCALAPPDATA`，脚本定位不到 Chrome 目录。
 
 替代：浏览器扩展导出 `cookies.txt` 后用 `--cookies`，或改用 Firefox。`cookies.txt` 是登录态明文，别放进项目目录。
 
