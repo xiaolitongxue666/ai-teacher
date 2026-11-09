@@ -84,6 +84,51 @@
 | `share_request_budget` | 人工 | 单条覆盖默认预算 |
 | `tree_checked_at` | 脚本 | 本次统计时间 |
 
+#### 浅层口径（`share_probe_depth: "shallow"`）
+
+教辅类成套资料（小学预习复习包、初中全科套件）结构是「1 个总目录 → 几十个教辅目录 → 再按年级/版本分册」。
+全量遍历一条要几分钟，44 条要好几小时，实际也不需要——使用者关心「这一包收了哪些教辅」，不是总字节数。
+这类条目加 `share_probe_depth: "shallow"`，走 `--only quark_shallow`：
+
+| 字段 | 来源 | 说明 |
+| --- | --- | --- |
+| `share_probe_depth` | 人工 | 写 `"shallow"` 即走浅层分区，同时被全量 `quark_tree` 跳过 |
+| `share_top_name` | 脚本 | 顶层目录名，用于核对分享标题与实际内容是否一致 |
+| `share_l2_entries` | 脚本 | 第 2 层总项数 |
+| `share_l2_dir_count` / `share_l2_file_count` | 脚本 | 第 2 层里目录与文件各多少 |
+| `share_l2_dirs` | 脚本 | 第 2 层目录名（上限 80 个） |
+| `share_l3_dir_names` | 脚本 | 第 3 层抽样，只用于说明「内容还在更下面」 |
+| `share_probe_truncated` | 脚本 | 请求预算用尽 |
+| `share_probe_requests` | 脚本 | 实际请求次数 |
+| `share_probe_error` | 脚本 | 失败原因（如 `code 41010 文件涉及违规内容`） |
+| `share_probe_checked_at` | 脚本 | 本次探测时间 |
+
+**浅层条目绝不写 `share_total_files`。** 第 2 层的文件数是按层计的，不是资料规模。
+反例实测：「初中电子课本」第 2 层只有 36 个文件，第 3 层却有 164 个目录，PDF 全在下面。
+
+第 3 层是抽样（取前 8 个目录各翻 1 页），**抽样不置 `truncated`**——截断标记只表示第 2 层本身没读全。
+
+#### 人工结论豁免：`status_manual`
+
+| 字段 | 来源 | 说明 |
+| --- | --- | --- |
+| `status_manual` | 人工 | 置 `true` 后所有探测分区都跳过该条，不回写 `verified` |
+| `replacement_id` | 人工 | 本条不可用时的替代条目 id，正文里链接过去 |
+
+夸克分享被平台按违规下架时，**分享页仍返回 HTTP 200**（前端兜底页），只有接口业务码 `41010` 能看出来。
+这种情况若让脚本重探，会把人工判定的 `dead` 冲成 `ok`。实测样本：`j_53_zhongkao`。
+
+#### 腾讯文档索引：`sheet_embedded_quark_links`
+
+走 `--only sheet_index`。表格数据在 percent-encoded 的 `flyweight.texts` 里，整体 unquote 后数 `pan.quark.cn/s/<id>`。
+标题不在明文（明文的 `<title>` 是通用的「腾讯文档」），从 base64 的 `basicClientVars` 解 `padInfo.padTitle`，解不出留空不猜。
+
+| 字段 | 说明 |
+| --- | --- |
+| `sheet_title` | 表格真实标题 |
+| `sheet_embedded_quark_links` | 内嵌夸克链接条数 |
+| `sheet_embedded_quark_links_unique` | 去重后条数 |
+
 ### videos
 
 按国家审定教材矩阵登记的在线视频课程。
@@ -141,6 +186,19 @@
 15. **`@ptbsare/netdisk-mcp-server` 的 `view` 只回 100 条**。它内部 `_size=1000` 但服务端硬限 100 且不翻页，`Total` 是单页条数不是总数。`list` / `transfer` 无 Cookie 直接 401。
 16. **`wpss.best` 之类的聚合页是 Nuxt SPA**。SSR 载荷里没有真实分享链接，抓不到 share id。
 
+### 浅层与索引类
+
+28. **教辅包不要跑全量**。44 条按 `quark_misc` 的量级（1534 请求 / 11 分钟）要好几小时。标 `share_probe_depth: "shallow"` 走 `--only quark_shallow`，实测 44 条 110 秒跑完。
+29. **第 2 层文件数 ≠ 资料规模**。「初中电子课本」第 2 层 36 文件 / 164 目录，PDF 全在第 3 层。把这个数字写进 `share_total_files` 会让人误以为是全量。
+30. **第 2 层的截断必须区分于第 3 层抽样**。第 3 层只取前 8 个目录各翻 1 页（`QUARK_SHALLOW_L3_SAMPLE_DIRS`），抽样不是遍历，不置 `truncated`。早期版本把第 3 层扫完，导致 `p_math`（8 项）都被标成「已截断」。
+31. **分享页 200 掩盖平台下架**。违规内容时公开接口返回 HTTP 404 + `code 41010`，但 `pan.quark.cn/s/<id>` 前端兜底页仍是 200。只跑 `--only collections` 会把它标成 `ok`，必须靠 `quark_shallow` 的业务码。
+32. **`mismatch` 之外还需要 `status_manual`**。空壳分享（如 53 知识清单）入口可达、内容为空，`verified` 会判 `ok`，需要人工置 `status_manual: true` 让它跳过回写。
+33. **腾讯文档标题要从 base64 解**。明文 `<title>` 是通用的「腾讯文档」，真实标题在 `basicClientVars=JSON.parse(decodeURIComponent(escape(atob('...'))))` 的 `docInfo.padInfo.padTitle`。
+34. **腾讯文档的表格数据在 percent-encoded 的 `flyweight.texts` 里**。不 unquote 直接搜 `pan.quark.cn` 会命中 0 次（页面上看似有 74 条）。
+35. **`docs.qq.com/dop-api/get/sheet` 需要权限票**。无登录态返回 `retcode: 56030 ticket mismatch`，只能解析 HTML 里的 flyweight，别指望走 API。
+36. **同一份资料可能在多个分享里重复**。逐文件比对文件名交集才能确认：大礼包的《课堂作业》44 文件与独立分享 44/44 完全相同，但《七彩课堂》大礼包 20 文件只与独立分享 284 文件交集 3——同名不同内容，不是重复。
+
+
 ### 工程类
 
 17. **`data/resources.json` 改动密集，rebase 必冲突**。远端先行提交导致 push 被拒时：`git fetch` 比对范围 → 必要时 `reset --hard origin/main` → 重放改动。不要硬 rebase。
@@ -172,6 +230,11 @@ python scripts/check_links.py
 python scripts/check_links.py --only websites,repos
 python scripts/check_links.py --only quark_tree --write
 
+# 教辅包浅层（只翻 2 层，44 条约 110 秒）
+python scripts/check_links.py --only quark_shallow --write
+# 腾讯文档索引内嵌的夸克链接计数
+python scripts/check_links.py --only sheet_index --write
+
 # 视频
 python scripts/download_video.py --check
 python scripts/download_video.py "https://www.bilibili.com/video/BVxxxx" --audio-only
@@ -199,4 +262,6 @@ git-smart-commit --yes
 
 - 五列表：`| 名称 | 年龄 | \`status\` | 说明 | 链接 |`
 - 四列表：首列链接、末列状态
-- 计数类（74 / 22 / 12 / 11 / 11）散落在 `README.md`、`docs/00`、`docs/03`，改数据后必须逐处核对。
+- 计数类（74 / 15 / 22 / 60 / 12 / 11 / 59）散落在 `README.md`、`docs/00`、`docs/03`，改数据后必须逐处核对。
+- `collections` 的 59 条分两张清单：11 条全量口径在 `docs/03b`，48 条浅层口径在 `docs/03c`。条数变了要同时改 `README.md` 索引四那张两行表、`docs/00` 的分区表、本文件第 18 行。
+- 浅层条目的 `share_l2_entries` 与 note 里写的「第 2 层 N 个」必须一致。改 note 前用脚本核一遍：读 `share_l2_entries` 比对正文字面数字。

@@ -390,11 +390,18 @@ def probe_quark_shallow(share_id: str, passcode: str = "") -> dict:
     top_entries = quark_share_walk_level(share_id, stoken, budget, "0")
     top_name = top_entries[0]["name"] if top_entries else ""
 
-    # 顶层常常只有 1 个同名总目录，直接下钻一层才是各科教辅
-    if len(top_entries) == 1 and top_entries[0]["is_dir"]:
-        level_two = quark_share_walk_level(share_id, stoken, budget, top_entries[0]["fid"])
-    else:
-        level_two = top_entries
+    # 顶层常常只有 1 个同名总目录，要下钻一层才是各科教辅。
+    # 「第 2 层」是使用者视角的教辅层，所以无论顶层有没有包裹目录，
+    # 都要保证读到 QUARK_SHALLOW_DEPTH 这一层，否则单独一包教辅会读成空。
+    level_two = top_entries
+    current_depth = 1
+    while (
+        current_depth < QUARK_SHALLOW_DEPTH
+        and len(level_two) == 1
+        and level_two[0]["is_dir"]
+    ):
+        level_two = quark_share_walk_level(share_id, stoken, budget, level_two[0]["fid"])
+        current_depth += 1
 
     level_two_dirs = [entry for entry in level_two if entry["is_dir"]]
     level_two_files = [entry for entry in level_two if not entry["is_dir"]]
