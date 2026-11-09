@@ -1,0 +1,41 @@
+{
+  "_comment": "Cursor MCP 配置示例。拷到 ~/.cursor/mcp.json 或 <项目>/.cursor/mcp.json 使用。所有环境变量都要替换成你自己的值。",
+  "_verified_at": "2026-11-09",
+  "mcpServers": {
+    "pdf-markdown": {
+      "command": "uvx",
+      "args": ["pymupdf4llm-mcp"],
+      "_note": "PyMuPDF 官方 MCP，纯本地无 Key，PDF -> Markdown。需要先安装 uv。"
+    },
+    "pdffr": {
+      "command": "npx",
+      "args": ["-y", "pdffr-mcp"],
+      "_note": "本地 PDF 处理，提供 pdf_to_markdown / pdf_outline / pdf_tables。仅在 npm 上，PyPI 无此包。"
+    },
+    "webdav": {
+      "command": "npx",
+      "args": ["-y", "webdav-mcp-server"],
+      "env": {
+        "WEBDAV_URL": "https://dav.jianguoyun.com/dav/",
+        "WEBDAV_USERNAME": "替换为你的账号",
+        "WEBDAV_PASSWORD": "替换为应用密码，不是登录密码"
+      },
+      "_note": "通用 WebDAV。坚果云地址固定为 https://dav.jianguoyun.com/dav/。环境变量名请以该包 README 为准。"
+    },
+    "netdisk": {
+      "command": "npx",
+      "args": ["-y", "@ptbsare/netdisk-mcp-server"],
+      "_note": "夸克 + 115 专用：列表/查看/转存/离线下载/多平台搜索。需要配置网盘凭据，见该包 README。"
+    },
+    "pdf-ocr": {
+      "command": "uvx",
+      "args": ["mcp-pdf"],
+      "_note": "文本提取 + OCR + 表格提取。注意与 npm 上的 pdf-mcp（仅删页功能）不是同一个包。"
+    },
+    "vault": {
+      "command": "npx",
+      "args": ["-y", "sync-vault-agent"],
+      "_note": "聚合百度/阿里/115/夸克/OneDrive。首次需在终端跑 mcp-agent init 走 OAuth；建议用小号账号试跑。"
+    }
+  }
+}
