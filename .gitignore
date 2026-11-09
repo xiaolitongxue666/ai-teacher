@@ -31,6 +31,9 @@ graphify-out/
 # 视频下载产物（可用 scripts/download_video.py --output 改到别处）
 downloads/
 
+# 检索结果中间产物（SSOT 是 data/resources.json，这只是并发写入冲突时的恢复备份）
+data/videos_bilibili.json
+
 # 全局/工具记忆残留（记忆 SSOT 是根目录 PROJECT_MEMORY.md）
 .claude-mem/
 .project-memory-backups/
