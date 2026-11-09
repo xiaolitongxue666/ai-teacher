@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-11-09T11:35:00+08:00",
+  "checked_at": "2026-11-09T11:38:41+08:00",
   "probe_note": "verified 字段由 scripts/check_links.py 生成。ok=HTTP 2xx；blocked=站点反爬（浏览器可正常打开）；dead=域名不存在或站点已关闭；unreachable=DNS 正常但本机网络连接失败（常见于境外站点直连）；mismatch=链接可达但页面内容与描述不符（需人工处理，脚本不会自动写入）；pending=未探测。",
   "status_values": [
     "ok",
@@ -19,7 +19,8 @@
       "url": "https://scratch.mit.edu",
       "verified": "ok",
       "note": "MIT 出品，儿童图形化编程标杆",
-      "lang": "多语言"
+      "lang": "多语言",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "code_org",
@@ -29,7 +30,8 @@
       "url": "https://code.org/en-US",
       "verified": "ok",
       "note": "零基础编程课程体系",
-      "lang": "多语言"
+      "lang": "多语言",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "codecombat",
@@ -39,7 +41,8 @@
       "url": "https://codecombat.com",
       "verified": "ok",
       "note": "游戏化写代码，Python/JS",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "blockly_games",
@@ -49,7 +52,8 @@
       "url": "https://blockly.games",
       "verified": "ok",
       "note": "Google Blockly 积木编程游戏",
-      "lang": "多语言"
+      "lang": "多语言",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "makecode",
@@ -59,7 +63,9 @@
       "url": "https://makecode.com",
       "verified": "ok",
       "note": "原 makecode.microsoft.com 已失效，现统一走 makecode.com 并跳转至 microsoft.com/makecode",
-      "lang": "多语言"
+      "lang": "多语言",
+      "checked_at": "2026-11-09T11:38:41+08:00",
+      "redirected_to": "https://www.microsoft.com/zh-cn/makecode"
     },
     {
       "id": "csforall",
@@ -69,7 +75,8 @@
       "url": "https://csforall.org/en-US",
       "verified": "ok",
       "note": "原 /en-US/hour-of-ai 路径返回 308 跳转异常，改用站点根",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "abcya",
@@ -79,7 +86,8 @@
       "url": "https://www.abcya.com/",
       "verified": "ok",
       "note": "分年级教育类小游戏",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "starfall",
@@ -89,7 +97,9 @@
       "url": "https://www.starfall.com",
       "verified": "ok",
       "note": "字母与阅读启蒙，部分内容免费",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00",
+      "redirected_to": "https://www.starfall.com/h/"
     },
     {
       "id": "pbskids",
@@ -99,7 +109,8 @@
       "url": "https://pbskids.org",
       "verified": "ok",
       "note": "教育动画与游戏",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "sesamestreet",
@@ -109,7 +120,8 @@
       "url": "https://www.sesamestreet.org/",
       "verified": "ok",
       "note": "芝麻街官方资源库",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "trtcocuk",
@@ -118,8 +130,9 @@
       "age": "3-10",
       "url": "https://trtcocuk.net.tr",
       "verified": "unreachable",
-      "note": "土耳其国家广播儿童频道，DNS 正常（85.111.24.151）但本机连接失败",
-      "lang": "tr"
+      "note": "公网 DNS（DNS-over-HTTPS 交叉验证）解析到 85.111.24.151，TCP 443 超时（境外站点本机不可达）",
+      "lang": "tr",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "bilimgenc",
@@ -128,8 +141,9 @@
       "age": "10+",
       "url": "https://bilimgenc.tubitak.gov.tr",
       "verified": "unreachable",
-      "note": "土耳其科学技术委员会青少年科普，SSL 证书校验失败（可能已过期）",
-      "lang": "tr"
+      "note": "土耳其科学技术委员会青少年科普。证书由 TÜBİTAK 自建 CA 签发，有效期 2026-04-30 至 2026-11-14，未过期；本机信任链不含该 CA，因此 Python 报 CERTIFICATE_VERIFY_FAILED。浏览器一般可正常打开",
+      "lang": "tr",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "ngkids",
@@ -139,7 +153,8 @@
       "url": "https://kids.nationalgeographic.com",
       "verified": "ok",
       "note": "自然与动物内容",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "si_kids",
@@ -149,7 +164,8 @@
       "url": "https://www.si.edu/kids",
       "verified": "blocked",
       "note": "返回 403，属站点反爬；浏览器可正常打开",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "britannica_kids",
@@ -159,7 +175,8 @@
       "url": "https://kids.britannica.com",
       "verified": "blocked",
       "note": "返回 403，属站点反爬；浏览器可正常打开",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "dk_learning",
@@ -169,7 +186,8 @@
       "url": "https://dk.com/pages/dk-learning",
       "verified": "ok",
       "note": "视觉百科，图文密度高",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "ducksters",
@@ -179,7 +197,8 @@
       "url": "https://www.ducksters.com/",
       "verified": "ok",
       "note": "作业辅导与主题讲解",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "wonderopolis",
@@ -189,7 +208,9 @@
       "url": "https://www.wonderopolis.org",
       "verified": "dead",
       "note": "站点已由 NCFL 关停，域名重定向至关闭公告页。原清单中的「每日一问」入口失效",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00",
+      "redirected_to": "https://familieslearning.org/blog/ncfls-digital-learning-platform-wonderopolis-to-close/"
     },
     {
       "id": "simple_wiki",
@@ -199,7 +220,8 @@
       "url": "https://simple.wikipedia.org/wiki/Main_Page",
       "verified": "ok",
       "note": "简化英语维基，i+1 阅读的理想语料",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "sciencebuddies",
@@ -209,7 +231,8 @@
       "url": "https://sciencebuddies.org",
       "verified": "blocked",
       "note": "返回 403，属站点反爬；浏览器可正常打开",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "phet",
@@ -219,7 +242,8 @@
       "url": "https://phet.colorado.edu",
       "verified": "ok",
       "note": "科罗拉多大学物理/化学仿真，可离线下载",
-      "lang": "多语言"
+      "lang": "多语言",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "spaceplace",
@@ -229,7 +253,8 @@
       "url": "https://spaceplace.nasa.gov",
       "verified": "ok",
       "note": "NASA 儿童页面",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "nasa_earth_kids",
@@ -239,7 +264,8 @@
       "url": "https://science.nasa.gov/kids/earth/",
       "verified": "ok",
       "note": "气候与地球科学",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "esa_kids",
@@ -249,7 +275,8 @@
       "url": "https://kids.esa.int/",
       "verified": "ok",
       "note": "欧空局儿童版块，原 esa.int/kids 已跳转至此",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "exploratorium",
@@ -259,7 +286,8 @@
       "url": "https://www.exploratorium.edu/",
       "verified": "ok",
       "note": "旧金山探索馆实验与活动",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "mysteryscience",
@@ -269,7 +297,8 @@
       "url": "https://mysteryscience.com",
       "verified": "ok",
       "note": "现成科学教案与短视频，部分免费",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "generationgenius",
@@ -279,7 +308,8 @@
       "url": "https://generationgenius.com",
       "verified": "blocked",
       "note": "返回 403，属站点反爬；主体为付费订阅",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "nrich",
@@ -287,9 +317,10 @@
       "category": "数学",
       "age": "5+",
       "url": "https://nrich.maths.org",
-      "verified": "ok",
+      "verified": "blocked",
       "note": "剑桥数学问题库，按学段分级",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "mathplayground",
@@ -299,7 +330,8 @@
       "url": "https://www.mathplayground.com",
       "verified": "ok",
       "note": "数学游戏与可视化",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "bedtimemath",
@@ -309,7 +341,8 @@
       "url": "https://bedtimemath.org",
       "verified": "ok",
       "note": "每日一题，家长共读式",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "splashlearn",
@@ -319,7 +352,8 @@
       "url": "https://www.splashlearn.com/",
       "verified": "ok",
       "note": "分年级练习，免费额度有限",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "storylineonline",
@@ -329,7 +363,9 @@
       "url": "https://www.storylineonline.net",
       "verified": "ok",
       "note": "演员真人朗读绘本，配字幕，超音段特征真实",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00",
+      "redirected_to": "https://storylineonline.net/"
     },
     {
       "id": "storyweaver",
@@ -339,7 +375,8 @@
       "url": "https://storyweaver.org.in",
       "verified": "ok",
       "note": "多语言儿童图书库，可下载 PDF",
-      "lang": "多语言"
+      "lang": "多语言",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "childrenslibrary",
@@ -349,7 +386,8 @@
       "url": "https://childrenslibrary.org",
       "verified": "ok",
       "note": "世界儿童数字图书馆",
-      "lang": "多语言"
+      "lang": "多语言",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "freekidsbooks",
@@ -359,7 +397,8 @@
       "url": "https://freekidsbooks.org",
       "verified": "ok",
       "note": "免费儿童图书，可下载",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "oxfordowl",
@@ -369,7 +408,8 @@
       "url": "https://www.oxfordowl.co.uk",
       "verified": "ok",
       "note": "牛津分级阅读，需注册免费账号",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "readingbear",
@@ -379,7 +419,8 @@
       "url": "https://www.readingbear.org",
       "verified": "ok",
       "note": "系统自然拼读教学，免费",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "unite4literacy",
@@ -389,7 +430,8 @@
       "url": "https://unite4literacy.com",
       "verified": "dead",
       "note": "域名 DNS 不存在（NXDOMAIN），原清单中的有声绘本入口已失效",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "freechildrenstories",
@@ -399,7 +441,8 @@
       "url": "https://www.freechildrenstories.com",
       "verified": "ok",
       "note": "免费儿童故事，补充入口",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "getepic",
@@ -409,7 +452,8 @@
       "url": "https://www.getepic.com",
       "verified": "ok",
       "note": "电子书库，教育账号免费但需教师身份",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "razkids",
@@ -419,7 +463,8 @@
       "url": "https://www.raz-kids.com",
       "verified": "blocked",
       "note": "返回 403，属站点反爬；主体为付费订阅",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "bbc_bitesize",
@@ -429,7 +474,8 @@
       "url": "https://www.bbc.co.uk/bitesize",
       "verified": "ok",
       "note": "英式课标全科复习，配短视频",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "newsinlevels",
@@ -439,7 +485,8 @@
       "url": "https://www.newsinlevels.com",
       "verified": "ok",
       "note": "同一新闻三档难度，i+1 输入的现成素材",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "breakingnewsenglish",
@@ -449,7 +496,8 @@
       "url": "https://breakingnewsenglish.com",
       "verified": "ok",
       "note": "新闻分级 + 配套练习与音频",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "voa_learningenglish",
@@ -458,8 +506,9 @@
       "age": "10+",
       "url": "https://learningenglish.voanews.com",
       "verified": "unreachable",
-      "note": "DNS 正常但本机连接被阻断；需要代理才能访问",
-      "lang": "en"
+      "note": "公网 DNS（DNS-over-HTTPS 交叉验证）解析到 Akamai Edge 23.55.143.189/159，TCP 443 超时；需要代理才能访问",
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "youglish",
@@ -469,7 +518,8 @@
       "url": "https://youglish.com",
       "verified": "ok",
       "note": "按词检索真人视频语境，替代 TTS 查发音的正确做法",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "tatoeba",
@@ -479,7 +529,9 @@
       "url": "https://tatoeba.org",
       "verified": "ok",
       "note": "多语言对照例句库，查词的真实语境",
-      "lang": "多语言"
+      "lang": "多语言",
+      "checked_at": "2026-11-09T11:38:41+08:00",
+      "redirected_to": "https://tatoeba.org/en/"
     },
     {
       "id": "cambridge_english",
@@ -489,7 +541,8 @@
       "url": "https://www.cambridgeenglish.org",
       "verified": "ok",
       "note": "免费在线水平测试与备考资料",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "test_english",
@@ -499,7 +552,8 @@
       "url": "https://test-english.com",
       "verified": "ok",
       "note": "A1-C1 分级测验，第一次探测返回 403、复测 200，属间歇性反爬",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "ldoce",
@@ -509,7 +563,8 @@
       "url": "https://www.ldoceonline.com",
       "verified": "ok",
       "note": "朗文当代，释义用 2000 基础词写成",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "oxford_learners",
@@ -519,7 +574,8 @@
       "url": "https://www.oxfordlearnersdictionaries.com",
       "verified": "ok",
       "note": "牛津学习词典，含真人发音与例句",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "dapeng_zidian",
@@ -529,7 +585,8 @@
       "url": "https://zidian.dapengshufa.com/",
       "verified": "ok",
       "note": "汉字字形/笔顺查询，硬笔练习辅助",
-      "lang": "zh"
+      "lang": "zh",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "duolingo",
@@ -539,7 +596,8 @@
       "url": "https://www.duolingo.com",
       "verified": "ok",
       "note": "游戏化语言学习，适合维持动机而非主输入",
-      "lang": "多语言"
+      "lang": "多语言",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "gusonthego",
@@ -549,7 +607,8 @@
       "url": "https://gus-on-the-go.com",
       "verified": "dead",
       "note": "域名 DNS 不存在（NXDOMAIN）",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "musictheory",
@@ -559,7 +618,8 @@
       "url": "https://www.musictheory.net/",
       "verified": "ok",
       "note": "乐理基础，含交互练习",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "sketchrx",
@@ -569,7 +629,8 @@
       "url": "https://sketchrx.com",
       "verified": "ok",
       "note": "绘画临摹练习",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "artforkidshub",
@@ -579,7 +640,9 @@
       "url": "https://www.artforkidshub.com",
       "verified": "ok",
       "note": "零基础绘画视频教程",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00",
+      "redirected_to": "https://artforkidshub.com/"
     },
     {
       "id": "metkids",
@@ -589,7 +652,8 @@
       "url": "https://www.metkids.org",
       "verified": "dead",
       "note": "metkids.org 已不解析；大都会博物馆儿童页现位于 metmuseum.org 下，但该站对脚本探测返回 429，未做判定",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "tate_kids",
@@ -599,7 +663,8 @@
       "url": "https://www.tate.org.uk/kids",
       "verified": "ok",
       "note": "泰特美术馆儿童艺术页",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "chesskid",
@@ -609,7 +674,8 @@
       "url": "https://www.chesskid.com",
       "verified": "ok",
       "note": "儿童国际象棋，免费额度有限",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "lichess",
@@ -619,7 +685,8 @@
       "url": "https://lichess.org",
       "verified": "ok",
       "note": "完全免费开源的国际象棋平台，含战术练习",
-      "lang": "多语言"
+      "lang": "多语言",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "typingclub",
@@ -629,7 +696,8 @@
       "url": "https://www.typingclub.com",
       "verified": "ok",
       "note": "十指盲打教学",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "lego_edu",
@@ -639,7 +707,8 @@
       "url": "https://education.lego.com/ja-jp/",
       "verified": "ok",
       "note": "免费教案（清单给的是日文站）",
-      "lang": "多语言"
+      "lang": "多语言",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "commonsense",
@@ -649,7 +718,8 @@
       "url": "https://www.commonsensemedia.org/",
       "verified": "ok",
       "note": "按年龄把关内容适龄度",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "parroto",
@@ -659,7 +729,8 @@
       "url": "https://parroto.app/zh-CN",
       "verified": "ok",
       "note": "Minecraft 长视频/播客，语速真实、单集时长极高，天然高输入量",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "words0xlei",
@@ -669,7 +740,8 @@
       "url": "https://0xlei.tech/words/",
       "verified": "ok",
       "note": "词汇练习小站",
-      "lang": "zh/en"
+      "lang": "zh/en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "every_joule",
@@ -679,7 +751,8 @@
       "url": "https://iamtechartist.com/every-joule/",
       "verified": "ok",
       "note": "交互式能量/物理可视化",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "openhouse",
@@ -689,7 +762,8 @@
       "url": "https://april-zhu.com/openhouse",
       "verified": "ok",
       "note": "3D 立体书案例，制作方法见 colorfigures",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "colorfigures",
@@ -699,7 +773,8 @@
       "url": "https://april-zhu.com/colorfigures",
       "verified": "ok",
       "note": "立体书/信息图制作技法",
-      "lang": "en"
+      "lang": "en",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "khanacademy",
@@ -709,7 +784,8 @@
       "url": "https://www.khanacademy.org",
       "verified": "ok",
       "note": "全科免费课程，数学与科学最完整",
-      "lang": "多语言"
+      "lang": "多语言",
+      "checked_at": "2026-11-09T11:38:41+08:00"
     }
   ],
   "repos": [
@@ -1144,9 +1220,9 @@
       "note": "数量属实：夸克分享目录实为 910 个条目（909 个 mp4，1 个 zip），「900 节」成立。但「1-6 年级全覆盖」与目录不符：内容以小学奥数/思维训练为主（巧求面积 150 条、鸡兔同笼 10、容斥 9、行程 8、盈亏 8、抽屉 6、牛吃草 4），低年级内容极少。目录通过夸克分享公开接口读取，无需登录",
       "url_official_verified": "ok",
       "url_alias_verified": "ok",
-      "checked_at": "2026-11-09T11:18:09+08:00",
+      "checked_at": "2026-11-09T11:38:41+08:00",
       "actual": "910 个条目 = 909 个 mp4 + 1 个 电子档资料.zip",
-      "grade_actual": "难度重心在 4-6 年级；显式 L1/L2 标记仅 4 条，L3 40 / L4 35 / L5 76 / L6 128（其余 627 条无年级标记）"
+      "grade_actual": "910 个文件中 232 个带年级标记、678 个无标记。标记按「L1、2、3、4、5、6」这类范围语法解析：仅 L6 的 111 条，L5+L6 的 62 条，L4-6 的 24 条，L3-6 的 31 条，L2-6 的 1 条，L1-6 全适用 3 条。真正覆盖低年级的只有 4 条，且都是「全年级适用」的趣味题与速算技巧，不是低年级课标内容"
     },
     {
       "id": "primary_1000_words",
@@ -1160,8 +1236,9 @@
       "verified": "ok",
       "note": "中转页打开后直接展示「夸克链接：https://pan.quark.cn/s/cbd38d7f7061」，未要求提取码。原始文案的提取码 YhRG 在该页上未被使用。夸克分享页返回 200（SPA 壳，文件清单需登录后查看）",
       "url_official_verified": "ok",
-      "checked_at": "2026-11-09T11:18:09+08:00",
-      "url_alias": "https://pan.powersharex.com/s/cbd38d7f7061"
+      "checked_at": "2026-11-09T11:38:41+08:00",
+      "url_alias": "https://pan.powersharex.com/s/cbd38d7f7061",
+      "url_alias_verified": "ok"
     },
     {
       "id": "phonics_270",
@@ -1175,8 +1252,9 @@
       "verified": "ok",
       "note": "中转页展示夸克链接 https://pan.quark.cn/s/f78b4890729e，未要求提取码。原始文案的提取码 ab8M 未在该页使用",
       "url_official_verified": "ok",
-      "checked_at": "2026-11-09T11:18:09+08:00",
-      "url_alias": "https://pan.powersharex.com/s/f78b4890729e"
+      "checked_at": "2026-11-09T11:38:41+08:00",
+      "url_alias": "https://pan.powersharex.com/s/f78b4890729e",
+      "url_alias_verified": "ok"
     },
     {
       "id": "scratch_174",
@@ -1191,7 +1269,7 @@
       "note": "wpss.best 实际是「松果盘搜」，页面内提供夸克与百度两个源。⚠️ 内容不一致：聚合页标题写「Scratch 3.0 全套 214 节课程」，而资源描述写「174 节」（65+59+50）。百度源页面标注「更新 2020-08-12」。节数需自行核对",
       "url_official_verified": "ok",
       "url_alt_verified": "ok",
-      "checked_at": "2026-11-09T11:18:09+08:00"
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "learn_english_movies",
@@ -1205,7 +1283,7 @@
       "note": "分享页 200",
       "url_official_verified": "ok",
       "url_official_redirected_to": "https://pan.quark.cn/s/7572c1cb1016",
-      "checked_at": "2026-11-09T11:18:09+08:00"
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "ielts_100_sentences",
@@ -1218,8 +1296,9 @@
       "verified": "ok",
       "note": "中转页以 location.replace 跳转至 https://pan.quark.cn/s/ae36118717fd，夸克页返回 200",
       "url_official_verified": "ok",
-      "checked_at": "2026-11-09T11:18:09+08:00",
-      "url_alias": "https://pan.quarket.xyz/s/ae36118717fd"
+      "checked_at": "2026-11-09T11:38:41+08:00",
+      "url_alias": "https://pan.quarket.xyz/s/ae36118717fd",
+      "url_alias_verified": "ok"
     },
     {
       "id": "wordly_wise_3000",
@@ -1233,7 +1312,7 @@
       "note": "分享页 200",
       "url_official_verified": "ok",
       "url_official_redirected_to": "https://pan.quark.cn/s/47b03b344081",
-      "checked_at": "2026-11-09T11:18:09+08:00"
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "word_posters",
@@ -1247,7 +1326,7 @@
       "note": "分享页 200",
       "url_official_verified": "ok",
       "url_official_redirected_to": "https://pan.quark.cn/s/c770b891a558",
-      "checked_at": "2026-11-09T11:18:09+08:00"
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "quark_misc",
@@ -1258,9 +1337,9 @@
       "url_official": "https://pan.quark.cn/s/3d2dd7b91043",
       "entry_type": "夸克官方",
       "verified": "ok",
-      "note": "标题「爆笑初中9科全套」。12 个顶层项：2 个推广文件（合众盘 .docx/.pdf）+ 10 个内容目录。含物理 3 版（142/400/3200+ 节）、化学 3 版（349/167/1500+ 节）、数学 12 个教材版本 + 中考 + 每日一练 PDF、地理 19 章、历史 8 模块、生物 6 模块、语文 4 模块、英语 5 册、政治 6 册、乐乐课堂 18 项。⚠️ 数学 12 个版本与乐乐课堂 18 项均带 (1) 重复副本，实际有效内容约为列出项的一半",
+      "note": "标题「爆笑初中9科全套」。12 个顶层项：2 个推广文件（合众盘 .docx 0.34MB + .pdf 1.43MB）+ 10 个内容目录。含物理 3 版（142/400/3200+ 节）、化学 3 版（349/167/1500+ 节）、数学 33 项（26 目录 + 7 文件）、地理 19 项、历史 8 模块、生物 6 模块、语文 4 模块、英语 5 册、政治 6 册、乐乐课堂 18 项。⚠️ 存在 (1) 重复副本：数学 13 组目录全部成对、乐乐课堂 9 组全部成对、地理仅 8 章成对（01/02/04 单份）",
       "url_official_verified": "ok",
-      "checked_at": "2026-11-09T11:18:09+08:00"
+      "checked_at": "2026-11-09T11:38:41+08:00"
     },
     {
       "id": "smartedu_downloader",
