@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-11-09T11:38:41+08:00",
+  "checked_at": "2026-11-09T11:48:44+08:00",
   "probe_note": "verified 字段由 scripts/check_links.py 生成。ok=HTTP 2xx；blocked=站点反爬（浏览器可正常打开）；dead=域名不存在或站点已关闭；unreachable=DNS 正常但本机网络连接失败（常见于境外站点直连）；mismatch=链接可达但页面内容与描述不符（需人工处理，脚本不会自动写入）；pending=未探测。",
   "status_values": [
     "ok",
@@ -20,7 +20,7 @@
       "verified": "ok",
       "note": "MIT 出品，儿童图形化编程标杆",
       "lang": "多语言",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "code_org",
@@ -31,7 +31,7 @@
       "verified": "ok",
       "note": "零基础编程课程体系",
       "lang": "多语言",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "codecombat",
@@ -42,7 +42,7 @@
       "verified": "ok",
       "note": "游戏化写代码，Python/JS",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "blockly_games",
@@ -53,7 +53,7 @@
       "verified": "ok",
       "note": "Google Blockly 积木编程游戏",
       "lang": "多语言",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "makecode",
@@ -64,7 +64,7 @@
       "verified": "ok",
       "note": "原 makecode.microsoft.com 已失效，现统一走 makecode.com 并跳转至 microsoft.com/makecode",
       "lang": "多语言",
-      "checked_at": "2026-11-09T11:38:41+08:00",
+      "checked_at": "2026-11-09T11:48:44+08:00",
       "redirected_to": "https://www.microsoft.com/zh-cn/makecode"
     },
     {
@@ -76,7 +76,7 @@
       "verified": "ok",
       "note": "原 /en-US/hour-of-ai 路径返回 308 跳转异常，改用站点根",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "abcya",
@@ -87,7 +87,7 @@
       "verified": "ok",
       "note": "分年级教育类小游戏",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "starfall",
@@ -98,7 +98,7 @@
       "verified": "ok",
       "note": "字母与阅读启蒙，部分内容免费",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00",
+      "checked_at": "2026-11-09T11:48:44+08:00",
       "redirected_to": "https://www.starfall.com/h/"
     },
     {
@@ -110,7 +110,7 @@
       "verified": "ok",
       "note": "教育动画与游戏",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "sesamestreet",
@@ -121,7 +121,7 @@
       "verified": "ok",
       "note": "芝麻街官方资源库",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "trtcocuk",
@@ -132,7 +132,7 @@
       "verified": "unreachable",
       "note": "公网 DNS（DNS-over-HTTPS 交叉验证）解析到 85.111.24.151，TCP 443 超时（境外站点本机不可达）",
       "lang": "tr",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "bilimgenc",
@@ -143,7 +143,7 @@
       "verified": "unreachable",
       "note": "土耳其科学技术委员会青少年科普。证书由 TÜBİTAK 自建 CA 签发，有效期 2026-04-30 至 2026-11-14，未过期；本机信任链不含该 CA，因此 Python 报 CERTIFICATE_VERIFY_FAILED。浏览器一般可正常打开",
       "lang": "tr",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "ngkids",
@@ -154,7 +154,7 @@
       "verified": "ok",
       "note": "自然与动物内容",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "si_kids",
@@ -165,7 +165,7 @@
       "verified": "blocked",
       "note": "返回 403，属站点反爬；浏览器可正常打开",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "britannica_kids",
@@ -176,7 +176,7 @@
       "verified": "blocked",
       "note": "返回 403，属站点反爬；浏览器可正常打开",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "dk_learning",
@@ -187,7 +187,7 @@
       "verified": "ok",
       "note": "视觉百科，图文密度高",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "ducksters",
@@ -198,7 +198,7 @@
       "verified": "ok",
       "note": "作业辅导与主题讲解",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "wonderopolis",
@@ -209,7 +209,7 @@
       "verified": "dead",
       "note": "站点已由 NCFL 关停，域名重定向至关闭公告页。原清单中的「每日一问」入口失效",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00",
+      "checked_at": "2026-11-09T11:48:44+08:00",
       "redirected_to": "https://familieslearning.org/blog/ncfls-digital-learning-platform-wonderopolis-to-close/"
     },
     {
@@ -221,7 +221,7 @@
       "verified": "ok",
       "note": "简化英语维基，i+1 阅读的理想语料",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "sciencebuddies",
@@ -232,7 +232,7 @@
       "verified": "blocked",
       "note": "返回 403，属站点反爬；浏览器可正常打开",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "phet",
@@ -243,7 +243,7 @@
       "verified": "ok",
       "note": "科罗拉多大学物理/化学仿真，可离线下载",
       "lang": "多语言",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "spaceplace",
@@ -254,7 +254,7 @@
       "verified": "ok",
       "note": "NASA 儿童页面",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "nasa_earth_kids",
@@ -265,7 +265,7 @@
       "verified": "ok",
       "note": "气候与地球科学",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "esa_kids",
@@ -276,7 +276,7 @@
       "verified": "ok",
       "note": "欧空局儿童版块，原 esa.int/kids 已跳转至此",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "exploratorium",
@@ -287,7 +287,7 @@
       "verified": "ok",
       "note": "旧金山探索馆实验与活动",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "mysteryscience",
@@ -298,7 +298,7 @@
       "verified": "ok",
       "note": "现成科学教案与短视频，部分免费",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "generationgenius",
@@ -309,7 +309,7 @@
       "verified": "blocked",
       "note": "返回 403，属站点反爬；主体为付费订阅",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "nrich",
@@ -320,7 +320,7 @@
       "verified": "blocked",
       "note": "剑桥数学问题库，按学段分级",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "mathplayground",
@@ -331,7 +331,7 @@
       "verified": "ok",
       "note": "数学游戏与可视化",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "bedtimemath",
@@ -342,7 +342,7 @@
       "verified": "ok",
       "note": "每日一题，家长共读式",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "splashlearn",
@@ -353,7 +353,7 @@
       "verified": "ok",
       "note": "分年级练习，免费额度有限",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "storylineonline",
@@ -364,7 +364,7 @@
       "verified": "ok",
       "note": "演员真人朗读绘本，配字幕，超音段特征真实",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00",
+      "checked_at": "2026-11-09T11:48:44+08:00",
       "redirected_to": "https://storylineonline.net/"
     },
     {
@@ -376,7 +376,7 @@
       "verified": "ok",
       "note": "多语言儿童图书库，可下载 PDF",
       "lang": "多语言",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "childrenslibrary",
@@ -387,7 +387,7 @@
       "verified": "ok",
       "note": "世界儿童数字图书馆",
       "lang": "多语言",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "freekidsbooks",
@@ -398,7 +398,7 @@
       "verified": "ok",
       "note": "免费儿童图书，可下载",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "oxfordowl",
@@ -409,7 +409,7 @@
       "verified": "ok",
       "note": "牛津分级阅读，需注册免费账号",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "readingbear",
@@ -420,7 +420,7 @@
       "verified": "ok",
       "note": "系统自然拼读教学，免费",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "unite4literacy",
@@ -431,7 +431,7 @@
       "verified": "dead",
       "note": "域名 DNS 不存在（NXDOMAIN），原清单中的有声绘本入口已失效",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "freechildrenstories",
@@ -442,7 +442,7 @@
       "verified": "ok",
       "note": "免费儿童故事，补充入口",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "getepic",
@@ -453,7 +453,7 @@
       "verified": "ok",
       "note": "电子书库，教育账号免费但需教师身份",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "razkids",
@@ -464,7 +464,7 @@
       "verified": "blocked",
       "note": "返回 403，属站点反爬；主体为付费订阅",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "bbc_bitesize",
@@ -475,7 +475,7 @@
       "verified": "ok",
       "note": "英式课标全科复习，配短视频",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "newsinlevels",
@@ -486,7 +486,7 @@
       "verified": "ok",
       "note": "同一新闻三档难度，i+1 输入的现成素材",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "breakingnewsenglish",
@@ -497,7 +497,7 @@
       "verified": "ok",
       "note": "新闻分级 + 配套练习与音频",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "voa_learningenglish",
@@ -508,7 +508,7 @@
       "verified": "unreachable",
       "note": "公网 DNS（DNS-over-HTTPS 交叉验证）解析到 Akamai Edge 23.55.143.189/159，TCP 443 超时；需要代理才能访问",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "youglish",
@@ -519,7 +519,7 @@
       "verified": "ok",
       "note": "按词检索真人视频语境，替代 TTS 查发音的正确做法",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "tatoeba",
@@ -530,7 +530,7 @@
       "verified": "ok",
       "note": "多语言对照例句库，查词的真实语境",
       "lang": "多语言",
-      "checked_at": "2026-11-09T11:38:41+08:00",
+      "checked_at": "2026-11-09T11:48:44+08:00",
       "redirected_to": "https://tatoeba.org/en/"
     },
     {
@@ -542,7 +542,7 @@
       "verified": "ok",
       "note": "免费在线水平测试与备考资料",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "test_english",
@@ -553,7 +553,7 @@
       "verified": "ok",
       "note": "A1-C1 分级测验，第一次探测返回 403、复测 200，属间歇性反爬",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "ldoce",
@@ -564,7 +564,7 @@
       "verified": "ok",
       "note": "朗文当代，释义用 2000 基础词写成",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "oxford_learners",
@@ -575,7 +575,7 @@
       "verified": "ok",
       "note": "牛津学习词典，含真人发音与例句",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "dapeng_zidian",
@@ -586,7 +586,7 @@
       "verified": "ok",
       "note": "汉字字形/笔顺查询，硬笔练习辅助",
       "lang": "zh",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "duolingo",
@@ -597,7 +597,7 @@
       "verified": "ok",
       "note": "游戏化语言学习，适合维持动机而非主输入",
       "lang": "多语言",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "gusonthego",
@@ -608,7 +608,7 @@
       "verified": "dead",
       "note": "域名 DNS 不存在（NXDOMAIN）",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "musictheory",
@@ -619,7 +619,7 @@
       "verified": "ok",
       "note": "乐理基础，含交互练习",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "sketchrx",
@@ -630,7 +630,7 @@
       "verified": "ok",
       "note": "绘画临摹练习",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "artforkidshub",
@@ -641,7 +641,7 @@
       "verified": "ok",
       "note": "零基础绘画视频教程",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00",
+      "checked_at": "2026-11-09T11:48:44+08:00",
       "redirected_to": "https://artforkidshub.com/"
     },
     {
@@ -653,7 +653,7 @@
       "verified": "dead",
       "note": "metkids.org 已不解析；大都会博物馆儿童页现位于 metmuseum.org 下，但该站对脚本探测返回 429，未做判定",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "tate_kids",
@@ -664,7 +664,7 @@
       "verified": "ok",
       "note": "泰特美术馆儿童艺术页",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "chesskid",
@@ -675,7 +675,7 @@
       "verified": "ok",
       "note": "儿童国际象棋，免费额度有限",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "lichess",
@@ -686,7 +686,7 @@
       "verified": "ok",
       "note": "完全免费开源的国际象棋平台，含战术练习",
       "lang": "多语言",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "typingclub",
@@ -697,7 +697,7 @@
       "verified": "ok",
       "note": "十指盲打教学",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "lego_edu",
@@ -708,7 +708,7 @@
       "verified": "ok",
       "note": "免费教案（清单给的是日文站）",
       "lang": "多语言",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "commonsense",
@@ -719,7 +719,7 @@
       "verified": "ok",
       "note": "按年龄把关内容适龄度",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "parroto",
@@ -730,7 +730,7 @@
       "verified": "ok",
       "note": "Minecraft 长视频/播客，语速真实、单集时长极高，天然高输入量",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "words0xlei",
@@ -741,7 +741,7 @@
       "verified": "ok",
       "note": "词汇练习小站",
       "lang": "zh/en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "every_joule",
@@ -752,7 +752,7 @@
       "verified": "ok",
       "note": "交互式能量/物理可视化",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "openhouse",
@@ -763,7 +763,7 @@
       "verified": "ok",
       "note": "3D 立体书案例，制作方法见 colorfigures",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "colorfigures",
@@ -774,7 +774,7 @@
       "verified": "ok",
       "note": "立体书/信息图制作技法",
       "lang": "en",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "khanacademy",
@@ -785,7 +785,7 @@
       "verified": "ok",
       "note": "全科免费课程，数学与科学最完整",
       "lang": "多语言",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     }
   ],
   "repos": [
@@ -795,7 +795,9 @@
       "stars": 609,
       "url": "https://github.com/gtiipoi/ielts-practice",
       "desc": "IELTS Atlas 雅思练习系统",
-      "subject": "英语"
+      "subject": "英语",
+      "verified": "ok",
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "bodyvista",
@@ -803,15 +805,19 @@
       "stars": 151,
       "url": "https://github.com/FreedomIntelligence/BodyVista",
       "desc": "沉浸式人体解剖探索",
-      "subject": "科学"
+      "subject": "科学",
+      "verified": "ok",
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "deeptutor",
       "name": "HKUDS/DeepTutor",
-      "stars": 57092,
+      "stars": 57117,
       "url": "https://github.com/HKUDS/DeepTutor",
       "desc": "终身个性化 AI 辅导框架（港大数据智能实验室）",
-      "subject": "AI 辅导"
+      "subject": "AI 辅导",
+      "verified": "ok",
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "speaking_island",
@@ -819,15 +825,19 @@
       "stars": 29,
       "url": "https://github.com/modengsir/speaking-island",
       "desc": "开口小岛，基于 Ming 语音模型的儿童英语启蒙应用",
-      "subject": "英语"
+      "subject": "英语",
+      "verified": "ok",
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "awesome_english_ebooks",
       "name": "hehonghui/awesome-english-ebooks",
-      "stars": 39311,
+      "stars": 39313,
       "url": "https://github.com/hehonghui/awesome-english-ebooks",
       "desc": "经济学人/纽约客/卫报等英语杂志（含音频）",
-      "subject": "英语"
+      "subject": "英语",
+      "verified": "ok",
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "nce_notes",
@@ -835,7 +845,9 @@
       "stars": 2051,
       "url": "https://github.com/andylee1890/NewConceptEnglish",
       "desc": "新概念学习笔记与工具",
-      "subject": "英语"
+      "subject": "英语",
+      "verified": "ok",
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "atlas_of_physics",
@@ -843,7 +855,9 @@
       "stars": 397,
       "url": "https://github.com/nathanliow/atlas-of-physics",
       "desc": "AP Physics 1/C 交互式 3D 教材",
-      "subject": "科学"
+      "subject": "科学",
+      "verified": "ok",
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "algorithm_visualizer",
@@ -851,31 +865,39 @@
       "stars": 49395,
       "url": "https://github.com/algorithm-visualizer/algorithm-visualizer",
       "desc": "算法可视化在线平台",
-      "subject": "编程与逻辑"
+      "subject": "编程与逻辑",
+      "verified": "ok",
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "learning_english",
       "name": "knowledgefxg/learning-english",
-      "stars": 4955,
+      "stars": 4956,
       "url": "https://github.com/knowledgefxg/learning-english",
       "desc": "听说读写英语学习资源合集",
-      "subject": "英语"
+      "subject": "英语",
+      "verified": "ok",
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "awesome_english",
       "name": "yvoronoy/awesome-english",
-      "stars": 4478,
+      "stars": 4480,
       "url": "https://github.com/yvoronoy/awesome-english",
       "desc": "英语学习资源 awesome 清单",
-      "subject": "英语"
+      "subject": "英语",
+      "verified": "ok",
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "word_atlas",
       "name": "designfuchen/word-atlas",
-      "stars": 4483,
+      "stars": 4490,
       "url": "https://github.com/designfuchen/word-atlas",
       "desc": "词光 · 图解雅思词汇 7298 词，含英美音与 FSRS 复习",
-      "subject": "英语"
+      "subject": "英语",
+      "verified": "ok",
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "keyboard_island",
@@ -883,7 +905,9 @@
       "stars": 101,
       "url": "https://github.com/shaom/keyboard-island",
       "desc": "儿童打字冒险，Keyboard Island 96 章 + Sentence Post Office",
-      "subject": "工具技能"
+      "subject": "工具技能",
+      "verified": "ok",
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "nce_online",
@@ -891,15 +915,19 @@
       "stars": 4371,
       "url": "https://github.com/iChochy/NCE",
       "desc": "新概念英语全四册在线朗读、单句点读、中英对照",
-      "subject": "英语"
+      "subject": "英语",
+      "verified": "ok",
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "cn_math_taxonomy",
       "name": "xiaoyang111222/cn-math-taxonomy",
-      "stars": 7127,
+      "stars": 7138,
       "url": "https://github.com/xiaoyang111222/cn-math-taxonomy",
       "desc": "小学数学到高中、英语三年级到高中、初中物理的知识图谱",
-      "subject": "数学"
+      "subject": "数学",
+      "verified": "ok",
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "freepep",
@@ -907,15 +935,19 @@
       "stars": 1476,
       "url": "https://github.com/siknet/FreePEP",
       "desc": "人教社电子教材下载器",
-      "subject": "教材"
+      "subject": "教材",
+      "verified": "ok",
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "cet_practice",
       "name": "o-Sakurajimamai-o/cet-practice",
-      "stars": 161,
+      "stars": 163,
       "url": "https://github.com/o-Sakurajimamai-o/cet-practice",
       "desc": "英语研习室，本地四六级/考研真题练习",
-      "subject": "英语"
+      "subject": "英语",
+      "verified": "ok",
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "anatomy_3d",
@@ -923,31 +955,39 @@
       "stars": 3888,
       "url": "https://github.com/thebuggeddev/anatomy",
       "desc": "Three.js 交互式 3D 人体解剖浏览器",
-      "subject": "科学"
+      "subject": "科学",
+      "verified": "ok",
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "lilinji_english",
       "name": "lilinji/English",
-      "stars": 1260,
+      "stars": 1262,
       "url": "https://github.com/lilinji/English",
       "desc": "英语学习小站",
-      "subject": "英语"
+      "subject": "英语",
+      "verified": "ok",
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "mineru",
       "name": "opendatalab/MinerU",
-      "stars": 83327,
+      "stars": 83331,
       "url": "https://github.com/opendatalab/MinerU",
       "desc": "PDF 结构化解析引擎，扫描件自动 OCR，输出 Markdown/JSON",
-      "subject": "OCR"
+      "subject": "OCR",
+      "verified": "ok",
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "dify",
       "name": "langgenius/dify",
-      "stars": 160699,
+      "stars": 160700,
       "url": "https://github.com/langgenius/dify",
       "desc": "LLM 应用开发平台，官方插件仓库见 dify-official-plugins",
-      "subject": "平台"
+      "subject": "平台",
+      "verified": "ok",
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "dify_official_plugins",
@@ -955,7 +995,9 @@
       "stars": 641,
       "url": "https://github.com/langgenius/dify-official-plugins",
       "desc": "Dify 官方插件库（datasources / tools / models 等）",
-      "subject": "平台"
+      "subject": "平台",
+      "verified": "ok",
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "tchmaterial_parser",
@@ -963,7 +1005,9 @@
       "stars": 7744,
       "url": "https://github.com/happycola233/tchMaterial-parser",
       "desc": "国家中小学智慧教育平台电子课本下载工具，MIT，Python，支持批量下载与自动加书签",
-      "subject": "教材"
+      "subject": "教材",
+      "verified": "ok",
+      "checked_at": "2026-11-09T11:48:44+08:00"
     }
   ],
   "mcp_tools": [
@@ -980,7 +1024,9 @@
       "platform": "全平台",
       "verified": "ok",
       "note": "通用 WebDAV，坚果云/Nextcloud/ownCloud 首选；本地与网盘直传，不经第三方",
-      "pushed": "2025-03-19"
+      "pushed": "2025-03-19",
+      "checked_at": "2026-11-09T11:47:07+08:00",
+      "latest_version_checked": "1.0.4"
     },
     {
       "id": "sync_vault_agent",
@@ -995,7 +1041,9 @@
       "platform": "全平台",
       "verified": "ok",
       "note": "声称聚合百度/阿里云盘/115/夸克/OneDrive，走 OAuth。包发布于 2026-07，仓库零 star，属新项目，建议先隔离试跑再连主账号",
-      "pushed": "2026-07-20"
+      "pushed": "2026-07-20",
+      "checked_at": "2026-11-09T11:47:07+08:00",
+      "latest_version_checked": "0.2.1"
     },
     {
       "id": "nutstore_mcp",
@@ -1010,7 +1058,9 @@
       "platform": "全平台",
       "verified": "ok",
       "note": "坚果云专用（走 WebDAV 协议，因此也能连任何兼容 WebDAV 的网盘）",
-      "pushed": "2026-04-24"
+      "pushed": "2026-04-24",
+      "checked_at": "2026-11-09T11:47:07+08:00",
+      "latest_version_checked": "1.1.0"
     },
     {
       "id": "netdisk_mcp_server",
@@ -1025,7 +1075,9 @@
       "platform": "全平台",
       "verified": "ok",
       "note": "夸克 + 115：列表/查看/转存/离线下载/多平台搜索。原需求中的「360 云盘 MCP」「百度网盘 MCP」未找到通用实现，这是最接近的可用替代",
-      "pushed": "2026-09-11"
+      "pushed": "2026-09-11",
+      "checked_at": "2026-11-09T11:47:07+08:00",
+      "latest_version_checked": "1.1.1"
     },
     {
       "id": "pdffr_mcp",
@@ -1040,7 +1092,9 @@
       "platform": "全平台",
       "verified": "ok",
       "note": "本地 PDF→Markdown，工具 pdf_to_markdown / pdf_outline / pdf_tables。注意 PyPI 无此包，只能走 npm",
-      "pushed": "2026-09-03"
+      "pushed": "2026-09-03",
+      "checked_at": "2026-11-09T11:47:07+08:00",
+      "latest_version_checked": "0.1.1"
     },
     {
       "id": "pymupdf4llm_mcp",
@@ -1055,7 +1109,9 @@
       "platform": "全平台",
       "verified": "ok",
       "note": "PyMuPDF 官方 MCP，纯本地、无 Key，是把教材 PDF 转 Markdown 最稳的一条路",
-      "pushed": "2026-07-02"
+      "pushed": "2026-07-02",
+      "checked_at": "2026-11-09T11:47:07+08:00",
+      "latest_version_checked": "1.28.0"
     },
     {
       "id": "mcp_pdf",
@@ -1070,7 +1126,9 @@
       "platform": "全平台",
       "verified": "ok",
       "note": "文本提取 + OCR + 表格提取，功能面比 pdffr 广。原清单说的「pdf-mcp 57 种工具」在 npm 上对应的是 alanhe421/pdf-mcp@0.0.3，实际功能只有「删除 PDF 页面」，不可互换",
-      "pushed": "2026-09-22"
+      "pushed": "2026-09-22",
+      "checked_at": "2026-11-09T11:47:07+08:00",
+      "latest_version_checked": "2026.9.22"
     },
     {
       "id": "macos_vision_mcp",
@@ -1085,7 +1143,9 @@
       "platform": "仅 macOS",
       "verified": "ok",
       "note": "调用苹果 Vision 框架离线 OCR。当前机器是 Windows，不可用",
-      "pushed": ""
+      "pushed": "",
+      "checked_at": "2026-11-09T11:47:07+08:00",
+      "latest_version_checked": "0.7.0"
     },
     {
       "id": "fastocr_mcp",
@@ -1100,7 +1160,9 @@
       "platform": "全平台",
       "verified": "ok",
       "note": "依赖 fastocr.org 云端 API，需 Key 且需联网，不是本地 OCR。原清单说它在 npm，实际在 PyPI",
-      "pushed": "2026-11-06"
+      "pushed": "2026-11-06",
+      "checked_at": "2026-11-09T11:47:07+08:00",
+      "latest_version_checked": "0.3.0"
     },
     {
       "id": "ocr_mcp",
@@ -1115,7 +1177,9 @@
       "platform": "全平台",
       "verified": "ok",
       "note": "多后端（Marker / DeepSeek / Mistral），本地 Marker 可完全离线，但版本很早期",
-      "pushed": ""
+      "pushed": "",
+      "checked_at": "2026-11-09T11:47:07+08:00",
+      "latest_version_checked": "0.1.0"
     },
     {
       "id": "onedrive_mcp",
@@ -1130,7 +1194,9 @@
       "platform": "全平台",
       "verified": "ok",
       "note": "OneDrive 专用 MCP",
-      "pushed": "2026-11-04"
+      "pushed": "2026-11-04",
+      "checked_at": "2026-11-09T11:47:07+08:00",
+      "latest_version_checked": "0.10.2"
     }
   ],
   "dify": [
@@ -1139,70 +1205,97 @@
       "name": "OneDrive 数据源",
       "kind": "官方 datasource",
       "verified": "ok",
-      "note": "dify-official-plugins/datasources/onedrive"
+      "note": "dify-official-plugins/datasources/onedrive",
+      "url": "https://github.com/langgenius/dify-official-plugins/tree/main/datasources/onedrive",
+      "checked_at": "2026-11-09T11:47:07+08:00"
     },
     {
       "id": "dify_ds_gdrive",
       "name": "Google Drive 数据源",
       "kind": "官方 datasource",
       "verified": "ok",
-      "note": "dify-official-plugins/datasources/google_drive"
+      "note": "dify-official-plugins/datasources/google_drive",
+      "url": "https://github.com/langgenius/dify-official-plugins/tree/main/datasources/google_drive",
+      "checked_at": "2026-11-09T11:47:07+08:00"
     },
     {
       "id": "dify_ds_box",
       "name": "Box 数据源",
       "kind": "官方 datasource",
       "verified": "ok",
-      "note": "dify-official-plugins/datasources/box_datasource"
+      "note": "dify-official-plugins/datasources/box_datasource",
+      "url": "https://github.com/langgenius/dify-official-plugins/tree/main/datasources/box_datasource",
+      "checked_at": "2026-11-09T11:47:07+08:00"
     },
     {
       "id": "dify_ds_s3",
       "name": "AWS S3 数据源",
       "kind": "官方 datasource",
       "verified": "ok",
-      "note": "dify-official-plugins/datasources/aws_s3_storage"
+      "note": "dify-official-plugins/datasources/aws_s3_storage",
+      "url": "https://github.com/langgenius/dify-official-plugins/tree/main/datasources/aws_s3_storage",
+      "checked_at": "2026-11-09T11:47:07+08:00"
     },
     {
       "id": "dify_ds_cos",
       "name": "腾讯 COS 数据源",
       "kind": "官方 datasource",
       "verified": "ok",
-      "note": "dify-official-plugins/datasources/tencent_cos_storage"
+      "note": "dify-official-plugins/datasources/tencent_cos_storage",
+      "url": "https://github.com/langgenius/dify-official-plugins/tree/main/datasources/tencent_cos_storage",
+      "checked_at": "2026-11-09T11:47:07+08:00"
     },
     {
       "id": "dify_ds_dropbox",
       "name": "Dropbox 数据源",
       "kind": "官方 datasource",
       "verified": "ok",
-      "note": "dify-official-plugins/datasources/dropbox_datasource"
+      "note": "dify-official-plugins/datasources/dropbox_datasource",
+      "url": "https://github.com/langgenius/dify-official-plugins/tree/main/datasources/dropbox_datasource",
+      "checked_at": "2026-11-09T11:47:07+08:00"
     },
     {
       "id": "dify_ds_webdav",
       "name": "WebDAV 数据源",
       "kind": "社区插件",
       "verified": "unverified",
-      "note": "shaba/dify-datasource-webdav，仅 1 star。官方目录内没有任何 webdav 数据源，说明「事实标准」这个说法不成立，需自行评估维护状态"
+      "note": "shaba/dify-datasource-webdav，仅 1 star。官方目录内没有任何 webdav 数据源，说明「事实标准」这个说法不成立，需自行评估维护状态",
+      "checked_at": "2026-11-09T11:47:07+08:00"
     },
     {
       "id": "dify_tool_mineru",
       "name": "MinerU",
       "kind": "官方 tool 插件",
       "verified": "ok",
-      "note": "dify-official-plugins/tools/mineru，扫描版 PDF 自动 OCR，输出结构化 Markdown"
+      "note": "dify-official-plugins/tools/mineru，扫描版 PDF 自动 OCR，输出结构化 Markdown",
+      "url": "https://github.com/langgenius/dify-official-plugins/tree/main/tools/mineru",
+      "checked_at": "2026-11-09T11:47:07+08:00"
     },
     {
       "id": "dify_tool_paddleocr",
       "name": "PaddleOCR",
       "kind": "官方 tool 插件",
       "verified": "ok",
-      "note": "dify-official-plugins/tools/paddleocr，可自托管，中文识别优势"
+      "note": "dify-official-plugins/tools/paddleocr，可自托管，中文识别优势",
+      "url": "https://github.com/langgenius/dify-official-plugins/tree/main/tools/paddleocr",
+      "checked_at": "2026-11-09T11:47:07+08:00"
+    },
+    {
+      "id": "dify_tool_nextcloud",
+      "name": "NextCloud",
+      "kind": "官方 tool 插件",
+      "verified": "ok",
+      "url": "https://github.com/langgenius/dify-official-plugins/tree/main/tools/nextcloud",
+      "checked_at": "2026-11-09T11:47:07+08:00",
+      "note": "dify-official-plugins/tools/nextcloud，作者 langgenius，v0.1.7，走 WebDAV 协议；提供 list_files / download_file / upload_file / create_folder / delete_file / search_files 六个工具。是 tool 插件不是 datasource，只能在工作流/Agent 节点里调用，不能作为知识库摄取数据源"
     },
     {
       "id": "dify_tool_upstage",
       "name": "Upstage Document Parse",
       "kind": "第三方/未核实",
       "verified": "unverified",
-      "note": "官方插件目录中未找到，需自行确认来源"
+      "note": "官方插件目录中未找到，需自行确认来源",
+      "checked_at": "2026-11-09T11:47:07+08:00"
     }
   ],
   "collections": [
@@ -1220,7 +1313,7 @@
       "note": "数量属实：夸克分享目录实为 910 个条目（909 个 mp4，1 个 zip），「900 节」成立。但「1-6 年级全覆盖」与目录不符：内容以小学奥数/思维训练为主（巧求面积 150 条、鸡兔同笼 10、容斥 9、行程 8、盈亏 8、抽屉 6、牛吃草 4），低年级内容极少。目录通过夸克分享公开接口读取，无需登录",
       "url_official_verified": "ok",
       "url_alias_verified": "ok",
-      "checked_at": "2026-11-09T11:38:41+08:00",
+      "checked_at": "2026-11-09T11:48:44+08:00",
       "actual": "910 个条目 = 909 个 mp4 + 1 个 电子档资料.zip",
       "grade_actual": "910 个文件中 232 个带年级标记、678 个无标记。标记按「L1、2、3、4、5、6」这类范围语法解析：仅 L6 的 111 条，L5+L6 的 62 条，L4-6 的 24 条，L3-6 的 31 条，L2-6 的 1 条，L1-6 全适用 3 条。真正覆盖低年级的只有 4 条，且都是「全年级适用」的趣味题与速算技巧，不是低年级课标内容"
     },
@@ -1236,7 +1329,7 @@
       "verified": "ok",
       "note": "中转页打开后直接展示「夸克链接：https://pan.quark.cn/s/cbd38d7f7061」，未要求提取码。原始文案的提取码 YhRG 在该页上未被使用。夸克分享页返回 200（SPA 壳，文件清单需登录后查看）",
       "url_official_verified": "ok",
-      "checked_at": "2026-11-09T11:38:41+08:00",
+      "checked_at": "2026-11-09T11:48:44+08:00",
       "url_alias": "https://pan.powersharex.com/s/cbd38d7f7061",
       "url_alias_verified": "ok"
     },
@@ -1252,7 +1345,7 @@
       "verified": "ok",
       "note": "中转页展示夸克链接 https://pan.quark.cn/s/f78b4890729e，未要求提取码。原始文案的提取码 ab8M 未在该页使用",
       "url_official_verified": "ok",
-      "checked_at": "2026-11-09T11:38:41+08:00",
+      "checked_at": "2026-11-09T11:48:44+08:00",
       "url_alias": "https://pan.powersharex.com/s/f78b4890729e",
       "url_alias_verified": "ok"
     },
@@ -1269,7 +1362,7 @@
       "note": "wpss.best 实际是「松果盘搜」，页面内提供夸克与百度两个源。⚠️ 内容不一致：聚合页标题写「Scratch 3.0 全套 214 节课程」，而资源描述写「174 节」（65+59+50）。百度源页面标注「更新 2020-08-12」。节数需自行核对",
       "url_official_verified": "ok",
       "url_alt_verified": "ok",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "learn_english_movies",
@@ -1283,7 +1376,7 @@
       "note": "分享页 200",
       "url_official_verified": "ok",
       "url_official_redirected_to": "https://pan.quark.cn/s/7572c1cb1016",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "ielts_100_sentences",
@@ -1296,7 +1389,7 @@
       "verified": "ok",
       "note": "中转页以 location.replace 跳转至 https://pan.quark.cn/s/ae36118717fd，夸克页返回 200",
       "url_official_verified": "ok",
-      "checked_at": "2026-11-09T11:38:41+08:00",
+      "checked_at": "2026-11-09T11:48:44+08:00",
       "url_alias": "https://pan.quarket.xyz/s/ae36118717fd",
       "url_alias_verified": "ok"
     },
@@ -1312,7 +1405,7 @@
       "note": "分享页 200",
       "url_official_verified": "ok",
       "url_official_redirected_to": "https://pan.quark.cn/s/47b03b344081",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "word_posters",
@@ -1326,7 +1419,7 @@
       "note": "分享页 200",
       "url_official_verified": "ok",
       "url_official_redirected_to": "https://pan.quark.cn/s/c770b891a558",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "quark_misc",
@@ -1339,7 +1432,7 @@
       "verified": "ok",
       "note": "标题「爆笑初中9科全套」。12 个顶层项：2 个推广文件（合众盘 .docx 0.34MB + .pdf 1.43MB）+ 10 个内容目录。含物理 3 版（142/400/3200+ 节）、化学 3 版（349/167/1500+ 节）、数学 33 项（26 目录 + 7 文件）、地理 19 项、历史 8 模块、生物 6 模块、语文 4 模块、英语 5 册、政治 6 册、乐乐课堂 18 项。⚠️ 存在 (1) 重复副本：数学 13 组目录全部成对、乐乐课堂 9 组全部成对、地理仅 8 章成对（01/02/04 单份）",
       "url_official_verified": "ok",
-      "checked_at": "2026-11-09T11:38:41+08:00"
+      "checked_at": "2026-11-09T11:48:44+08:00"
     },
     {
       "id": "smartedu_downloader",
