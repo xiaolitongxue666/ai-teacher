@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-11-09T13:21:31+08:00",
+  "checked_at": "2026-11-09T14:19:34+08:00",
   "probe_note": "verified 字段由 scripts/check_links.py 生成。ok=HTTP 2xx；blocked=站点反爬（浏览器可正常打开）；dead=域名不存在或站点已关闭；unreachable=DNS 正常但本机网络连接失败（常见于境外站点直连）；mismatch=链接可达但页面内容与描述不符（需人工处理，脚本不会自动写入）；pending=未探测。",
   "status_values": [
     "ok",
@@ -812,12 +812,12 @@
     {
       "id": "deeptutor",
       "name": "HKUDS/DeepTutor",
-      "stars": 57117,
+      "stars": 57188,
       "url": "https://github.com/HKUDS/DeepTutor",
       "desc": "终身个性化 AI 辅导框架（港大数据智能实验室）",
       "subject": "AI 辅导",
       "verified": "ok",
-      "checked_at": "2026-11-09T11:48:44+08:00"
+      "checked_at": "2026-11-09T14:19:34+08:00"
     },
     {
       "id": "speaking_island",
@@ -832,12 +832,12 @@
     {
       "id": "awesome_english_ebooks",
       "name": "hehonghui/awesome-english-ebooks",
-      "stars": 39313,
+      "stars": 39320,
       "url": "https://github.com/hehonghui/awesome-english-ebooks",
       "desc": "经济学人/纽约客/卫报等英语杂志（含音频）",
       "subject": "英语",
       "verified": "ok",
-      "checked_at": "2026-11-09T11:48:44+08:00"
+      "checked_at": "2026-11-09T14:19:34+08:00"
     },
     {
       "id": "nce_notes",
@@ -862,12 +862,12 @@
     {
       "id": "algorithm_visualizer",
       "name": "algorithm-visualizer/algorithm-visualizer",
-      "stars": 49395,
+      "stars": 49400,
       "url": "https://github.com/algorithm-visualizer/algorithm-visualizer",
       "desc": "算法可视化在线平台",
       "subject": "编程与逻辑",
       "verified": "ok",
-      "checked_at": "2026-11-09T11:48:44+08:00"
+      "checked_at": "2026-11-09T14:19:34+08:00"
     },
     {
       "id": "learning_english",
@@ -882,22 +882,22 @@
     {
       "id": "awesome_english",
       "name": "yvoronoy/awesome-english",
-      "stars": 4480,
+      "stars": 4489,
       "url": "https://github.com/yvoronoy/awesome-english",
       "desc": "英语学习资源 awesome 清单",
       "subject": "英语",
       "verified": "ok",
-      "checked_at": "2026-11-09T11:48:44+08:00"
+      "checked_at": "2026-11-09T14:19:34+08:00"
     },
     {
       "id": "word_atlas",
       "name": "designfuchen/word-atlas",
-      "stars": 4490,
+      "stars": 4505,
       "url": "https://github.com/designfuchen/word-atlas",
       "desc": "词光 · 图解雅思词汇 7298 词，含英美音与 FSRS 复习",
       "subject": "英语",
       "verified": "ok",
-      "checked_at": "2026-11-09T11:48:44+08:00"
+      "checked_at": "2026-11-09T14:19:34+08:00"
     },
     {
       "id": "keyboard_island",
@@ -912,82 +912,82 @@
     {
       "id": "nce_online",
       "name": "iChochy/NCE",
-      "stars": 4371,
+      "stars": 4372,
       "url": "https://github.com/iChochy/NCE",
       "desc": "新概念英语全四册在线朗读、单句点读、中英对照",
       "subject": "英语",
       "verified": "ok",
-      "checked_at": "2026-11-09T11:48:44+08:00"
+      "checked_at": "2026-11-09T14:19:34+08:00"
     },
     {
       "id": "cn_math_taxonomy",
       "name": "xiaoyang111222/cn-math-taxonomy",
-      "stars": 7138,
+      "stars": 7158,
       "url": "https://github.com/xiaoyang111222/cn-math-taxonomy",
       "desc": "小学数学到高中、英语三年级到高中、初中物理的知识图谱",
       "subject": "数学",
       "verified": "ok",
-      "checked_at": "2026-11-09T11:48:44+08:00"
+      "checked_at": "2026-11-09T14:19:34+08:00"
     },
     {
       "id": "freepep",
       "name": "siknet/FreePEP",
-      "stars": 1476,
+      "stars": 1477,
       "url": "https://github.com/siknet/FreePEP",
       "desc": "人教社电子教材下载器",
       "subject": "教材",
       "verified": "ok",
-      "checked_at": "2026-11-09T11:48:44+08:00"
+      "checked_at": "2026-11-09T14:19:34+08:00"
     },
     {
       "id": "cet_practice",
       "name": "o-Sakurajimamai-o/cet-practice",
-      "stars": 163,
+      "stars": 182,
       "url": "https://github.com/o-Sakurajimamai-o/cet-practice",
       "desc": "英语研习室，本地四六级/考研真题练习",
       "subject": "英语",
       "verified": "ok",
-      "checked_at": "2026-11-09T11:48:44+08:00"
+      "checked_at": "2026-11-09T14:19:34+08:00"
     },
     {
       "id": "anatomy_3d",
       "name": "thebuggeddev/anatomy",
-      "stars": 3888,
+      "stars": 3890,
       "url": "https://github.com/thebuggeddev/anatomy",
       "desc": "Three.js 交互式 3D 人体解剖浏览器",
       "subject": "科学",
       "verified": "ok",
-      "checked_at": "2026-11-09T11:48:44+08:00"
+      "checked_at": "2026-11-09T14:19:34+08:00"
     },
     {
       "id": "lilinji_english",
       "name": "lilinji/English",
-      "stars": 1262,
+      "stars": 1269,
       "url": "https://github.com/lilinji/English",
       "desc": "英语学习小站",
       "subject": "英语",
       "verified": "ok",
-      "checked_at": "2026-11-09T11:48:44+08:00"
+      "checked_at": "2026-11-09T14:19:34+08:00"
     },
     {
       "id": "mineru",
       "name": "opendatalab/MinerU",
-      "stars": 83331,
+      "stars": 83338,
       "url": "https://github.com/opendatalab/MinerU",
       "desc": "PDF 结构化解析引擎，扫描件自动 OCR，输出 Markdown/JSON",
       "subject": "OCR",
       "verified": "ok",
-      "checked_at": "2026-11-09T11:48:44+08:00"
+      "checked_at": "2026-11-09T14:19:34+08:00"
     },
     {
       "id": "dify",
       "name": "langgenius/dify",
-      "stars": 160700,
+      "stars": 160714,
       "url": "https://github.com/langgenius/dify",
       "desc": "LLM 应用开发平台，官方插件仓库见 dify-official-plugins",
       "subject": "平台",
       "verified": "ok",
-      "checked_at": "2026-11-09T11:48:44+08:00"
+      "checked_at": "2026-11-09T14:19:34+08:00"
     },
     {
       "id": "dify_official_plugins",
@@ -1002,12 +1002,12 @@
     {
       "id": "tchmaterial_parser",
       "name": "happycola233/tchMaterial-parser",
-      "stars": 7744,
+      "stars": 7746,
       "url": "https://github.com/happycola233/tchMaterial-parser",
       "desc": "国家中小学智慧教育平台电子课本下载工具，MIT，Python，支持批量下载与自动加书签",
       "subject": "教材",
       "verified": "ok",
-      "checked_at": "2026-11-09T11:48:44+08:00"
+      "checked_at": "2026-11-09T14:19:34+08:00"
     }
   ],
   "mcp_tools": [
@@ -1572,6 +1572,27 @@
       "share_tree_elapsed_seconds": 651,
       "share_tree_note": "1534 次请求、约 11 分钟跑完，无截断无失败。早期用 400 次预算截断成 6899，是严重低估。另有 4 个文件的扩展名被文件名截断污染（如「.求三个字母之比mp4」「.平移」「.投影」），是分享方上传时文件名超长截断所致，按扩展名统计会失真但文件本身可下",
       "share_request_budget": 2000
+    },
+    {
+      "id": "xueersi_full",
+      "name": "学而思·小初高全套（小学 1-6 / 初中 1-3 / 高中 1-3）",
+      "subject": "全科",
+      "grade": "小学-高中",
+      "media": "视频（直播课/录播）+ 讲义 PDF + 音频 + 图片",
+      "claimed": "全科覆盖，小学一路用到高中，讲义、习题、视频课一应俱全",
+      "url_official": "https://pan.quark.cn/s/d43db1bf2db6",
+      "url_alias": "https://pan.quarkn.xyz/s/d43db1bf2db6",
+      "entry_type": "第三方中转页，meta refresh + location.replace 跳转至夸克官方",
+      "verified": "ok",
+      "note": "顶层 1 个目录「价值上万！最新精整学而思全套资料」，下分 3 个子树：高中（高一/高二/高三）、小学（一~六年级）、初中（初一/初二/初三 + 刘飞飞新概念一二三册）。各级内部按「年份+学期+科目+班型+主讲」组织，如「【2019-暑】初三升高一数学直播腾飞班（课改）吴旭完结」。原始文案的「全科覆盖」与实测结构基本吻合，但讲义/习题/视频的分类数量未做全量统计。",
+      "url_official_verified": "ok",
+      "url_alias_verified": "ok",
+      "checked_at": "2026-11-09T14:16:29+08:00",
+      "actual": "顶层 1 项 → 3 个子树（高中 3 年级 / 小学 6 年级 / 初中 3 年级 + 新概念一二三册）。抽样实测：小学六年级子树 488 文件 / 150 目录 / 151 次请求，无截断无失败，构成 190 pdf + 86 mp4 + 76 flv + 46 png + 43 mp3 + 41 jpg。高一 2019 暑假层实测含数学/物理/化学/语文/英语/生物六科。全量文件总数未统计。",
+      "grade_actual": "目录按年级分树：小学一~六年级各一套、初中初一/初二/初三、高中高一/高二/高三，与文案「小学一路用到高中」一致",
+      "needs_passcode": false,
+      "expired_at": "2099-12-31",
+      "share_tree_note": "仅抽样统计，未跑全量；因此不写 share_total_files，也不标 truncated（未跑完不等于截断）"
     },
     {
       "id": "smartedu_downloader",
