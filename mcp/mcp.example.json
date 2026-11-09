@@ -1,41 +1,49 @@
 {
   "_comment": "Cursor MCP 配置示例。拷到 ~/.cursor/mcp.json 或 <项目>/.cursor/mcp.json 使用。所有环境变量都要替换成你自己的值。",
   "_verified_at": "2026-11-09",
+  "_how_to_get_credentials": "各包的环境变量名与获取方式均按 2026-11-09 的官方 README 核对，见同目录 README.md 的「逐项核实」一节。",
   "mcpServers": {
     "pdf-markdown": {
       "command": "uvx",
       "args": ["pymupdf4llm-mcp"],
-      "_note": "PyMuPDF 官方 MCP，纯本地无 Key，PDF -> Markdown。需要先安装 uv。"
+      "_note": "PyMuPDF 官方 MCP，纯本地无 Key，PDF -> Markdown。入口点在 pyproject.toml 的 [project.scripts] 里名为 pymupdf4llm-mcp，uvx 可直接调起。需要先装 uv。"
     },
     "pdffr": {
       "command": "npx",
       "args": ["-y", "pdffr-mcp"],
-      "_note": "本地 PDF 处理，提供 pdf_to_markdown / pdf_outline / pdf_tables。仅在 npm 上，PyPI 无此包。"
+      "_note": "本地 PDF 处理，工具：pdf_to_markdown / pdf_outline / pdf_tables。仅在 npm 上有，PyPI 无同名包。"
     },
     "webdav": {
       "command": "npx",
       "args": ["-y", "webdav-mcp-server"],
       "env": {
-        "WEBDAV_URL": "https://dav.jianguoyun.com/dav/",
+        "WEBDAV_ROOT_URL": "https://dav.jianguoyun.com/dav/",
+        "WEBDAV_ROOT_PATH": "/",
+        "WEBDAV_AUTH_ENABLED": "true",
         "WEBDAV_USERNAME": "替换为你的账号",
         "WEBDAV_PASSWORD": "替换为应用密码，不是登录密码"
       },
-      "_note": "通用 WebDAV。坚果云地址固定为 https://dav.jianguoyun.com/dav/。环境变量名请以该包 README 为准。"
+      "_note": "变量名以 LaubPlusCo/mcp-webdav-server 的 README 为准：WEBDAV_ROOT_URL 而非 WEBDAV_URL，认证需显式开 WEBDAV_AUTH_ENABLED=true。坚果云地址固定 https://dav.jianguoyun.com/dav/。密码必须是明文，因为 WebDAV 协议本身要求。"
     },
     "netdisk": {
       "command": "npx",
       "args": ["-y", "@ptbsare/netdisk-mcp-server"],
-      "_note": "夸克 + 115 专用：列表/查看/转存/离线下载/多平台搜索。需要配置网盘凭据，见该包 README。"
+      "env": {
+        "NETDISK_QUARK_COOKIE": "替换为夸克网盘 Cookie",
+        "NETDISK_115_COOKIE": "替换为 115 网盘 Cookie",
+        "PANSOU_URL": "http://your-pansou-instance"
+      },
+      "_note": "夸克 + 115 专用，工具：list / view / transfer / offline_download / search / health。凭据是 Cookie，不是账号密码。PANSOU_URL 只有用 search 才需要，不装也能用其他工具。"
     },
     "pdf-ocr": {
       "command": "uvx",
       "args": ["mcp-pdf"],
-      "_note": "文本提取 + OCR + 表格提取。注意与 npm 上的 pdf-mcp（仅删页功能）不是同一个包。"
+      "_note": "文本提取 + OCR + 表格提取 + 表单 + 注释。注意与 npm 上的 pdf-mcp（只删页）不是同一个包。需要 markdown_to_pdf 时改用 uvx --from \"mcp-pdf[markdown]\" mcp-pdf，且宿主机要装 pandoc。"
     },
     "vault": {
       "command": "npx",
       "args": ["-y", "sync-vault-agent"],
-      "_note": "聚合百度/阿里/115/夸克/OneDrive。首次需在终端跑 mcp-agent init 走 OAuth；建议用小号账号试跑。"
+      "_note": "聚合百度/阿里/115/夸克/OneDrive。该包还提供 mcp-agent 这个 CLI 入口，首次需在终端跑 mcp-agent init 走 OAuth。项目 2026-07 上线，star 极少，建议先用小号账号试跑。"
     }
   }
 }
