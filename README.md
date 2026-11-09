@@ -35,8 +35,8 @@
 | 2-3 岁 | 声音与画面直连，建立「外语 = 好玩」 | Starfall、PBS Kids、Sesame Street | 每天 20-30 分钟动画，户外 2 小时 |
 | 3-6 岁 | 自然拼读、听力量 | Reading Bear、Storyline Online、StoryWeaver | 每天 30 分钟，全程不翻译 |
 | 小学 1-3 | 分级阅读、图形认知 | Oxford Owl、范老师几何思维课（1-3 年级段） | 每天 30-45 分钟 |
-| 小学 4-6 | 章节书、几何推理、打字 | Free Kids Books、范老师几何思维课（4-6 年级段）、TypingClub | 每天 45-60 分钟 |
-| 初中 | 学科英语、科学实验 | BBC Bitesize、PhET、News in Levels | 每天 30 分钟英语 + 课内 |
+| 小学 4-6 | 章节书、几何推理、打字 | Free Kids Books、范老师几何思维课（挑专题）、TypingClub | 每天 45-60 分钟 |
+| 初中 | 学科英语、科学实验 | BBC Bitesize、PhET、爆笑初中9科全套 | 每天 30 分钟英语 + 课内 |
 | 高中 / 成人 | 雅思托福、四六级、原版阅读 | IELTS Atlas、Word Atlas、awesome-english-ebooks | 按考试节奏 |
 
 更细的阶段目标见 [docs/06-学习路线图.md](docs/06-学习路线图.md)。
@@ -58,11 +58,12 @@
 | 科目 | 免费网站 | 成套资料 | 开源项目 |
 | --- | --- | --- | --- |
 | 英语 | Reading Bear、YouGlish、Tatoeba | 小学 1000 词、自然拼读 270 页、Wordly Wise 3000 | [Word Atlas](https://github.com/designfuchen/word-atlas)、[NCE](https://github.com/iChochy/NCE) |
-| 数学（含几何） | NRICH、Math Playground、Bedtime Math | **范老师几何思维课 900 节** | [cn-math-taxonomy](https://github.com/xiaoyang111222/cn-math-taxonomy) |
-| 科学 | PhET、NASA Space Place、Exploratorium | — | [BodyVista](https://github.com/FreedomIntelligence/BodyVista)、[atlas-of-physics](https://github.com/nathanliow/atlas-of-physics) |
+| 数学（含几何） | NRICH、Math Playground、Bedtime Math | **范老师几何思维课（909 个视频，4-6 年级专题）** | [cn-math-taxonomy](https://github.com/xiaoyang111222/cn-math-taxonomy)、[FreePEP](https://github.com/siknet/FreePEP) |
+| 科学 | PhET、NASA Space Place、Exploratorium | **爆笑初中9科全套**（物理 3 版、化学 3 版、生物 6 模块） | [BodyVista](https://github.com/FreedomIntelligence/BodyVista)、[atlas-of-physics](https://github.com/nathanliow/atlas-of-physics) |
 | 编程与逻辑 | Scratch、Code.org、CodeCombat | Scratch 3.0 全套 174 节 | [algorithm-visualizer](https://github.com/algorithm-visualizer/algorithm-visualizer) |
 | 艺术与音乐 | musictheory.net、Art for Kids Hub、Tate Kids | — | — |
 | 通识百科 | Simple Wikipedia、BBC Bitesize、DK Learning | — | — |
+| 教材 | basic.smartedu.cn | — | [tchMaterial-parser](https://github.com/happycola233/tchMaterial-parser) |
 
 ## 索引三：参考网站（节选）
 
@@ -79,14 +80,19 @@
 
 ## 索引四：网盘成套资料
 
-10 份成套资料，见 [docs/03b-网盘资料清单.md](docs/03b-网盘资料清单.md)。其中数学方向的主入口是 **范老师·小学数学几何思维课（900 节，1-6 年级）**。
+10 份资料，见 [docs/03b-网盘资料清单.md](docs/03b-网盘资料清单.md)。
 
-其中两条实测与原始描述不符，已在文档里标出：
+其中数学方向的 **范老师·小学数学几何思维课**，我拉了完整目录核对：夸克分享里实际是 **910 个条目**（909 个 mp4 + 1 个 `电子档资料.zip`），「900 节」这个数量属实。但**「1-6 年级全覆盖」不成立**——显式标 L1/L2 的只有 4 条，L3 40 / L4 35 / L5 76 / L6 128，其余 627 条无年级标记；按主题看是奥数专题（巧求面积 150 条、鸡兔同笼 10、容斥 9、行程 8）。
+
+三条实测与原始描述不符的，已在文档里标出：
 
 | 条目 | 问题 |
 | --- | --- |
-| 智慧教育平台电子教材下载器 | 短链实际指向「网盘热门资源2000T」扫码页，不是教材下载器 |
+| 智慧教育平台电子教材下载器 | 短链指向「网盘热门资源2000T」扫码页，已移除，替换为 [tchMaterial-parser](https://github.com/happycola233/tchMaterial-parser) |
 | Scratch 3.0 全套 | 聚合页标题写 214 节，资源描述写 174 节 |
+| 范老师几何思维课 | 数量属实，但年级覆盖与描述不符，内容以 4-6 年级奥数为主 |
+
+`pan.quark.cn/s/3d2dd7b91043` 已查实为 **「爆笑初中9科全套」**：初中物理/化学/数学/地理/历史/生物/语文/英语/政治九科动画课，外加乐乐课堂 18 项（含小学奥数与高中课程）。注意数学 12 个教材版本与乐乐课堂 18 项都带 `(1)` 重复副本，实际有效内容约为列出项的一半。
 
 ## 索引五：工具推荐
 
