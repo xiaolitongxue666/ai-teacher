@@ -32,6 +32,12 @@ graphify-out/
 .claude-mem/
 .project-memory-backups/
 
+# 本地凭据（明文 Cookie / token，绝不入库）
+.credentials/
+
+# 本地工具二进制（贡献约定禁止提交可执行文件）
+.tools/
+
 # Windows 上 cmd 展开残留的目录名
 /%SystemDrive%/
 /%USERPROFILE%/

@@ -33,7 +33,12 @@
         "NETDISK_115_COOKIE": "替换为 115 网盘 Cookie",
         "PANSOU_URL": "http://your-pansou-instance"
       },
-      "_note": "夸克 + 115 专用，工具：list / view / transfer / offline_download / search / health。凭据是 Cookie，不是账号密码。PANSOU_URL 只有用 search 才需要，不装也能用其他工具。"
+      "_note": "夸克 + 115 专用，工具：list / view / transfer / offline_download / search / health。凭据是 Cookie，不是账号密码。PANSOU_URL 只有用 search 才需要，不装也能用其他工具。实测三点：view 免登录可读公开分享但固定只回 100 条且不翻页，首行 Total 是单页条数不是总数；view 只扫分享根目录一层，子目录里的文件要 file_pattern=* 才看得到；list 无 Cookie 直接 401；没有任何 download 工具，transfer 是转存进自己网盘。"
+    },
+    "netdisk-local": {
+      "command": "python",
+      "args": ["scripts/run_netdisk_mcp.py"],
+      "_note": "同上，但凭据从项目内 .credentials/netdisk.env 读，不写在 mcp.json 里。缺 Cookie 也能启动，view 仍可用。推荐用这个，避免明文密钥进配置文件。"
     },
     "pdf-ocr": {
       "command": "uvx",
@@ -44,6 +49,10 @@
       "command": "npx",
       "args": ["-y", "sync-vault-agent"],
       "_note": "聚合百度/阿里/115/夸克/OneDrive。该包还提供 mcp-agent 这个 CLI 入口，首次需在终端跑 mcp-agent init 走 OAuth。项目 2026-07 上线，star 极少，建议先用小号账号试跑。"
+    },
+    "baidu-netdisk": {
+      "url": "https://mcp-pan.baidu.com/sse?access_token=替换为百度网盘开放平台 AccessToken",
+      "_note": "百度官方托管 SSE，不是本地 server。需要先在 https://pan.baidu.com/union/home 建应用拿 AppKey/SecretKey 并配 redirect_uri 走 OAuth 换 token。无效 token 返回 400 {errno:2003, show_msg:'auth fail:token fail'}。仓库 baidu-netdisk/mcp（163 star, MIT）里 README 那段 Windows netdisk.py 配置指向的文件不存在，别照抄。"
     }
   }
 }

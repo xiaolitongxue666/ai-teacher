@@ -156,6 +156,123 @@
 
 ---
 
+## 实测结论：netdisk MCP 的真实能力边界
+
+2026-11-09 用 MCP 协议直接连 `@ptbsare/netdisk-mcp-server@1.1.1` 实测，以下都是抓到的实际返回，不是文档转述。
+
+### 六个工具，没有下载
+
+```
+list_tools -> ['list', 'view', 'transfer', 'offline_download', 'search', 'health']
+```
+
+**没有任何 download 工具。** `transfer` 是把分享转存进你自己的网盘，不是落到本地磁盘。
+
+### `view` 免登录可用，但固定只回 100 条
+
+`view` 读公开分享不需要 Cookie，这点很好用。但它**不翻页**：
+
+| 分享 | 实际文件数 | `view` 返回 | 首行声明 |
+| --- | --- | --- | --- |
+| `668920790b03`（范老师几何） | 910 | 100 | `Total: 100 files (2.00 GB)` |
+| `cbd38d7f7061`（1000 词） | 4 | 4 | `Total: 4 files (169.13 MB)` |
+
+第一行的 `Total` 是**服务端单页返回的条数**，不是分享总数。小分享恰好对上，大分享会严重低估。
+
+源码里内部传的是 `_size: '1000'`，但夸克服务端硬限 100 且不翻页，所以拿不到全量。要全量必须自己翻页，见 `scripts/check_links.py` 的 `quark_tree` 分区。
+
+另一处坑：`view` 只扫**分享根目录下一层**。传 `file_pattern="*.zip"` 返回 `No files found`，而那个 zip 其实在子目录里（`700_电子档资料.zip`）。`file_pattern="*"` 能看到它，因为返回的每行带方括号标注了所在目录。
+
+### `list` 没有 Cookie 直接 401
+
+```
+list(cloud="quark", path="/") -> Error: Request failed with status code 401
+```
+
+`list` 读的是**你自己网盘**，必须有 Cookie。而 `view` 读的是**别人的公开分享**，不需要。
+
+### 项目内的凭据隔离方案
+
+`.cursor/mcp.json` 里不写 Cookie，改成调启动器：
+
+```json
+{
+  "mcpServers": {
+    "netdisk": {
+      "command": "python",
+      "args": ["scripts/run_netdisk_mcp.py"]
+    }
+  }
+}
+```
+
+`scripts/run_netdisk_mcp.py` 从 `.credentials/netdisk.env` 读 `KEY=VALUE`，注入子进程环境。好处：
+
+- 明文 Cookie 只在 `.credentials/` 一处，该目录已被 `.gitignore` 忽略；
+- 缺 Cookie 也能启动（`view` 仍可用），只在 stderr 打一行提示；
+- 换 Cookie 不用动 MCP 配置。
+
+---
+
+## 百度这条路：官方托管 SSE 与 BaiduPCS-Go
+
+`docs/04` 原先写「百度网盘 MCP 在生态里没有可用的落地物」。这是错的，实测有两条路。
+
+### 官方 `baidu-netdisk/mcp`
+
+百度官方组织下的仓库（163 star，MIT，push 2025-09-23）。但**它不是本地 MCP server**，是远程托管 SSE：
+
+```
+https://mcp-pan.baidu.com/sse?access_token=<你的 token>
+```
+
+无效 token 实测返回：
+
+```
+400 {"errno":2003,"show_msg":"auth fail:token fail"}
+```
+
+仓库 README 里那段 Windows 的 `netdisk.py` 配置**指向不存在的文件**（全仓搜 `netdisk.py` 命中 0），只有 client demo 和本地 uploader。要接这个，得先去[开放平台](https://pan.baidu.com/union/home)建应用拿 `AppKey`/`SecretKey` 并配 `redirect_uri` 走 OAuth。
+
+### `BaiduPCS-Go`（本次采用）
+
+| 项 | 值 |
+| --- | --- |
+| 仓库 | `qjfoidnh/BaiduPCS-Go` |
+| 星数 | 5,907 |
+| License | Apache-2.0 |
+| 版本 | v4.0.2（2026-08-21） |
+| 平台 | 有 `windows-x64.zip` |
+| 鉴权 | `login -cookies=<Cookie>` 或 `-bduss=<BDUSS> -stoken=<STOKEN>` |
+
+**它不是 MCP**，agent 只能通过 shell 调用。命令面：`ls` / `download` / `transfer`（转存分享）/ `share list`。
+
+实测未登录状态：
+
+```
+BaiduPCS-Go --version  -> BaiduPCS-Go version v4.0.2
+BaiduPCS-Go who        -> uid: 0, 用户名: (空)
+BaiduPCS-Go ls /       -> not absolute path
+```
+
+二进制放 `.tools/`，已忽略，不入库（`docs/00` 贡献约定第 5 条禁止提交可执行文件）。
+
+---
+
+## 取 Cookie 的两条路都已被 Chrome 封堵
+
+这是本次核实推翻的第二个假设。你的 Chrome 是 `156.0.8078.81`，默认 profile 且未带 `--user-data-dir`。
+
+| 原方案 | 结论 |
+| --- | --- |
+| `--remote-debugging-port` 重启 Chrome 抽 Cookie | **Chrome ≥136 在默认 profile 上直接忽略该开关**，端口不开。官方公告要求必须配 `--user-data-dir` 指向非默认目录 |
+| 复制 profile 到临时目录再起调试 | App-Bound Encryption 对非默认目录返回 `kTemporarilyUnavailable`，v20 Cookie 解不开。见 `app_bound_encryption_provider_win.cc` 的 `kNotUsingDefaultUserDataDir` 分支 |
+| 直接读 `Network/Cookies` | Chrome 运行时文件被独占锁，实测 `PermissionError: [Errno 13]` |
+
+所以 Cookie 只能**手动从 DevTools 复制**到 `.credentials/netdisk.env`。
+
+---
+
 ## 逐个工具的详细信息
 
 安装命令、版本、仓库、核验状态、风险评级，见 [../docs/04-工具推荐.md](../docs/04-工具推荐.md)。
@@ -166,7 +283,7 @@
 | --- | --- | --- | --- | --- | --- |
 | `webdav-mcp-server` | npm | 1.0.4 | 是 | 全平台 | 低 |
 | `sync-vault-agent` | npm | 0.2.1 | 是 | 全平台 | **中高** |
-| `@ptbsare/netdisk-mcp-server` | npm | 1.1.1 | 是 | 全平台 | 中 |
+| `@ptbsare/netdisk-mcp-server` | npm | 1.1.1 | 是 | 全平台 | 中（无 download 工具） |
 | `pymupdf4llm-mcp` | PyPI | 1.28.0 | 否 | 全平台 | 低 |
 | `pdffr-mcp` | npm | 0.1.1 | 否 | 全平台 | 低 |
 | `mcp-pdf` | PyPI | 2026.9.22 | 否 | 全平台 | 低 |
@@ -174,6 +291,7 @@
 | `fastocr-mcp` | PyPI | 0.3.0 | **是** | 全平台 | 中（数据上云） |
 | `ocr-mcp` | PyPI | 0.1.0 | 视后端 | 全平台 | 中（版本很早期） |
 | `mcp-onedrive` | npm | 0.10.2 | 是 | 全平台 | 中 |
+| `BaiduPCS-Go` | GitHub Release | v4.0.2 | 是（Cookie） | Win/macOS/Linux | 中（**非 MCP**，CLI） |
 
 ---
 
