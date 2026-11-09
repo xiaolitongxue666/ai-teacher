@@ -48,7 +48,9 @@
       "command": "npx",
       "args": ["-y", "webdav-mcp-server"],
       "env": {
-        "WEBDAV_URL": "https://dav.jianguoyun.com/dav/",
+        "WEBDAV_ROOT_URL": "https://dav.jianguoyun.com/dav/",
+        "WEBDAV_ROOT_PATH": "/",
+        "WEBDAV_AUTH_ENABLED": "true",
         "WEBDAV_USERNAME": "your@email.com",
         "WEBDAV_PASSWORD": "应用密码，不是登录密码"
       }
@@ -62,7 +64,7 @@
 - `uvx` 需要先装 `uv`（本机已装 0.9.2）；
 - 坚果云的 WebDAV 地址固定是 `https://dav.jianguoyun.com/dav/`；
 - 应用密码在坚果云「账户信息 → 安全选项 → 添加应用」生成。**用登录密码会认证失败**；
-- `webdav-mcp-server` 的环境变量名以该包 README 为准，上面用的是通用命名，实际配置前请核对一遍。
+- 变量名以 `LaubPlusCo/mcp-webdav-server` 的 README 为准：是 `WEBDAV_ROOT_URL` 而非 `WEBDAV_URL`，且必须显式 `WEBDAV_AUTH_ENABLED=true` 才会带上凭据。`WEBDAV_PASSWORD` 只能是明文，因为 WebDAV 协议要求把密码发给服务端。
 
 ---
 
@@ -95,7 +97,25 @@
   mcp-agent init
   ```
 - 授权时**用小号网盘账号**。这个包 2026-07 才发布，仓库 0 star，没有第三方验证。
-- 如果只接夸克或 115，换成 `@ptbsare/netdisk-mcp-server`，风险更可控。
+- 如果只接夸克或 115，换成 `@ptbsare/netdisk-mcp-server`，风险更可控。它不需要走 OAuth，而是直接读 Cookie：
+
+  ```json
+  {
+    "mcpServers": {
+      "netdisk": {
+        "command": "npx",
+        "args": ["-y", "@ptbsare/netdisk-mcp-server"],
+        "env": {
+          "NETDISK_QUARK_COOKIE": "替换为夸克网盘 Cookie",
+          "NETDISK_115_COOKIE": "替换为 115 网盘 Cookie",
+          "PANSOU_URL": "http://your-pansou-instance"
+        }
+      }
+    }
+  }
+  ```
+
+  `PANSOU_URL` 只有用 `search` 工具才需要，不填也能用 `list` / `view` / `transfer`。
 
 ---
 
