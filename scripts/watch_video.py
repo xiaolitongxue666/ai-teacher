@@ -2,9 +2,8 @@
 """视频下载的旁观式进度采集。
 
 为什么需要这个脚本：
-  视频阶段可能由「上一轮会话启动的进程」在跑，那个进程用的是当时的代码，
-  不一定写 progress.video.json。此时 `fetch_resources.py status` 看不到视频进度，
-  轮询方只能看到 GitHub 与网盘两个阶段。
+  旧版本下载进程不写 progress.video.json。当前 `bilibili.py` 会写 `current`，
+  那种情况下不要再启动本脚本：它按磁盘计数整文件覆盖 progress.video.json。
 
   本脚本不去干预下载进程，只按磁盘实际文件数合成一份符合既有 schema 的
   progress.video.json，让 status / report 重新能如实反映视频进度。
@@ -12,7 +11,8 @@
 用法（后台起，别占前台）：
     python scripts/watch_video.py
 
-退出条件：累计 1994 P 下完，或连续 40 次（约 200 分钟）没有新增。
+退出条件：磁盘 mp4 数达到 plan_videos(only_core=True) 的分 P 总数
+（五组白名单现为 2894），或连续 40 次（约 200 分钟）没有新增。
 """
 
 from __future__ import annotations

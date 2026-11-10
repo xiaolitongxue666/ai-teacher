@@ -37,7 +37,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     plan_parser = subparsers.add_parser("plan", help="只估算体积与数量，不下载")
     plan_parser.add_argument("--all-videos", action="store_true",
-                             help="含非核心版本的 B站合集（默认只算小学核心三科）")
+                             help="含非核心版本的 B站合集（默认只算小学核心五组）")
 
     run_parser = subparsers.add_parser("run", help="执行下载")
     run_parser.add_argument("--only", choices=["github", "video", "netdisk"],
@@ -80,7 +80,7 @@ def command_plan(arguments: argparse.Namespace) -> int:
     print(f"{'合计（不含网盘实探）':<14}{'':>6}{common.format_bytes(total):>14}")
 
     print()
-    print(f"视频口径：{'全部 ' + str(len(videos)) + ' 个合集' if arguments.all_videos else '小学核心三科 ' + str(len(videos)) + ' 个合集'}"
+    print(f"视频口径：{'全部 ' + str(len(videos)) + ' 个合集' if arguments.all_videos else '小学核心五组 ' + str(len(videos)) + ' 个合集'}"
           f"，{sum(item['pages'] for item in videos)} P，{video_hours:.0f} 小时")
     print(f"视频码率假设：{VIDEO_BYTES_PER_HOUR / 1024**2:.0f} MB/小时（实测中位数 53.5、均值 124.6）")
     print(f"盘上剩余：{common.format_bytes(common.free_bytes())}")

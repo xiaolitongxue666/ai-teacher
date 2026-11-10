@@ -42,7 +42,7 @@ CONTAINER_TIMEOUT_SECONDS = 6 * 60 * 60
 # 单个合集失败后的重试次数
 CONTAINER_RETRIES = 2
 
-# id 前缀 -> 教材版本中文名。只有核心 32 个合集落盘，其余版本暂不下。
+# id 前缀 -> 教材版本中文名。白名单内的合集落盘，其余版本暂不下。
 EDITION_BY_PREFIX = {
     "tongbian": "统编版",
     "renjiao": "人教版",
@@ -50,8 +50,16 @@ EDITION_BY_PREFIX = {
     "waiyanshe": "外研社版",
     "waiyan_xinjiaoji": "外研新交际版",
 }
-# 本次要下的合集前缀。用户口径：先只考虑小学核心（统编语文 + 人教数学 + 人教英语）。
-CORE_PREFIXES = ("tongbian_chinese", "renjiao_math", "renjiao_english")
+# 本次要下的合集前缀：小学核心五组（统编语文 + 人教数学 + 人教英语 + 北师数学 + 外研三起点英语）。
+# 必须写全 `beishida_math` 而不是 `beishida`，否则会把北师英语也带进来；
+# 用 `waiyanshe_english` 而不是 `waiyan`，以排除地方教材 `waiyan_xinjiaoji_english`。
+CORE_PREFIXES = (
+    "tongbian_chinese",
+    "renjiao_math",
+    "renjiao_english",
+    "beishida_math",
+    "waiyanshe_english",
+)
 
 # BBDown 的默认 BBDown.exe 位置。允许用环境变量覆盖，避免把绝对路径写死。
 DEFAULT_BBDOWN = r"E:\Code\my_code\Tools\BBDownload\BBDownExe\BBDown.exe"
@@ -92,7 +100,7 @@ def edition_of(item_id: str) -> str:
 def target_dir_for(record: dict) -> pathlib.Path:
     """视频落盘目录：videos/bilibili/小学/<学科>-<版本>/<年级>-<册>
 
-    只用小学这一层，是因为本次范围限定在小学核心三科。
+    只用小学这一层，是因为本次范围限定在小学核心五组。
     年级与册直接取 resources.json 的 grade / volume 字段，避免从标题里猜。
     """
     subject = common.sanitize_segment(record.get("subject") or "未知学科")

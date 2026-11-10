@@ -11,11 +11,11 @@
   "schema_version": 1,
   "checked_at": "2026-11-09T13:21:31+08:00",
   "status_values": [...],
-  "websites": [], "tutoring": [], "repos": [], "mcp_tools": [], "dify": [], "collections": []
+  "websites": [], "tutoring": [], "repos": [], "videos": [], "mcp_tools": [], "dify": [], "collections": []
 }
 ```
 
-当前条目数：websites 74 / tutoring 15 / repos 22 / mcp_tools 12 / dify 11 / collections 59。
+当前条目数：websites 74 / tutoring 15 / repos 22 / videos 61 / mcp_tools 12 / dify 11 / collections 59。
 
 ### websites
 
@@ -220,7 +220,7 @@
 
 28. **小学语文只有统编版**。「人教版语文」「部编版语文」指的是同一套，2017 年起全国统一。
 29. **小学英语从三年级起**，23 个国家审定版本没有任何一个覆盖二年级。二年级英语教材都是地方/校本教材。
-30. **外研社版按主编分三个**（孙有中 / 刘兆义 / 张祖春），覆盖年级不同。刘兆义版缺四年级上册，所以外研社只有 7 格。
+30. **外研社版按主编分三个**（孙有中 / 刘兆义 / 张祖春），覆盖年级不同；刘兆义版缺四年级上册。B站标题一律不写主编，所以 `videos` 段按「外研三起点」统一登记 8 格、`editor` 留空，不要凭标题给视频安主编。
 
 ## 四、常用命令
 

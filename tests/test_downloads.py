@@ -182,6 +182,26 @@ class BilibiliPathTests(unittest.TestCase):
         ranks = [order.get(subject, 9) for subject in subjects]
         self.assertEqual(ranks, sorted(ranks), "学科顺序应为 语文 -> 数学 -> 英语")
 
+    def test_core_includes_beishida_math_and_waiyanshe_english(self):
+        """白名单扩到五组后，北师数学与外研三起点英语必须都在默认范围内。"""
+        planned_ids = {item["id"] for item in bilibili.plan_videos(only_core=True)}
+        self.assertIn("beishida_math_g1_up", planned_ids)
+        self.assertIn("beishida_math_g6_down", planned_ids)
+        self.assertIn("waiyanshe_english_g3_up", planned_ids)
+        self.assertIn("waiyanshe_english_g4_up", planned_ids)
+
+    def test_core_excludes_other_editions_sharing_prefix(self):
+        """`beishida_math` 不能带进北师英语，`waiyanshe_english` 不能带进外研新交际。"""
+        planned_ids = {item["id"] for item in bilibili.plan_videos(only_core=True)}
+        self.assertNotIn("beishida_english_g3_up", planned_ids)
+        self.assertNotIn("waiyan_xinjiaoji_english_g2_up", planned_ids)
+
+    def test_core_has_twelve_beishida_math_collections(self):
+        """北师数学 1-6 上下册共 12 格，缺一册就说明登记被改坏了。"""
+        planned = bilibili.plan_videos(only_core=True)
+        math_ids = [item["id"] for item in planned if item["id"].startswith("beishida_math_")]
+        self.assertEqual(len(math_ids), 12, f"北师数学应有 12 格，实际 {sorted(math_ids)}")
+
 
 class QuarkPlanTests(unittest.TestCase):
     def test_plan_only_contains_primary_scope(self):

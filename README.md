@@ -163,7 +163,7 @@ ai-teacher/
 ```bash
 python scripts/fetch_resources.py plan                 # 只估算体积，不下载
 python scripts/fetch_resources.py run --only github    # 浅克隆 22 个仓库（按体积升序）
-python scripts/fetch_resources.py run --only video     # B站小学核心三科，1994 P
+python scripts/fetch_resources.py run --only video     # B站小学核心五组，2894 P
 python scripts/fetch_resources.py run --only netdisk   # 夸克小学条目（需 Cookie）
 python scripts/fetch_resources.py status               # 轮询进度
 python scripts/fetch_resources.py report               # 生成 REPORT.md
@@ -206,26 +206,27 @@ python scripts/fetch_resources.py run --only video > downloads/_state/run.log 2>
 python scripts/fetch_resources.py status
 ```
 
-如果视频阶段是由别的会话/旧版本代码启动的（不写 `progress.video.json`），
-用旁观采集补上观测能力，它只数磁盘文件、不干预下载：
+旧版本下载进程不写 `progress.video.json` 时，才用旁观采集补观测。当前管道会自己写 `current`，
+这时不要再开 `watch_video.py`，它会整文件覆盖下载进程写下的进度：
 
 ```bash
 python scripts/watch_video.py &
 ```
 
-### 下载进度（2026-11-10 快照）
+### 下载进度（2026-11-10 16:18 快照）
+
+活动任务只剩两个：`video` 第二轮和 `netdisk`。`github` 已在 2026-11-09 下完。
 
 | 阶段 | 状态 | 已落地 | 备注 |
 | --- | --- | --- | --- |
-| `github` | 完成 22/22 | 12.05 GB（磁盘实测）/ 11.64 GB（manifest 记录） | 实下 3 个，19 个按 `skipped` 跳过 |
-| `video` | 完成 32/32 | 1994 P / 77.80 GB | 小学语文 12 + 数学 12 + 英语 8 个合集全部下满 |
-| `netdisk` | 进行中 | 410 项 / 6.34 GB（`fan_geometry_900`） | 该条目标称 910 项 / 19.05 GB |
+| `github` | 完成 22/22 | 12.05 GB（磁盘实测）/ 11.64 GB（manifest 记录） | 实下 3 个，19 个按 `skipped` 跳过。不再是活动任务 |
+| `video` | 第一轮在盘上；第二轮只剩 BBDown 子进程 | 第一轮 1994 P（统编语文 945 + 人教数学 716 + 人教英语 333） | 北师数学 625/651 个 mp4，外研三起点 0/249。BBDown 正在下北师六年级下册 `BV1r2wAzvENB`，父进程已退出，这一集结束后队列不会自己继续 |
+| `netdisk` | 已停 | `fan_geometry_900` 目录 910 个文件 | `current` 停在 `p_chn`《核心划重点》四下 PDF 的 `.part`，16:14 后不再增长，锁 pid 已不在 |
 
-`downloads/` 合计约 96.2 GB，磁盘剩余约 261 GB。
+磁盘剩余约 214 GB。底线是 `MIN_FREE_BYTES`（20 GB），视频和网盘共用这块盘。
 
-网盘阶段是逐条串行的：`fan_geometry_900` 未跑完，后面 10 条（`primary_1000_words`、`phonics_270`、
-`p_chn`、`p_math`、`p_eng`、`p_morality`、`p_sci`、`j_curriculum` 等，合计 119.42 GB）不会开始。
-看进度用 `progress.netdisk.json` 的 `current` 字段，它写的是正在下的那个文件名。
+网盘阶段逐条串行：同一阶段里前一条没跑完，后一条不会开始。`fan_geometry_900` 的 910 个文件已经在目录里，管道已进入后面的小学条目，16:18 停在 `p_chn`。
+看进度用 `progress.netdisk.json` 的 `current`，它写的是正在下的那个文件名；同时还要确认锁文件里的 pid 还在。
 
 两个只读观测脚本，都不干预下载进程：
 
@@ -238,8 +239,9 @@ python scripts/fetch_resources.py status
 （只有无登录态的清单模式才写）。所以在纯下载产物目录上它只输出 `0 B / 0 B` ——
 当前 `fan_geometry_900` 就是这种情况，实际进度只能靠 `ls` 计数或 `progress.netdisk.json` 的 `current`。
 
-`progress.video.json` 的 `finished: true` 来自 `watch_video.py` 旁路采集，不是下载进程自报；
-下载进程本身从不写进度文件，所以「有没有在跑」只能看目录 mtime 或进程列表。
+当前的 `bilibili.py` / `quark.py` 会把 `current` 写进 `progress.<stage>.json`。
+`finished: false` 只表示这轮还没标完成。进程还在不在，看锁文件里的 pid，以及文件是否还在变大。
+父进程退出后，BBDown 子进程可能继续下当前这一集，下完不会自己开下一集。
 
 ### 实现中踩到的坑（改动这些代码前必读）
 
