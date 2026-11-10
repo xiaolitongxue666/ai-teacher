@@ -96,6 +96,36 @@ python scripts/download_video.py <URL> [--audio-only] [--output DIR]
 
 网盘分享链接会被脚本直接拒绝——`yt-dlp` 1755 个提取器里国内网盘命中 0。网盘里的 mp4 必须先用网盘客户端或 `BaiduPCS-Go` 落盘。
 
+### 工作流 C2：三类资源批量下载（github / video / netdisk）
+
+```bash
+python scripts/fetch_resources.py plan                 # 只估算体积
+python scripts/fetch_resources.py run --only github    # 浅克隆，按体积升序
+python scripts/fetch_resources.py run --only video     # B站小学三科 1994 P
+python scripts/fetch_resources.py run --only netdisk   # 夸克，需 NETDISK_QUARK_COOKIE
+python scripts/fetch_resources.py status               # 合成三阶段进度
+python scripts/fetch_resources.py report               # 写出 downloads/_state/REPORT.md
+```
+
+阶段之间互不阻塞，但**同一阶段内部串行**：`netdisk` 里 11 条要一条条跑完，`fan_geometry_900`
+（19.05 GB）没跑完，后面 10 条合计 119.42 GB 不会开始。
+
+看进度别只信 `finished` 字段：
+
+| 想知道 | 看哪里 |
+| --- | --- |
+| 网盘在跑没跑 | `downloads/_state/RUNNING.netdisk.lock` 的 pid 是否存活，或目标目录 mtime 是否在涨 |
+| 网盘下到哪个文件 | `progress.netdisk.json` 的 `current`（**不写这个字段就无法判断**） |
+| 已完成多少项 | `ls <目标目录>/*.mp4 \| wc -l`，对标 `_inventory.json` 的 `files` |
+| 视频阶段 | `progress.video.json` 的 `per_collection`；若由旁路采集则是磁盘计数不是进程自报 |
+
+`scripts/netdisk_progress.py` 需要条目目录下的 `_inventory.json`，而**下载模式不写这个文件**
+（只有无登录态的清单模式才写）。在纯下载产物上它恒输出 `0 B / 0 B`，不要据它判断进度。
+
+`downloads/netdisk/_manifest.jsonl` 与 `REPORT.md` 都是**追加历史**，同一 item 会出现多行；
+判读 `failed` 必须带上时间——DNS 断网那一轮的 8 条 `getaddrinfo failed` 与文件可下性无关，
+重跑同一命令即可续。
+
 ### 工作流 D：按教材版本找视频课
 
 分类基准是**国家审定教材目录**，不是 B站 的标签。
@@ -144,6 +174,9 @@ python scripts/search_bilibili_courses.py --write --json-out data/videos_bilibil
 | 相信视频标题里的集数 | 实测 30 条带集数的标题只有 3 条对得上；判断覆盖度看 `view` 返回的分P数 |
 | 假设语文有多个版本 | 小学语文在国家审定目录里只有统编版，「人教版语文」= 「部编版」= 统编版 |
 | 假设小学英语有一二年级 | 国家审定的小学英语从三年级起，一二年级的英语教材都是地方/校本教材 |
+| 用 `netdisk_progress.py` 判断下载进度 | 下载模式不写 `_inventory.json`，它恒输出 `0 B / 0 B`；改看目录计数与 `current` |
+| 拿 `_manifest.jsonl` 的 `failed` 当当前故障 | 那是追加历史，同一条会多行；`failed` 要连时间一起看（DNS 断网那轮是 `getaddrinfo failed`） |
+| 用 `REPORT.md` 的条目数判断阶段完成 | 同样是历史累积，同一 item 重复出现；以 `progress.<stage>.json` 为准 |
 
 ## 环境约定
 

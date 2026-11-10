@@ -25,11 +25,17 @@ logs/
 *.log
 *.jsonl
 
+# /summary-memory 的记忆草稿（写入 PROJECT_MEMORY.md 后即删）
+.project-memory-draft.md
+
 # 生成目录
 graphify-out/
 
 # 视频下载产物（可用 scripts/download_video.py --output 改到别处）
-downloads/
+# 只忽略仓库根目录下的 downloads/，前面必须带斜杠。
+# 不带斜杠的 `downloads/` 会连 scripts/downloads/（管道源码）一起忽略，
+# 实测 `git check-ignore scripts/downloads/common.py` 命中这条规则。
+/downloads/
 
 # 检索结果中间产物（SSOT 是 data/resources.json，这只是并发写入冲突时的恢复备份）
 data/videos_bilibili.json
