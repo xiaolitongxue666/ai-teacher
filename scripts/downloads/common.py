@@ -21,6 +21,7 @@ import pathlib
 import re
 import shutil
 import sys
+import time
 
 REPO_ROOT = pathlib.Path(__file__).resolve().parent.parent.parent
 DOWNLOADS_ROOT = REPO_ROOT / "downloads"
@@ -39,6 +40,13 @@ STAGE_PROGRESS_GLOB = "progress.*.json"
 # 开工前必须留出的余量。低于它就停下，而不是把盘写满 ——
 # 写满会让 7z/ffmpeg 合并中途失败，产生半个文件，比不下载更糟。
 MIN_FREE_BYTES = 20 * 1024**3
+
+# 原子替换目标 JSON 的重试参数。Windows 上目标被外部进程打开时 os.replace
+# 抛 PermissionError（WinError 5），占用通常只持续毫秒级，重试即可跨过去。
+# 退避按 attempt 线性增长，6 次约 0.75s；实测 1.5s 的独占打开仍会失败，
+# 所以放到 10 次（约 4.5s）。轮询方读一次只有毫秒级，正常不会走到这么深。
+REPLACE_ATTEMPTS = 10
+REPLACE_BACKOFF_SECONDS = 0.1
 
 # Windows 文件名禁用字符（保留 `/` 与 `\` 用于路径分隔，清洗时替换）
 WINDOWS_FORBIDDEN_CHARS = '<>:"/\\|?*'
@@ -156,6 +164,11 @@ def write_json_atomic(path: pathlib.Path, payload: dict) -> None:
 
     同名 .replace 在同一卷上是原子操作，轮询方要么读到旧文件、要么读到新文件，
     不会读到写了一半的内容。直接 open("w") 会让轮询方 json.loads 失败。
+
+    Windows 上 os.replace 会在目标文件正被其它进程打开时抛 PermissionError
+    （WinError 5，实测发生在外部脚本读取 progress.netdisk.json 的瞬间）。
+    这个占用是毫秒级的，重试即可；早期版本不重试，导致一次采样就把整个
+    下载阶段打成崩溃 —— 错误处理路径上的 flush 一抛异常，外层没有兜底。
     """
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix + ".tmp")
@@ -163,7 +176,14 @@ def write_json_atomic(path: pathlib.Path, payload: dict) -> None:
         json.dumps(payload, ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
-    os.replace(temporary, path)
+    for attempt in range(REPLACE_ATTEMPTS):
+        try:
+            os.replace(temporary, path)
+            return
+        except PermissionError:
+            if attempt == REPLACE_ATTEMPTS - 1:
+                raise
+            time.sleep(REPLACE_BACKOFF_SECONDS * (attempt + 1))
 
 
 def read_json(path: pathlib.Path, default: dict | None = None) -> dict:
