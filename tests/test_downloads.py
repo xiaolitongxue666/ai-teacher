@@ -19,6 +19,7 @@ import unittest
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent / "scripts"))
 
 from downloads import bilibili, common, github, quark
+import probe_remaining
 
 
 class SanitizeSegmentTests(unittest.TestCase):
@@ -314,6 +315,98 @@ class QuarkMissingRecordTests(unittest.TestCase):
             self.assertEqual(payload["item_id"], "p_math")
             self.assertEqual(payload["missing"], ["苏教版/a.zip", "人教版/b.pdf"])
             self.assertNotIn("stoken", payload)
+
+
+class ProbeRemainingTests(unittest.TestCase):
+    """补漏脚本判定「未完成条目」的口径。
+
+    不能用 `data/resources.json` 的 `share_total_size_bytes`：59 条里只有 4 条
+    写了这个字段，其余为 0，拿它比对会把已完成的条目全判成未完成（实测）。
+    也不能排除 `_` 前缀的文件：网盘分享里存在 `_5 3全优卷….zip` 这类真实文件，
+    过滤掉会让已下完的条目看起来缺量。
+    """
+
+    def _with_workspace(self, manifest_lines, dirs):
+        import tempfile
+        workspace = pathlib.Path(tempfile.mkdtemp())
+        netdisk = workspace / "netdisk"
+        netdisk.mkdir()
+        (netdisk / "_manifest.jsonl").write_text(
+            "\n".join(json.dumps(line, ensure_ascii=False) for line in manifest_lines) + "\n",
+            encoding="utf-8")
+        for name in dirs:
+            (netdisk / name).mkdir(parents=True)
+        return workspace, netdisk
+
+    def test_completed_item_is_not_listed(self):
+        workspace, netdisk = self._with_workspace(
+            [{"id": "p_chn", "status": "ok", "failed": 0}], ["p_chn"])
+        original_root, original_target = common.DOWNLOADS_ROOT, quark.target_dir_for
+        common.DOWNLOADS_ROOT = workspace
+        quark.target_dir_for = lambda item: netdisk / item["id"]
+        try:
+            result = probe_remaining._unfinished_ids(
+                [{"id": "p_chn", "share_id": "abc"}])
+        finally:
+            common.DOWNLOADS_ROOT, quark.target_dir_for = original_root, original_target
+        self.assertEqual(result, [])
+
+    def test_failed_item_is_listed(self):
+        workspace, netdisk = self._with_workspace(
+            [{"id": "p_math", "status": "ok", "failed": 1882}], ["p_math"])
+        original_root, original_target = common.DOWNLOADS_ROOT, quark.target_dir_for
+        common.DOWNLOADS_ROOT = workspace
+        quark.target_dir_for = lambda item: netdisk / item["id"]
+        try:
+            result = probe_remaining._unfinished_ids(
+                [{"id": "p_math", "share_id": "abc"}])
+        finally:
+            common.DOWNLOADS_ROOT, quark.target_dir_for = original_root, original_target
+        self.assertEqual(result, ["p_math"])
+
+    def test_last_manifest_record_wins(self):
+        """同一 item 会出现多行（追加历史），只看最后一条。"""
+        workspace, netdisk = self._with_workspace(
+            [{"id": "p_eng", "status": "incomplete", "failed": 615},
+             {"id": "p_eng", "status": "ok", "failed": 0}], ["p_eng"])
+        original_root, original_target = common.DOWNLOADS_ROOT, quark.target_dir_for
+        common.DOWNLOADS_ROOT = workspace
+        quark.target_dir_for = lambda item: netdisk / item["id"]
+        try:
+            result = probe_remaining._unfinished_ids(
+                [{"id": "p_eng", "share_id": "abc"}])
+        finally:
+            common.DOWNLOADS_ROOT, quark.target_dir_for = original_root, original_target
+        self.assertEqual(result, [])
+
+    def test_missing_file_marks_item_unfinished(self):
+        workspace, netdisk = self._with_workspace(
+            [{"id": "p_sci", "status": "ok", "failed": 0}], ["p_sci"])
+        (netdisk / "p_sci" / "_missing.json").write_text("{}", encoding="utf-8")
+        original_root, original_target = common.DOWNLOADS_ROOT, quark.target_dir_for
+        common.DOWNLOADS_ROOT = workspace
+        quark.target_dir_for = lambda item: netdisk / item["id"]
+        try:
+            result = probe_remaining._unfinished_ids(
+                [{"id": "p_sci", "share_id": "abc"}])
+        finally:
+            common.DOWNLOADS_ROOT, quark.target_dir_for = original_root, original_target
+        self.assertEqual(result, ["p_sci"])
+
+    def test_landed_bytes_counts_underscore_files(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as workspace:
+            target = pathlib.Path(workspace) / "p_eng"
+            target.mkdir()
+            (target / "_5 3全优卷 英语三下RP.zip").write_bytes(b"x" * 70)
+            (target / "normal.pdf").write_bytes(b"x" * 30)
+            original = quark.target_dir_for
+            quark.target_dir_for = lambda _item: target
+            try:
+                landed = probe_remaining._landed_bytes({"id": "p_eng"})
+            finally:
+                quark.target_dir_for = original
+            self.assertEqual(landed, 100)
 
 
 class PageNumberNormalizationTests(unittest.TestCase):

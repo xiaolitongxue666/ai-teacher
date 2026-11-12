@@ -18,6 +18,11 @@ from downloads import common, quark  # noqa: E402
 
 
 def main(argv: list[str]) -> int:
+    if len(argv) == 2 and argv[1] in {"-h", "--help"}:
+        # 显式 --help 属于正常请求，返回 0。早期把「参数个数不对」一律返回 2，
+        # 导致 --help 也被当成错误，用脚本化探测时会误判成导入失败。
+        print(__doc__)
+        return 0
     if len(argv) != 3:
         print(__doc__)
         return 2
