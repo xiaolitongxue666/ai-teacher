@@ -21,6 +21,7 @@
 | 我要补某个科目 | [docs/02-科目类别.md](docs/02-科目类别.md) |
 | 找免费学习网站 | [docs/03-参考网站.md](docs/03-参考网站.md) |
 | 找成套的网盘资料 | [docs/03b-网盘资料清单.md](docs/03b-网盘资料清单.md)、[docs/03c-教辅成套清单.md](docs/03c-教辅成套清单.md) |
+| 按年级排一节课，先看本地有什么 | [docs/13-本地资料库.md](docs/13-本地资料库.md) |
 | 按教材版本找配套视频课 | [docs/11-在线视频课程.md](docs/11-在线视频课程.md) |
 | 配置网盘 / OCR 工具 | [docs/04-工具推荐.md](docs/04-工具推荐.md)、[mcp/README.md](mcp/README.md)、[dify/README.md](dify/README.md) |
 | 方法比资源更重要 | [docs/05-学习方法论.md](docs/05-学习方法论.md) |
@@ -152,6 +153,8 @@ ai-teacher/
 ├── scripts/fetch_resources.py # 三类资源统一下载入口
 ├── scripts/downloads/         # 下载管道实现（github / bilibili / quark）
 ├── downloads/                 # 下载产物（已 gitignore）
+│   ├── github/                # 浅克隆，不进课程树
+│   └── library/               # 按学科/版本/年级/册/用途
 └── .cursor/skills/            # 维护本仓库的 agent skill
 ```
 
@@ -174,12 +177,20 @@ python scripts/fetch_resources.py report               # 生成 REPORT.md
 ```
 downloads/
 ├─ _state/                     # progress.<阶段>.json、REPORT.md、run.log
-├─ github/<owner>__<repo>/     # 浅克隆，保留 .git
-├─ videos/bilibili/小学/<学科>-<版本>/<年级>-<册>/[P001] 标题.mp4
-└─ netdisk/quark/小学/<id>__<资料名>/
+├─ github/<owner>__<repo>/     # 浅克隆，保留 .git，不进课程树
+└─ library/                    # 课程槽位，见 docs/13-本地资料库.md
+   ├─ 小学/{学科}/{版本}/{年级}/{册}/{用途}/{系列}/
+   ├─ 小学/{学科}/通用/{专题}/
+   └─ 课标/{义务教育|普通高中}/{年}/
 ```
 
-每册视频的路径、文件数和时长见 [docs/11-在线视频课程.md](docs/11-在线视频课程.md) 的「本地教学视频库」。
+排课先查 [docs/13-本地资料库.md](docs/13-本地资料库.md)：
+
+```bash
+python scripts/library_query.py --subject 英语 --edition 人教版 --grade 三年级 --volume 下册
+```
+
+同步课每一册的 BVID 和时长仍见 [docs/11-在线视频课程.md](docs/11-在线视频课程.md)。文件在 `downloads/library/小学/<学科>/<版本>/<年级>/<册>/同步课/<id>/`。
 
 三条必须知道的边界：
 
@@ -225,7 +236,7 @@ python scripts/watch_video.py &
 | `video` | **完成 52/52 合集，2894/2894 P** | 114.54 GB | 五组各版本：统编语文 945、人教数学 716、北师数学 651、人教英语 333、外研三起点英语 249。实测 900 个新文件零字节数为 0 |
 | `netdisk` | **完成 9/9 条，12738 个文件** | 119.42 GB | 逐条与 `data/resources.json` 的 `share_total_size_bytes` 对齐，全部 `failed=0` |
 
-`downloads/` 合计 246.03 GB，磁盘剩余 99.2 GB。底线是 `MIN_FREE_BYTES`（20 GB）。
+`downloads/` 合计 246.03 GB，磁盘剩余 99.2 GB。底线是 `MIN_FREE_BYTES`（20 GB）。上表是搬迁前的阶段账。2026-11-12 课程文件同盘改名进 `downloads/library/`（15606 个文件，约 233.74 GB）。`downloads/github/` 仍是代码克隆。
 
 网盘九条实测：`p_math` 7713 个 / 50.28 GB、`p_chn` 829 / 28.18 GB、`fan_geometry_900` 910 / 19.05 GB、
 `p_eng` 1014 / 9.35 GB、`p_sci` 1656 / 6.47 GB、`phonics_270` 462 / 2.58 GB、`p_morality` 89 / 2.38 GB、

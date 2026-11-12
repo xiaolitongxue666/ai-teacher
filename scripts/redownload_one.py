@@ -14,7 +14,7 @@ import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
-from downloads import common, quark  # noqa: E402
+from downloads import common, library_layout, quark  # noqa: E402
 
 
 def main(argv: list[str]) -> int:
@@ -57,7 +57,7 @@ def main(argv: list[str]) -> int:
         return 1
 
     entry = matches[0]
-    target = quark.target_dir_for(item) / common.sanitize_relative_path(wanted)
+    target = library_layout.destination_for(item_id, wanted)
     print("TARGET", target)
     print("EXPECTED_MB", round(int(entry["size"]) / 1024 ** 2, 2))
     target.parent.mkdir(parents=True, exist_ok=True)

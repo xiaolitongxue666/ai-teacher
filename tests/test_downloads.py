@@ -18,7 +18,7 @@ import unittest
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent / "scripts"))
 
-from downloads import bilibili, common, github, quark
+from downloads import bilibili, common, github, library_layout, quark
 import probe_remaining
 
 
@@ -156,8 +156,8 @@ class BilibiliPathTests(unittest.TestCase):
         }
         path = bilibili.target_dir_for(record)
         expected = (
-            common.DOWNLOADS_ROOT / "videos" / "bilibili" / "小学"
-            / "语文-统编版" / "一年级-上册"
+            common.DOWNLOADS_ROOT / "library" / "小学" / "语文" / "统编版"
+            / "一年级" / "上册" / "同步课" / "tongbian_chinese_g1_up"
         )
         self.assertEqual(path, expected)
 
@@ -264,39 +264,37 @@ class QuarkRemainingBytesTests(unittest.TestCase):
         import tempfile
         with tempfile.TemporaryDirectory() as workspace:
             root = pathlib.Path(workspace)
-            target = root / "p_math__数学"
-            target.mkdir(parents=True)
-            (target / "done.pdf").write_bytes(b"x" * 100)
             entries = [
                 {"rel_path": "标题/done.pdf", "size": 100, "fid": "1"},
                 {"rel_path": "标题/todo.pdf", "size": 500, "fid": "2"},
             ]
             item = {"id": "p_math", "name": "数学"}
-            inventory = {"entries": entries}
-            original = quark.target_dir_for
-            quark.target_dir_for = lambda _item: target
+            original = common.DOWNLOADS_ROOT
+            common.DOWNLOADS_ROOT = root
             try:
-                remaining = quark._remaining_bytes(item, inventory)
+                done = library_layout.destination_for("p_math", "done.pdf")
+                done.parent.mkdir(parents=True, exist_ok=True)
+                done.write_bytes(b"x" * 100)
+                remaining = quark._remaining_bytes(item, {"entries": entries})
             finally:
-                quark.target_dir_for = original
+                common.DOWNLOADS_ROOT = original
             self.assertEqual(remaining, 500)
 
     def test_counts_size_mismatch_as_remaining(self):
         import tempfile
         with tempfile.TemporaryDirectory() as workspace:
             root = pathlib.Path(workspace)
-            target = root / "p_math__数学"
-            target.mkdir(parents=True)
-            (target / "partial.pdf").write_bytes(b"x" * 40)
             entries = [{"rel_path": "标题/partial.pdf", "size": 100, "fid": "1"}]
             item = {"id": "p_math", "name": "数学"}
-            inventory = {"entries": entries}
-            original = quark.target_dir_for
-            quark.target_dir_for = lambda _item: target
+            original = common.DOWNLOADS_ROOT
+            common.DOWNLOADS_ROOT = root
             try:
-                remaining = quark._remaining_bytes(item, inventory)
+                partial = library_layout.destination_for("p_math", "partial.pdf")
+                partial.parent.mkdir(parents=True, exist_ok=True)
+                partial.write_bytes(b"x" * 40)
+                remaining = quark._remaining_bytes(item, {"entries": entries})
             finally:
-                quark.target_dir_for = original
+                common.DOWNLOADS_ROOT = original
             self.assertEqual(remaining, 100)
 
 
@@ -396,16 +394,21 @@ class ProbeRemainingTests(unittest.TestCase):
     def test_landed_bytes_counts_underscore_files(self):
         import tempfile
         with tempfile.TemporaryDirectory() as workspace:
-            target = pathlib.Path(workspace) / "p_eng"
-            target.mkdir()
-            (target / "_5 3全优卷 英语三下RP.zip").write_bytes(b"x" * 70)
-            (target / "normal.pdf").write_bytes(b"x" * 30)
-            original = quark.target_dir_for
-            quark.target_dir_for = lambda _item: target
+            root = pathlib.Path(workspace)
+            entries = [
+                {"rel_path": "_5 3全优卷 英语三下RP.zip", "size": 70},
+                {"rel_path": "normal.pdf", "size": 30},
+            ]
+            original = common.DOWNLOADS_ROOT
+            common.DOWNLOADS_ROOT = root
             try:
-                landed = probe_remaining._landed_bytes({"id": "p_eng"})
+                for entry in entries:
+                    destination = library_layout.destination_for("p_eng", entry["rel_path"])
+                    destination.parent.mkdir(parents=True, exist_ok=True)
+                    destination.write_bytes(b"x" * entry["size"])
+                landed = probe_remaining._landed_bytes({"id": "p_eng"}, entries)
             finally:
-                quark.target_dir_for = original
+                common.DOWNLOADS_ROOT = original
             self.assertEqual(landed, 100)
 
 

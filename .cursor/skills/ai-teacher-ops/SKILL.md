@@ -1,6 +1,6 @@
 ---
 name: ai-teacher-ops
-description: Maintain the ai-teacher learning-resource index repo — add or verify links, register a Quark share collection with measured file counts, run the link/Quark probes, and commit. Use when adding a resource to data/resources.json, editing docs/02 03 03b 07, running scripts/check_links.py or scripts/download_video.py, or when a link needs re-verification.
+description: Maintain the ai-teacher learning-resource index repo — add or verify links, register a Quark share collection with measured file counts, run the link/Quark probes, query downloads/library for a lesson, and commit. Use when adding a resource to data/resources.json, editing docs/02 03 03b 07 13, running scripts/check_links.py, scripts/library_query.py, or scripts/download_video.py, or when a link needs re-verification.
 disable-model-invocation: true
 ---
 
@@ -168,6 +168,26 @@ python scripts/search_bilibili_courses.py --write --json-out data/videos_bilibil
 
 再加两条软约束：分P数 < 5 视为不是成套课程（单词朗读、单节精讲），带「单词朗读 / 课文朗读 / 听力磨耳朵」的降权。
 
+### 工作流 E：按年级排课，先查本地资料库
+
+本地文件在 `downloads/library/`，索引是 `data/library_catalog.json`。不要去翻已经搬走的 `downloads/videos/bilibili/` 和 `downloads/netdisk/quark/小学/`。
+
+```bash
+python scripts/catalog_library.py
+python scripts/library_query.py --subject 英语 --edition 人教版 --grade 三年级 --volume 下册
+```
+
+查询会带上覆盖该年级的范围目录（`三至六年级`）和没写年级的目录。上册不会混进下册。
+
+排课之前先看清这几条，避免把材料用错地方：
+
+- 语文、道法只有统编。路径里的「人教版语文」已经落在 `统编版`。
+- 小学英语从三年级起。
+- `小学/数学/通用/思维专题/` 是范老师几何课，按解题模型编排，不是同步课。
+- `课标/` 是课程标准文本，不是课时。
+
+`library_catalog.json` 里的文件数和字节数只能由 `catalog_library.py` 重扫磁盘写回。手改会和磁盘分叉。
+
 ## 不要做什么
 
 | 禁止 | 原因 |
@@ -189,6 +209,8 @@ python scripts/search_bilibili_courses.py --write --json-out data/videos_bilibil
 | 在当前管道还在写进度时再开 `watch_video.py` | 它按磁盘计数整文件覆盖 `progress.video.json`，把下载进程写下的 `current` 冲掉 |
 | 拿 `_manifest.jsonl` 的 `failed` 当当前故障 | 那是追加历史，同一条会多行；`failed` 要连时间一起看（DNS 断网那轮是 `getaddrinfo failed`） |
 | 用 `REPORT.md` 的条目数判断阶段完成 | 同样是历史累积，同一 item 重复出现；以 `progress.<stage>.json` 为准 |
+| 手改 `data/library_catalog.json` 的文件数或字节数 | 目录只反映磁盘扫描；改数字不会改文件位置 |
+| 把范老师几何课或课标 PDF 当成某一册的同步课 | 前者在 `数学/通用/思维专题/`，后者在 `课标/` |
 
 ## 环境约定
 

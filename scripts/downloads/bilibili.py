@@ -24,7 +24,7 @@ import pathlib
 import re
 import subprocess
 
-from . import common
+from . import common, library_layout
 
 # 实测确认可用的匿名 720P 组合。改这些参数前请先跑 --only-show-info 复核清晰度。
 BBDOWN_VIDEO_ENCODING_PRIORITY = "avc"     # h264 兼容性最好，教育场景要投屏到老旧设备
@@ -98,16 +98,12 @@ def edition_of(item_id: str) -> str:
 
 
 def target_dir_for(record: dict) -> pathlib.Path:
-    """视频落盘目录：videos/bilibili/小学/<学科>-<版本>/<年级>-<册>
+    """视频落盘目录：library/小学/<学科>/<版本>/<年级>/<册>/同步课/<id>
 
-    只用小学这一层，是因为本次范围限定在小学核心五组。
     年级与册直接取 resources.json 的 grade / volume 字段，避免从标题里猜。
+    和网盘教辅共用 library_layout，避免两套目录。
     """
-    subject = common.sanitize_segment(record.get("subject") or "未知学科")
-    edition = common.sanitize_segment(edition_of(record.get("id") or ""))
-    grade = common.sanitize_segment(record.get("grade") or "未知年级")
-    volume = common.sanitize_segment(record.get("volume") or "全册")
-    return common.DOWNLOADS_ROOT / "videos" / "bilibili" / "小学" / f"{subject}-{edition}" / f"{grade}-{volume}"
+    return library_layout.video_directory(record)
 
 
 def plan_videos(only_core: bool = True) -> list[dict]:

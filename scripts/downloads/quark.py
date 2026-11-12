@@ -43,7 +43,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-from . import common
+from . import common, library_layout
 
 QUARK_API_BASE = "https://drive-h.quark.cn"
 QUARK_TOKEN_PATH = "/1/clouddrive/share/sharepage/token"
@@ -621,7 +621,8 @@ def relative_after_root(entry: dict, root: str) -> str:
 def download_with_login(share_id: str, passcode: str, cookie: str,
                         entries: list[dict], target_dir: pathlib.Path,
                         progress: common.Progress | None = None,
-                        opener=None, stoken: str = "") -> dict:
+                        opener=None, stoken: str = "",
+                        item_id: str = "") -> dict:
     """登录态下取直链下载。
 
     每个文件走「转存 → 取直链 → 下载 → 删除」闭环，而不是先把整个分享
@@ -649,7 +650,9 @@ def download_with_login(share_id: str, passcode: str, cookie: str,
         if not entry.get("fid"):
             continue
         relative = relative_after_root(entry, root)
-        destination = target_dir / common.sanitize_relative_path(relative)
+        # 续传认的是课程槽位上的文件，不是旧的「分享目录树」路径。
+        # target_dir 只留给清单 / 缺失 json，不再作为文件父目录。
+        destination = library_layout.destination_for(item_id, relative)
         # 已存在且体积一致就跳过，这是断点续传的判据
         if destination.is_file() and destination.stat().st_size == entry["size"]:
             skipped += 1
@@ -796,6 +799,7 @@ def plan_netdisk() -> list[dict]:
 
 
 def target_dir_for(item: dict) -> pathlib.Path:
+    """清单侧车目录。文件字节走 library_layout.destination_for，不写到这里。"""
     label = common.sanitize_segment(f"{item['id']}__{item.get('name') or '未命名'}")
     return common.DOWNLOADS_ROOT / "netdisk" / "quark" / "小学" / label
 
@@ -870,6 +874,7 @@ def run(progress: common.Progress | None = None, manifest_only: bool = False) ->
                 item["share_id"], item["passcode"], cookie,
                 inventory["entries"], target, progress,
                 opener=shared_opener, stoken=inventory["stoken"],
+                item_id=item["id"],
             )
             # 有失败就不能记 ok：早期版本只要循环跑完就记 ok，结果 p_math
             # 缺 1882 个、p_eng 缺 615 个都被「成功」掩盖，只剩 last_error
@@ -925,12 +930,11 @@ def _remaining_bytes(item: dict, inventory: dict) -> int:
 
     已有且体积一致的文件不会重新下载，不该计入需要的空间。
     """
-    base = target_dir_for(item)
     root_prefix = share_root_prefix(inventory["entries"])
     remaining = 0
     for entry in inventory["entries"]:
         relative = relative_after_root(entry, root_prefix)
-        destination = base / common.sanitize_relative_path(relative)
+        destination = library_layout.destination_for(str(item.get("id") or ""), relative)
         if destination.is_file() and destination.stat().st_size == entry.get("size"):
             continue
         remaining += int(entry.get("size") or 0)

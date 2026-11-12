@@ -22,20 +22,28 @@ import time
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
-from downloads import common, quark  # noqa: E402
+from downloads import common, library_layout, quark  # noqa: E402
 
 
-def _landed_bytes(item: dict) -> int:
+def _landed_bytes(item: dict, entries: list[dict] | None = None) -> int:
     """该条目已落盘体积。
 
-    不排除 `_` 前缀的文件：网盘分享里存在 `_5 3全优卷….zip`、
-    `_Recycle 2-学习任务单.docx` 这类真实文件，过滤掉会把已下完的条目
-    误判成未完成（实测因此把 6 条已完成条目列为待探测）。
+    有分享清单时按课程槽位逐个对路径，不按旧的包目录求和——文件已经不在
+    `<id>__标题/` 下面。不排除 `_` 前缀：网盘里有 `_5 3全优卷….zip` 这种真文件。
     """
-    target = quark.target_dir_for(item)
-    if not target.is_dir():
-        return 0
-    return sum(p.stat().st_size for p in target.rglob("*") if p.is_file())
+    if not entries:
+        target = quark.target_dir_for(item)
+        if not target.is_dir():
+            return 0
+        return sum(path.stat().st_size for path in target.rglob("*") if path.is_file())
+    root_prefix = quark.share_root_prefix(entries)
+    total = 0
+    for entry in entries:
+        relative = quark.relative_after_root(entry, root_prefix)
+        destination = library_layout.destination_for(str(item.get("id") or ""), relative)
+        if destination.is_file():
+            total += destination.stat().st_size
+    return total
 
 
 def _unfinished_ids(items: list[dict]) -> list[str]:
@@ -123,7 +131,7 @@ def main(argv: list[str] | None = None) -> int:
             "status": "ok",
             "files": len(inventory["entries"]),
             "bytes": inventory["bytes"],
-            "landed_bytes": _landed_bytes(item),
+            "landed_bytes": _landed_bytes(item, inventory["entries"]),
             "truncated": inventory["truncated"],
             "elapsed_seconds": round(time.monotonic() - started, 1),
         }

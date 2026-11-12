@@ -1,4 +1,7 @@
-"""统计各网盘条目的完成度：已落盘且体积一致的文件数 / 总体积。"""
+"""按旧包目录里的 `_inventory.json` 统计完成度。
+
+下载模式不写这份清单。课程文件在 `downloads/library/`，本脚本看不到资料库里的文件。
+"""
 from __future__ import annotations
 
 import json

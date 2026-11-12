@@ -15,7 +15,7 @@ import pathlib
 import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
-from downloads import common, quark  # noqa: E402
+from downloads import common, library_layout, quark  # noqa: E402
 
 PREFIX_PATTERN = re.compile(r"^\d+_\d+[、.]")
 LEGACY_DIRNAME = "_legacy"
@@ -46,7 +46,7 @@ def main() -> int:
     wanted: dict[tuple[str, int], list[pathlib.Path]] = collections.defaultdict(list)
     for entry in entries:
         relative = quark.relative_after_root(entry, share_root)
-        destination = target / common.sanitize_relative_path(relative)
+        destination = library_layout.destination_for(item["id"], relative)
         wanted[(destination.name, entry["size"])].append(destination)
 
     reusable = []

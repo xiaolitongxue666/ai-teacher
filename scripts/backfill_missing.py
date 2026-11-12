@@ -20,17 +20,16 @@ import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
-from downloads import common, quark  # noqa: E402
+from downloads import common, library_layout, quark  # noqa: E402
 
 
 def collect_missing(item: dict, opener, inventory: dict) -> list[dict]:
     """返回该分享里未落盘或体积不符的条目。"""
-    base = quark.target_dir_for(item)
     root_prefix = quark.share_root_prefix(inventory["entries"])
     missing: list[dict] = []
     for entry in inventory["entries"]:
         relative = quark.relative_after_root(entry, root_prefix)
-        destination = base / common.sanitize_relative_path(relative)
+        destination = library_layout.destination_for(item["id"], relative)
         if destination.is_file() and destination.stat().st_size == entry["size"]:
             continue
         missing.append({**entry, "relative": relative})
@@ -65,12 +64,10 @@ def backfill(item_id: str, dry_run: bool) -> int:
                   f"{common.format_bytes(entry.get('size') or 0)}", flush=True)
         return 0
 
-    base = quark.target_dir_for(item)
-    base.mkdir(parents=True, exist_ok=True)
     remaining = 0
     failed = 0
     for index, entry in enumerate(missing, start=1):
-        destination = base / common.sanitize_relative_path(entry["relative"])
+        destination = library_layout.destination_for(item["id"], entry["relative"])
         destination.parent.mkdir(parents=True, exist_ok=True)
         try:
             # 复用下载闭包，转存封禁的退避逻辑与主流程一致
