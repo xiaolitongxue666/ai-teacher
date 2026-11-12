@@ -215,19 +215,26 @@ python scripts/fetch_resources.py status
 python scripts/watch_video.py &
 ```
 
-### 下载进度（2026-11-11 08:20 快照）
+### 下载进度（2026-11-11 23:32 快照）
 
-`video` 已完成，`netdisk` 仍在跑。`github` 已在 2026-11-09 下完。
+三个阶段全部完成。`github` 在 2026-11-09 下完，`video` 在 11-11 08:20 收尾，`netdisk` 在 11-11 23:32 收尾。
 
 | 阶段 | 状态 | 已落地 | 备注 |
 | --- | --- | --- | --- |
 | `github` | 完成 22/22 | 12.05 GB（磁盘实测）/ 11.64 GB（manifest 记录） | 实下 3 个，19 个按 `skipped` 跳过 |
 | `video` | **完成 52/52 合集，2894/2894 P** | 114.54 GB | 五组各版本：统编语文 945、人教数学 716、北师数学 651、人教英语 333、外研三起点英语 249。实测 900 个新文件零字节数为 0 |
-| `netdisk` | 进行中 | 92.18 GB | 已过 `fan_geometry_900`、`p_math`、`p_chn`，`current` 到 `p_eng` 的三下学习任务单 |
+| `netdisk` | **完成 9/9 条，12738 个文件** | 119.42 GB | 逐条与 `data/resources.json` 的 `share_total_size_bytes` 对齐，全部 `failed=0` |
 
-磁盘剩余 138.60 GB。底线是 `MIN_FREE_BYTES`（20 GB），视频和网盘共用这块盘。
+`downloads/` 合计 246.03 GB，磁盘剩余 99.2 GB。底线是 `MIN_FREE_BYTES`（20 GB）。
 
-网盘阶段逐条串行：同一阶段里前一条没跑完，后一条不会开始。
+网盘九条实测：`p_math` 7713 个 / 50.28 GB、`p_chn` 829 / 28.18 GB、`fan_geometry_900` 910 / 19.05 GB、
+`p_eng` 1014 / 9.35 GB、`p_sci` 1656 / 6.47 GB、`phonics_270` 462 / 2.58 GB、`p_morality` 89 / 2.38 GB、
+`j_curriculum` 61 / 0.96 GB、`primary_1000_words` 4 / 0.17 GB。
+
+`scratch_174` 与 `word_posters` 未下载：`url_official` 不是 `pan.quark.cn`（分别指向 `wpss.best` 与
+`pan.nameishare.com`），管道记 `skipped_no_source`。要下这两条得先解析中转页拿真实分享 id。
+
+   229|网盘阶段逐条串行：同一阶段里前一条没跑完，后一条不会开始。
 看进度用 `progress.netdisk.json` 的 `current`，它写的是正在下的那个文件名；同时还要确认锁文件里的 pid 还在。
 
 两个只读观测脚本，都不干预下载进程：
@@ -237,9 +244,21 @@ python scripts/netdisk_progress.py    # 按 _inventory.json 比对「已落盘�
 python scripts/fetch_resources.py status
 ```
 
-`netdisk_progress.py` 依赖各条目目录下的 `_inventory.json`，而**下载模式不写这个文件**
-（只有无登录态的清单模式才写）。所以在纯下载产物目录上它只输出 `0 B / 0 B` ——
-当前 `fan_geometry_900` 就是这种情况，实际进度只能靠 `ls` 计数或 `progress.netdisk.json` 的 `current`。
+   239|`netdisk_progress.py` 依赖各条目目录下的 `_inventory.json`，而**下载模式不写这个文件**
+（只有无登录态的清单模式才写）。所以在纯下载产物目录上它只输出 `0 B / 0 B` —— **下载模式一律如此**，
+实际进度只能靠递归计数或 `progress.netdisk.json` 的 `current`。
+
+### 补漏工具（下载模式不写 `_inventory.json`，残缺条目靠它们回补）
+
+`download_with_login` 对单文件失败只记 `last_error` 继续下一个，跑完不会回头。三个脚本按不同粒度回补：
+
+```bash
+python scripts/probe_remaining.py                      # 只读探测剩余条目体积，不转存、不占容量
+python scripts/backfill_missing.py p_math p_eng         # 批量补某条目缺的文件（--dry-run 先看清单）
+python scripts/redownload_one.py p_math "子目录/a.pdf"  # 只补单个文件，适合定位到具体路径时用
+```
+
+三者都复用 `quark.walk_share` + `download_entry`，与主流程同一套接口和封禁退避逻辑。
 
 当前的 `bilibili.py` / `quark.py` 会把 `current` 写进 `progress.<stage>.json`。
 `finished: false` 只表示这轮还没标完成。进程还在不在，看锁文件里的 pid，以及文件是否还在变大。

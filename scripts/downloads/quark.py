@@ -115,6 +115,15 @@ QUARK_STAGING_HEADROOM_BYTES = 512 * 1024 ** 2
 # 剩余容量每查一次是一次 HTTP 往返，逐个文件查会拖慢小文件居多的分享
 QUARK_CAPACITY_PROBE_EVERY = 20
 
+# 转存被风控封禁时的处理。
+# 实测现象（2026-11-11）：`sharepage/save` 间歇性返回「当前用户封禁转存功能受限」，
+# 几十分钟后自行解除；封禁期间每个文件都失败，但循环只记 last_error 继续下一个，
+# 于是整条分享被记成 `ok` 却静默缺了大批文件（p_math 缺 1882 个、p_eng 缺 615 个）。
+# 因此单文件要退避重试，整条要能识别出来并停下，而不是一路记 ok。
+QUARK_SAVE_BANNED_MESSAGE = "封禁转存功能受限"
+# 每轮退避秒数；轮数即重试次数。放在后台跑，等一小时比缺一半文件划算。
+QUARK_SAVE_BAN_BACKOFF_SECONDS = (120, 600, 1800)
+
 # 本次范围：只下小学。初中/高中/雅思等按用户口径暂不下载。
 PRIMARY_ITEM_IDS = frozenset({
     "fan_geometry_900", "primary_1000_words", "phonics_270", "scratch_174",
@@ -135,6 +144,15 @@ class QuarkError(RuntimeError):
     def __init__(self, message: str, code: int = 0) -> None:
         super().__init__(message)
         self.code = code
+
+    @property
+    def is_save_banned(self) -> bool:
+        """是否为转存被风控封禁。
+
+        判据只用消息文本，不认业务码：实测封禁返回的 code 每次可能不同，
+        而中文提示固定包含「封禁转存功能受限」。业务码在变、文案没变。
+        """
+        return QUARK_SAVE_BANNED_MESSAGE in str(self)
 
 
 def _opener_with_cookie(cookie: str) -> urllib.request.OpenerDirector:
@@ -322,18 +340,22 @@ def save_to_drive(opener, share_id: str, stoken: str, entry: dict) -> str:
         raise QuarkError(str(save_body.get("message") or "转存未返回 task_id")[:80], code)
 
     deadline = time.time() + QUARK_SAVE_TASK_TIMEOUT
-    while time.time() < deadline:
-        time.sleep(QUARK_SAVE_TASK_INTERVAL)
+    # 先立刻查一次，再按间隔轮询。转存是小文件元数据操作，实测 2s 内就完成，
+    # 无条件先 sleep 一个间隔会让每个文件白等 0.5s；剩余几千个小文件时
+    # 这个固定开销比下载本身还长（3949 个文件 ≈ 33 分钟）。
+    while True:
         task_body = _request_json(
             opener, f"{QUARK_API_BASE}{QUARK_TASK_PATH}?pr=ucpro&fr=pc&task_id={task_id}")
         detail = task_body.get("data") or {}
-        if int(detail.get("status") or 0) != QUARK_SAVE_TASK_STATUS_DONE:
-            continue
-        new_fids = (detail.get("save_as") or {}).get("save_as_top_fids") or []
-        if new_fids:
-            return str(new_fids[0])
-        # 容量不足等业务失败会以 status==2 结束但 save_as 为空
-        raise QuarkError(f"转存完成但没有产出 fid（可能容量不足）：{task_id}"[:120])
+        if int(detail.get("status") or 0) == QUARK_SAVE_TASK_STATUS_DONE:
+            new_fids = (detail.get("save_as") or {}).get("save_as_top_fids") or []
+            if new_fids:
+                return str(new_fids[0])
+            # 容量不足等业务失败会以 status==2 结束但 save_as 为空
+            raise QuarkError(f"转存完成但没有产出 fid（可能容量不足）：{task_id}"[:120])
+        if time.time() >= deadline:
+            break
+        time.sleep(QUARK_SAVE_TASK_INTERVAL)
     raise QuarkError(f"转存任务轮询超时（{QUARK_SAVE_TASK_TIMEOUT}s）：{task_id}"[:120])
 
 
@@ -616,6 +638,7 @@ def download_with_login(share_id: str, passcode: str, cookie: str,
     saved = 0
     failed = 0
     skipped = 0
+    missing: list[str] = []
     # 容量查询每次是一个 HTTP 往返，逐个文件查会拖慢小文件居多的分享；
     # 完全不查又会在容量耗尽时连续失败。改成每 N 个查一次。
     remaining: int | None = None
@@ -640,6 +663,7 @@ def download_with_login(share_id: str, passcode: str, cookie: str,
             probed_since = 0
         if remaining is not None and remaining < pending:
             failed += 1
+            missing.append(relative)
             message = (f"账号剩余容量 {common.format_bytes(remaining)} 不足"
                        f"（需要 {common.format_bytes(pending)}）")
             if progress:
@@ -648,7 +672,8 @@ def download_with_login(share_id: str, passcode: str, cookie: str,
 
         destination.parent.mkdir(parents=True, exist_ok=True)
         try:
-            download_entry(opener, share_id, stoken, entry, destination, progress)
+            _download_entry_with_ban_backoff(
+                opener, share_id, stoken, entry, destination, progress)
             saved += 1
             if remaining is not None:
                 # 只扣文件本身大小，不能扣 headroom：早先按 pending 扣会让每个
@@ -656,13 +681,52 @@ def download_with_login(share_id: str, passcode: str, cookie: str,
                 # 扣除后是偏保守的估计（删除是异步 task，容量实际会更快释放）。
                 remaining = max(remaining - int(entry.get("size") or 0), 0)
             probed_since += 1
-        except Exception as unexpected:  # noqa: BLE001 - 单文件失败不该中断整批
+        except QuarkError as quark_error:
             failed += 1
+            missing.append(relative)
             # 立刻重查容量：连续失败常常是容量/配额耗尽导致
             probed_since = QUARK_CAPACITY_PROBE_EVERY
             if progress:
+                progress.record_error(f"{entry['rel_path']}: {quark_error}")
+            if quark_error.is_save_banned:
+                # 退避全部用完仍在封禁，说明这次风控短时间不会解除。
+                # 继续跑只会把剩余文件全刷成失败并记 ok，所以停下整条，
+                # 交给调用方标成 incomplete 让补漏环节接手。
+                break
+        except Exception as unexpected:  # noqa: BLE001 - 单文件失败不该中断整批
+            failed += 1
+            missing.append(relative)
+            probed_since = QUARK_CAPACITY_PROBE_EVERY
+            if progress:
                 progress.record_error(f"{entry['rel_path']}: {unexpected}")
-    return {"saved": saved, "failed": failed, "skipped": skipped}
+    return {"saved": saved, "failed": failed, "skipped": skipped,
+            "missing": missing, "total": len(entries)}
+
+
+def _download_entry_with_ban_backoff(opener, share_id: str, stoken: str,
+                                     entry: dict, destination: pathlib.Path,
+                                     progress: common.Progress | None) -> None:
+    """下载单个文件，遇到转存封禁按等级退避重试。
+
+    封禁是账号级、间歇性的，单次失败不代表这个文件下不了。直接放弃会让
+    整条分享静默缺失大批文件，所以宁可等。退避阶梯见
+    QUARK_SAVE_BAN_BACKOFF_SECONDS；全部用完仍封禁才向上抛。
+    """
+    for wait_seconds in (0,) + QUARK_SAVE_BAN_BACKOFF_SECONDS:
+        if wait_seconds:
+            if progress:
+                progress.record_error(
+                    f"{entry['rel_path']}: 转存被封禁，等待 {wait_seconds}s 后重试")
+            time.sleep(wait_seconds)
+        try:
+            download_entry(opener, share_id, stoken, entry, destination, progress)
+            return
+        except QuarkError as quark_error:
+            if not quark_error.is_save_banned:
+                raise
+    raise QuarkError(
+        f"转存持续被封禁，已退避 {sum(QUARK_SAVE_BAN_BACKOFF_SECONDS)}s 仍失败", 0)
+
 
 
 def _stream_to_file(opener, url: str, destination: pathlib.Path,
@@ -788,8 +852,12 @@ def run(progress: common.Progress | None = None, manifest_only: bool = False) ->
         if manifest_only:
             _write_inventory(target, item, inventory)
         else:
+            # 只按「还缺多少」判磁盘，不按整条分享体积。断点续传时已完成部分
+            # 占了体积，按全量判会把本可以下完的条目误判成 skipped_disk ——
+            # 分享越接近完成，误判越容易发生。
+            needed_bytes = _remaining_bytes(item, inventory)
             try:
-                common.assert_disk_headroom(inventory["bytes"], f"下载 {item['id']}")
+                common.assert_disk_headroom(needed_bytes, f"下载 {item['id']}")
             except common.InsufficientDisk as disk_error:
                 record.update({"status": "skipped_disk", "error": str(disk_error)})
                 results.append(record)
@@ -803,9 +871,19 @@ def run(progress: common.Progress | None = None, manifest_only: bool = False) ->
                 inventory["entries"], target, progress,
                 opener=shared_opener, stoken=inventory["stoken"],
             )
-            record.update({"status": "ok", "saved": outcome["saved"],
-                           "failed": outcome["failed"],
-                           "skipped_existing": outcome["skipped"]})
+            # 有失败就不能记 ok：早期版本只要循环跑完就记 ok，结果 p_math
+            # 缺 1882 个、p_eng 缺 615 个都被「成功」掩盖，只剩 last_error
+            # 里最后一条错误可查。缺文件必须体现成状态，并落一份缺失清单。
+            incomplete = bool(outcome["failed"])
+            record.update({
+                "status": "incomplete" if incomplete else "ok",
+                "saved": outcome["saved"],
+                "failed": outcome["failed"],
+                "skipped_existing": outcome["skipped"],
+                "missing_files": len(outcome["missing"]),
+            })
+            if incomplete:
+                _write_missing(target, item, outcome["missing"])
 
         results.append(record)
         _append_manifest(record)
@@ -816,9 +894,8 @@ def run(progress: common.Progress | None = None, manifest_only: bool = False) ->
                 int(item.get("bytes") or 0) for item in results)
             progress.add_pages(
                 count=0, byte_delta=0,
-                item_done=1 if record["status"] in {"ok", "manifest_only"} else 0)
+                item_done=1 if record["status"] in {"ok", "incomplete", "manifest_only"} else 0)
             progress.flush()
-
     if manifest_only and progress:
         progress.state["note"] = f"仅产清单：{login_note}"
         progress.flush()
@@ -841,6 +918,40 @@ def _write_inventory(target: pathlib.Path, item: dict, inventory: dict) -> None:
         "entries": inventory["entries"],
     }
     common.write_json_atomic(target / "_inventory.json", payload)
+
+
+def _remaining_bytes(item: dict, inventory: dict) -> int:
+    """算出该分享里还没落盘的文件总体积，用于磁盘守卫。
+
+    已有且体积一致的文件不会重新下载，不该计入需要的空间。
+    """
+    base = target_dir_for(item)
+    root_prefix = share_root_prefix(inventory["entries"])
+    remaining = 0
+    for entry in inventory["entries"]:
+        relative = relative_after_root(entry, root_prefix)
+        destination = base / common.sanitize_relative_path(relative)
+        if destination.is_file() and destination.stat().st_size == entry.get("size"):
+            continue
+        remaining += int(entry.get("size") or 0)
+    return remaining
+
+
+def _write_missing(target: pathlib.Path, item: dict, missing: list[str]) -> None:
+    """把本次没下成的相对路径落成清单，供补漏环节读取。
+
+    只记路径。体积、fid、share_fid_token 由补漏时重新 walk 分享得到，
+    写在这里会让文件很快过期（stoken 每调一次就换新值）。
+    """
+    payload = {
+        "item_id": item["id"],
+        "name": item.get("name"),
+        "share_id": item.get("share_id"),
+        "passcode": item.get("passcode") or "",
+        "recorded_at": common.now_iso(),
+        "missing": missing,
+    }
+    common.write_json_atomic(target / "_missing.json", payload)
 
 
 def _append_manifest(record: dict) -> None:

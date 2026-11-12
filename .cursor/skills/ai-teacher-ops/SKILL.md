@@ -107,9 +107,9 @@ python scripts/fetch_resources.py status               # 合成三阶段进度
 python scripts/fetch_resources.py report               # 写出 downloads/_state/REPORT.md
 ```
 
-`github` 已在 2026-11-09 下完。还在跑的只有 `video` 和 `netdisk` 两个任务，锁、进度文件、产物目录都按阶段分开，可以并行，共用的是磁盘（底线 `MIN_FREE_BYTES` = 20 GB）。
+三个下载阶段均已完成（`github` 2026-11-09、`video` 11-11 08:20、`netdisk` 11-11 23:32），当前无活动下载任务。锁、进度文件、产物目录都按阶段分开，曾与 `video` 并行跑过，共用的是磁盘（底线 `MIN_FREE_BYTES` = 20 GB）。
 
-阶段之间互不阻塞，但**同一阶段内部串行**：`netdisk` 里 11 条要一条条跑完，前一条没结束，后一条不会开始。
+阶段之间互不阻塞，但**同一阶段内部串行**：`netdisk` 里 9 条要一条条跑完，前一条没结束，后一条不会开始。
 
 看进度别只信 `finished` 字段。当前代码会写 `current`；`finished: false` 配上一个已经退出的锁 pid，表示停了，不是还在跑。父进程退出后，BBDown 子进程可能还在下当前这一集，下完不会自己开下一集。重开视频前先确认没有残留的 BBDown。
 
@@ -117,15 +117,25 @@ python scripts/fetch_resources.py report               # 写出 downloads/_state
 | --- | --- |
 | 网盘在跑没跑 | `downloads/_state/RUNNING.netdisk.lock` 的 pid 是否存活，以及目标文件的 mtime 是否还在涨 |
 | 网盘下到哪个文件 | `progress.netdisk.json` 的 `current` |
-| 已完成多少项 | `ls <目标目录>/*.mp4 \| wc -l`。下载模式不写 `_inventory.json`，对不上清单 |
+| 已完成多少项 | 递归计数：`find <目标目录> -type f \| wc -l`。只数顶层会少算子层，下载模式也不写 `_inventory.json` |
 | 视频阶段 | `progress.video.json` 的 `current`。`per_collection` 只在 `watch_video.py` 覆盖过该文件时才有 |
 
 `scripts/netdisk_progress.py` 需要条目目录下的 `_inventory.json`，而**下载模式不写这个文件**
 （只有无登录态的清单模式才写）。在纯下载产物上它恒输出 `0 B / 0 B`，不要据它判断进度。
 
+条目残缺时用三个补漏脚本按粒度回补（都复用 `quark.walk_share` + `download_entry`）：
+
+```bash
+python scripts/probe_remaining.py                       # 只读探测体积，不转存不占容量
+python scripts/backfill_missing.py p_math --dry-run      # 先看清单
+python scripts/backfill_missing.py p_math p_eng          # 批量补
+python scripts/redownload_one.py p_math "子目录/a.pdf"   # 只补单个文件
+```
+
 `downloads/netdisk/_manifest.jsonl` 与 `REPORT.md` 都是**追加历史**，同一 item 会出现多行；
 判读 `failed` 必须带上时间——DNS 断网那一轮的 8 条 `getaddrinfo failed` 与文件可下性无关，
-重跑同一命令即可续。
+重跑同一命令即可续。注意 `status: ok` 不代表完整：2026-11-11 之前的版本在 `failed > 0` 时
+仍记 `ok`（`p_math` 缺 1882 个、`p_eng` 缺 615 个都因此被掩盖），现在改记 `incomplete`。
 
 ### 工作流 D：按教材版本找视频课
 

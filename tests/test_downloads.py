@@ -11,6 +11,7 @@
 
 from __future__ import annotations
 
+import json
 import pathlib
 import sys
 import unittest
@@ -229,6 +230,90 @@ class QuarkErrorTests(unittest.TestCase):
         error = quark.QuarkError("需要提取码", quark.QUARK_PASSCODE_REQUIRED_CODE)
         self.assertEqual(error.code, 41008)
         self.assertIn("提取码", str(error))
+
+
+class QuarkSaveBanTests(unittest.TestCase):
+    """转存封禁识别。
+
+    实测夸克返回的文案是「当前用户封禁转存功能受限」，业务码每次可能不同，
+    所以判据只能落在文案上。这个测试锁住的就是「文案能识别、普通错误不会误判」。
+    """
+
+    def test_recognizes_ban_message(self):
+        error = quark.QuarkError("当前用户封禁转存功能受限", 41020)
+        self.assertTrue(error.is_save_banned)
+
+    def test_recognizes_ban_without_business_code(self):
+        error = quark.QuarkError("当前用户封禁转存功能受限")
+        self.assertTrue(error.is_save_banned)
+
+    def test_other_errors_are_not_bans(self):
+        for message in ("需要提取码", "分享文件不存在", "转存文件token校验异常"):
+            with self.subTest(message=message):
+                self.assertFalse(quark.QuarkError(message, 41008).is_save_banned)
+
+
+class QuarkRemainingBytesTests(unittest.TestCase):
+    """磁盘守卫只算未落盘部分。
+
+    按整条分享体积判会导致越接近完成的分享越容易被误判成 skipped_disk。
+    """
+
+    def test_excludes_already_complete_files(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as workspace:
+            root = pathlib.Path(workspace)
+            target = root / "p_math__数学"
+            target.mkdir(parents=True)
+            (target / "done.pdf").write_bytes(b"x" * 100)
+            entries = [
+                {"rel_path": "标题/done.pdf", "size": 100, "fid": "1"},
+                {"rel_path": "标题/todo.pdf", "size": 500, "fid": "2"},
+            ]
+            item = {"id": "p_math", "name": "数学"}
+            inventory = {"entries": entries}
+            original = quark.target_dir_for
+            quark.target_dir_for = lambda _item: target
+            try:
+                remaining = quark._remaining_bytes(item, inventory)
+            finally:
+                quark.target_dir_for = original
+            self.assertEqual(remaining, 500)
+
+    def test_counts_size_mismatch_as_remaining(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as workspace:
+            root = pathlib.Path(workspace)
+            target = root / "p_math__数学"
+            target.mkdir(parents=True)
+            (target / "partial.pdf").write_bytes(b"x" * 40)
+            entries = [{"rel_path": "标题/partial.pdf", "size": 100, "fid": "1"}]
+            item = {"id": "p_math", "name": "数学"}
+            inventory = {"entries": entries}
+            original = quark.target_dir_for
+            quark.target_dir_for = lambda _item: target
+            try:
+                remaining = quark._remaining_bytes(item, inventory)
+            finally:
+                quark.target_dir_for = original
+            self.assertEqual(remaining, 100)
+
+
+class QuarkMissingRecordTests(unittest.TestCase):
+    """缺失清单只记路径，不记 stoken 相关字段。"""
+
+    def test_writes_only_paths(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as workspace:
+            target = pathlib.Path(workspace)
+            item = {"id": "p_math", "name": "小学数学", "share_id": "abc",
+                    "passcode": ""}
+            quark._write_missing(target, item, ["苏教版/a.zip", "人教版/b.pdf"])
+            payload = json.loads(
+                (target / "_missing.json").read_text(encoding="utf-8"))
+            self.assertEqual(payload["item_id"], "p_math")
+            self.assertEqual(payload["missing"], ["苏教版/a.zip", "人教版/b.pdf"])
+            self.assertNotIn("stoken", payload)
 
 
 class PageNumberNormalizationTests(unittest.TestCase):
