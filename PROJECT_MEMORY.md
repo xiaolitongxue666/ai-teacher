@@ -1,6 +1,6 @@
 # Project Memory (Compact)
 
-1) 仓库唯一工作副本为 `E:\Code\my_code\Agents\ai-teacher`，远端 `github.com/xiaolitongxue666/ai-teacher`（PUBLIC）。原路径 `C:\Users\Administrator\Projects\ai-teacher` 已删除：双副本 HEAD 相同但工作区会分叉。记忆 SSOT 是根目录 `PROJECT_MEMORY.md`，备份落 `.project-memory-backups/`（保留最近 2 份）。
+1) 仓库唯一工作副本为 `E:\Code\my_code\Agents\study-map`，远端 `github.com/xiaolitongxue666/study-map`（PUBLIC）。原路径 `C:\Users\Administrator\Projects\ai-teacher` 已删除：双副本 HEAD 相同但工作区会分叉。GitHub 仓库曾用名 `ai-teacher`，现名 `study-map`。记忆 SSOT 是根目录 `PROJECT_MEMORY.md`，备份落 `.project-memory-backups/`（保留最近 2 份）。
 
 2) `data/resources.json` 是链接索引，不是文件清单。2026-11-10 实测分区：websites 74 / tutoring 15 / repos 22 / videos 61 / mcp_tools 12 / dify 11 / collections 59。每条记录必须同时有 `verified` 与 `checked_at`。目录里的文件数只从磁盘扫描来。
 

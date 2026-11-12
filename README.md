@@ -1,4 +1,4 @@
-# ai-teacher
+# study-map
 
 面向孩子与青少年的学习资源导航。**这不是一套课程，是一张资源地图。**
 
@@ -142,7 +142,7 @@
 ## 目录结构
 
 ```
-ai-teacher/
+study-map/
 ├── README.md
 ├── docs/                      # 全部正文
 ├── data/resources.json        # 单一数据源，脚本与文档都从这里取

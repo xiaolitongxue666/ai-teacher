@@ -203,7 +203,7 @@
 
 17. **`data/resources.json` 改动密集，rebase 必冲突**。远端先行提交导致 push 被拒时：`git fetch` 比对范围 → 必要时 `reset --hard origin/main` → 重放改动。不要硬 rebase。
 18. **星数会漂移**。一次比对 22 个项目有 14 个已偏。发布前用 API 复核，同步 `data` 与 `docs/07` 两处。
-19. **两份工作副本会导致工作区分叉**。只保留 `E:\Code\my_code\Agents\ai-teacher`。
+19. **两份工作副本会导致工作区分叉**。只保留 `E:\Code\my_code\Agents\study-map`。
 
 ### B站检索类
 

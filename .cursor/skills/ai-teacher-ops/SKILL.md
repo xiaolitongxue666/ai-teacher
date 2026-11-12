@@ -214,7 +214,7 @@ python scripts/library_query.py --subject 英语 --edition 人教版 --grade 三
 
 ## 环境约定
 
-- 工作副本只有 `E:\Code\my_code\Agents\ai-teacher` 一份，别再开第二份。
+- 工作副本只有 `E:\Code\my_code\Agents\study-map` 一份，别再开第二份。
 - bash 里盘符写 `/e/...`，不要用 `cmd //c`。
 - Python 输出中文一律 `PYTHONIOENCODING=utf-8`。
 - 跨 bash 与 python 传文件用项目内相对路径，用完即删；`/tmp` 两边解析到不同位置。
